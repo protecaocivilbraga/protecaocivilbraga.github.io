@@ -5,8 +5,8 @@
    "nome": "Batalhão Sapadores Bombeiros de Braga",
    "contacto": "800 45 10 10",
    "morada": "Avenida Olímpica, 4700-083 Braga",
-   "lat": null,
-   "lon": null,
+   "lat": 41.56888425510794,
+   "lon": -8.427385303903124,
    "nota": "Telefone / Emergência",
    "email": "bsb.comando@cm-braga.pt"
   },
@@ -15,8 +15,8 @@
    "nome": "Bombeiros Voluntários de Braga",
    "contacto": "253 200 430",
    "morada": "Rua dos Soldados da Paz, 4705-162 Braga",
-   "lat": null,
-   "lon": null
+   "lat": 41.51928749817645,
+   "lon": -8.421237632741219
   }
  ],
  "freguesias": {}
