@@ -177,6 +177,7 @@ const KITS={
 const KITKEYS=Object.keys(KITS);
 const EXP=new Set(["agua","comida","primeiros","medicacao","analgesico","mascaras","bebe","pilhas","purificar","agua_v","comida_v","racao","agua_a","medicacao_a"]);
 const GUIDES={sismo:"🌍",cheias:"🌊",incendio:"🔥",calor:"🌡️",frio:"🥶",tempestade:"🌬️",apagao:"🔌",gases:"🧪",agua:"🚰",deslizamento:"⛰️"};
+const LINES=[["ciav","☠️","800 250 250"],["suic","💙","1411"],["psi","🧠","808 24 24 24"],["apav","🤝","116 006"],["vd","🛡️","800 202 148"],["crianca","🧒","116 111"],["social","🏠","144"],["idoso","👵","800 20 35 31"],["droga","💊","1414"],["ambiente","🌿","808 200 520"]];
 const RISKS=[["cheias","🌊"],["deslizamento","⛰️"],["incendio","🔥"],["tempestade","🌬️"],["calor","🌡️"],["gases","🧪"],["sismo","🌍"]];
 const EVAC=["ev1","ev2","ev3","ev4","ev5","ev6"];
 const WMO={0:["☀️","w_clear"],1:["🌤️","w_fewcl"],2:["⛅","w_partly"],3:["☁️","w_cloudy"],45:["🌫️","w_fog"],48:["🌫️","w_fog"],51:["🌦️","w_drizzle"],53:["🌦️","w_drizzle"],55:["🌦️","w_drizzle"],56:["🌧️","w_fdrizzle"],57:["🌧️","w_fdrizzle"],61:["🌧️","w_rainl"],63:["🌧️","w_rain"],65:["🌧️","w_rainh"],66:["🌧️","w_frain"],67:["🌧️","w_frain"],71:["🌨️","w_snowl"],73:["🌨️","w_snow"],75:["❄️","w_snowh"],77:["🌨️","w_grains"],80:["🌦️","w_showers"],81:["🌧️","w_showers"],82:["⛈️","w_showersh"],85:["🌨️","w_snowsh"],86:["🌨️","w_snowsh"],95:["⛈️","w_thunder"],96:["⛈️","w_hail"],99:["⛈️","w_hail"]};
@@ -453,7 +454,9 @@ function contactos(){
   ${linha("🩺",t("c_s24"),t("c_s24_d"),[["",'808 24 24 24']])}
   ${ulpcSel()?linha("🛟","ULPC · "+ulpcSel().freguesia,t("c_ulpc_d"),[[t("c_noemerg"),ulpcSel().contacto]]):""}
   ${Lc.smpc?linha("🛟",t("c_smpc"),t("c_smpc_d"),[[t("c_noemerg"),Lc.smpc]]):""}
-  </div>`;
+  </div>
+  <div class="card"><h2>${esc(t("ln_title"))}</h2><p class="mut">${esc(t("ln_intro"))}</p>
+  ${LINES.map(x=>{const d=tx("lines",x[0]);return linha(x[1],d.n,d.d,[["",x[2]]])}).join("")}</div>`;
 }
 function warn(){
   if(sub==="contactos")return contactos();

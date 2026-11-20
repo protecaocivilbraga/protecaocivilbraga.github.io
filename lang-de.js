@@ -38,7 +38,7 @@ foot:"Unterstützende Information. Sie ersetzt weder offizielle Warnungen noch d
 c_intro:"Rufen Sie im Notfall immer die 112 an: Die 112 leitet an Feuerwehr, Polizei, GNR und Rettungsdienst weiter. Die folgenden Nummern sind für Kontakte, die keine Notfälle sind.",c_pm:"Kommunalpolizei (Polícia Municipal)",c_psp:"Öffentliche Sicherheitspolizei (PSP)",c_hosp:"Krankenhaus Braga (ULS Braga)",c_hosp_d:"Medizinischer Notfall: Rufen Sie 112 an. Sete Fontes, São Victor.",c_hosp_t:"Zentrale (keine Notrufnummer)",c_cv:"Portugiesisches Rotes Kreuz",c_cv_d:"Niederlassung Braga.",c_noemerg:"keine Notrufnummer",c_s24:"Saúde 24 (SNS 24)",c_s24_d:"Gesundheitsberatung.",c_ulpc_d:"Lokale Zivilschutzeinheit Ihrer Gemeinde.",c_smpc:"Zivilschutz Braga",c_smpc_d:"Information und Vorbeugung.",
 w_intro:"Wetterwarnungen des IPMA und Mitteilungen der Gemeinde Braga.",w_update:"Jetzt aktualisieren",w_updating:"Wird aktualisiert…",w_last:"Zuletzt aktualisiert um {0}.",w_sources:"Quellen: IPMA (Warnungen) und Gemeinde Braga.",
 g_antes:"Vorher",g_durante:"Währenddessen",g_depois:"Danach",guide_title:"Was tun",guide_intro:"Einfache Schritte für jede Situation: vorher, währenddessen und danach. Folgen Sie immer den Anweisungen der Behörden.",guide_all:"Alle Ratgeber",
-risk_tag:"📍 Risiko in Braga",risk_title:"Risiken in Braga",risk_intro:"Die Gefahren, denen die Gemeinde am stärksten ausgesetzt ist. Tippen Sie, um zu sehen, was zu tun ist.",risk_src:"Information auf Grundlage von Studien zu den Gefahren der Gemeinde. Die offizielle Bewertung steht im kommunalen Notfallplan des Zivilschutzes."
+ln_title:"Weitere Hilfetelefone",ln_intro:"Fachliche Hilfe. Bei unmittelbarer Gefahr immer 112 anrufen.",risk_tag:"📍 Risiko in Braga",risk_title:"Risiken in Braga",risk_intro:"Die Gefahren, denen die Gemeinde am stärksten ausgesetzt ist. Tippen Sie, um zu sehen, was zu tun ist.",risk_src:"Information auf Grundlage von Studien zu den Gefahren der Gemeinde. Die offizielle Bewertung steht im kommunalen Notfallplan des Zivilschutzes."
 },
 kits:{mochila:"Rucksack",casa:"Zuhause",carro:"Auto",animais:"Haustiere"},
 kitd:{mochila:"Um das Haus schnell zu verlassen (Evakuierung). Einer pro Person.",casa:"Vorrat, um 72 Stunden zu Hause zu bleiben.",carro:"Für alle, die auf der Straße festsitzen oder sich fortbewegen müssen.",animais:"Was Ihr Haustier 72 Stunden lang braucht."},
@@ -64,6 +64,18 @@ sismo:{n:"Erdbeben",t:"Die Gemeinde liegt in der Erdbebenzone der Intensität VI
 frio:{n:"",t:"Kälte und Frost: Schützen Sie ältere Menschen, Kinder und Tiere und achten Sie auf Eis auf den Straßen."},
 apagao:{n:"",t:"Stromausfälle können Stunden dauern: Halten Sie Taschenlampe, Batterieradio und Powerbanks bereit."},
 agua:{n:"",t:"Es kann zu Unterbrechungen der Versorgung kommen: Halten Sie einen Vorrat an Trinkwasser bereit."}
+},
+lines:{
+ciav:{n:"Vergiftungen (CIAV, INEM)",d:"Medizinische Auskunft bei Vergiftungen, rund um die Uhr, kostenloser Anruf. In schweren Fällen 112 anrufen."},
+suic:{n:"Suizidprävention",d:"Kostenlose nationale Hotline, rund um die Uhr, für Menschen in Not oder besorgte Angehörige."},
+psi:{n:"Psychologische Beratung (SNS 24)",d:"Anrufen und Option 4 wählen. Rund um die Uhr erreichbar."},
+apav:{n:"Opferhilfe (APAV)",d:"Kostenlose, vertrauliche Hilfe für Opfer von Straftaten. 9 bis 21 Uhr."},
+vd:{n:"Häusliche Gewalt",d:"Kostenloser Informationsdienst, rund um die Uhr. Auch per SMS an 3060."},
+crianca:{n:"SOS Kind",d:"Hilfetelefon für Kinder und Jugendliche und für alle, die sich um ein Kind sorgen."},
+social:{n:"Soziale Notlage",d:"Für Menschen in schutzloser Lage, etwa ohne Obdach oder ohne unmittelbare Hilfe. Rund um die Uhr, kostenlos."},
+idoso:{n:"Seniorentelefon (Bürgerbeauftragter)",d:"Information und Hilfe für ältere Menschen. Werktags, 9:30 bis 17:30 Uhr."},
+droga:{n:"SOS Drogen",d:"Informations- und Hilfetelefon zum Drogenkonsum."},
+ambiente:{n:"SOS Umwelt und Territorium (GNR)",d:"Meldung von Umweltverstößen und illegalen Bränden oder Abbrennen. Rund um die Uhr."}
 },
 guides:{
 sismo:{n:"Erdbeben",

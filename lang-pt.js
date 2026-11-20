@@ -38,7 +38,7 @@ foot:"Informação de apoio. Não substitui os avisos oficiais nem as indicaçõ
 c_intro:"Em caso de emergência ligue sempre 112: o 112 encaminha para bombeiros, polícia, GNR e emergência médica. Os números abaixo servem para contactos que não são emergências.",c_pm:"Polícia Municipal",c_psp:"Polícia de Segurança Pública (PSP)",c_hosp:"Hospital de Braga (ULS Braga)",c_hosp_d:"Emergência médica: ligue 112. Sete Fontes, São Victor.",c_hosp_t:"telefone geral (não é linha de urgência)",c_cv:"Cruz Vermelha Portuguesa",c_cv_d:"Delegação de Braga.",c_noemerg:"não é linha de emergência",c_s24:"Saúde 24 (SNS 24)",c_s24_d:"Aconselhamento de saúde.",c_ulpc_d:"Unidade Local de Proteção Civil da sua freguesia.",c_smpc:"Proteção Civil de Braga",c_smpc_d:"Informação e prevenção.",
 w_intro:"Avisos meteorológicos do IPMA e comunicados do Município de Braga.",w_update:"Atualizar agora",w_updating:"A atualizar…",w_last:"Última atualização às {0}.",w_sources:"Fontes: IPMA (avisos) e Município de Braga.",
 g_antes:"Antes",g_durante:"Durante",g_depois:"Depois",guide_title:"O que fazer",guide_intro:"Passos simples para cada situação, antes, durante e depois. Siga sempre as indicações das autoridades.",guide_all:"Todos os guias",
-risk_tag:"📍 Risco em Braga",risk_title:"Riscos em Braga",risk_intro:"Os perigos a que o concelho está mais exposto. Toque para ver o que fazer.",risk_src:"Informação baseada em estudos sobre os perigos do concelho. A avaliação oficial está no Plano Municipal de Emergência de Proteção Civil."
+ln_title:"Outras linhas de apoio",ln_intro:"Apoio especializado. Em perigo imediato, ligue sempre 112.",risk_tag:"📍 Risco em Braga",risk_title:"Riscos em Braga",risk_intro:"Os perigos a que o concelho está mais exposto. Toque para ver o que fazer.",risk_src:"Informação baseada em estudos sobre os perigos do concelho. A avaliação oficial está no Plano Municipal de Emergência de Proteção Civil."
 },
 kits:{mochila:"Mochila",casa:"Casa",carro:"Carro",animais:"Animais"},
 kitd:{mochila:"Para sair de casa rapidamente (evacuação). Uma por pessoa.",casa:"Reserva para ficar em casa durante 72 horas.",carro:"Para quem ficar retido na estrada ou tiver de se deslocar.",animais:"O que o seu animal de companhia precisa durante 72 horas."},
@@ -64,6 +64,18 @@ sismo:{n:"Sismos",t:"O concelho está numa zona de intensidade sísmica VI; a pr
 frio:{n:"",t:"Vagas de frio e geada: proteja idosos, crianças e animais e tenha cuidado com o gelo nas estradas."},
 apagao:{n:"",t:"Os cortes de eletricidade podem durar horas: tenha lanterna, rádio a pilhas e carregadores portáteis."},
 agua:{n:"",t:"Podem ocorrer falhas no abastecimento: mantenha uma reserva de água potável em casa."}
+},
+lines:{
+ciav:{n:"Intoxicações (CIAV, INEM)",d:"Informação médica sobre intoxicações, 24 horas, chamada gratuita. Em caso grave, ligue 112."},
+suic:{n:"Prevenção do suicídio",d:"Linha nacional gratuita, 24 horas, para quem está em sofrimento ou quer ajudar alguém."},
+psi:{n:"Aconselhamento psicológico (SNS 24)",d:"Ligue e escolha a opção 4. Disponível 24 horas."},
+apav:{n:"Apoio à vítima (APAV)",d:"Apoio gratuito e confidencial a vítimas de crime. Das 9h às 21h."},
+vd:{n:"Violência doméstica",d:"Serviço de informação gratuito, 24 horas. Também por SMS para o 3060."},
+crianca:{n:"SOS Criança",d:"Linha de apoio a crianças e jovens e a quem se preocupa com uma criança."},
+social:{n:"Emergência social",d:"Para pessoas em situação de desproteção, como sem-abrigo ou sem apoio imediato. 24 horas, gratuita."},
+idoso:{n:"Linha do Idoso (Provedor de Justiça)",d:"Informação e apoio a pessoas idosas. Dias úteis, das 9h30 às 17h30."},
+droga:{n:"SOS Droga",d:"Linha de informação e apoio sobre consumo de drogas."},
+ambiente:{n:"SOS Ambiente e Território (GNR)",d:"Denúncia de infrações ambientais e de incêndios ou queimadas ilegais. 24 horas."}
 },
 guides:{
 sismo:{n:"Sismo",
