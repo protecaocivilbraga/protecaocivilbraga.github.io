@@ -1,7 +1,23 @@
 {
-  "corporacoes": [
-    {"id": "sapadores", "nome": "Bombeiros Sapadores de Braga", "contacto": "", "morada": "", "lat": null, "lon": null},
-    {"id": "voluntarios", "nome": "Bombeiros Voluntários de Braga", "contacto": "", "morada": "", "lat": null, "lon": null}
-  ],
-  "freguesias": {}
+ "corporacoes": [
+  {
+   "id": "sapadores",
+   "nome": "Batalhão Sapadores Bombeiros de Braga",
+   "contacto": "800 45 10 10",
+   "morada": "Avenida Olímpica, 4700-083 Braga",
+   "lat": null,
+   "lon": null,
+   "nota": "Telefone / Emergência",
+   "email": "bsb.comando@cm-braga.pt"
+  },
+  {
+   "id": "voluntarios",
+   "nome": "Bombeiros Voluntários de Braga",
+   "contacto": "",
+   "morada": "",
+   "lat": null,
+   "lon": null
+  }
+ ],
+ "freguesias": {}
 }
