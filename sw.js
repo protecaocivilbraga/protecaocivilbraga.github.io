@@ -1,6 +1,6 @@
 /* Service worker "Braga Resiliente": guarda a casca da app para abrir depressa e funcionar sem rede.
    Avisos e previsão (IPMA, Open-Meteo) vão sempre à rede; a app guarda o último resultado no telemóvel. */
-const V='braga-v24',CASCA=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./logos.png','./lang-pt.js','./lang-en.js','./lang-es.js','./lang-fr.js','./lang-de.js'];
+const V='braga-v25',CASCA=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./logos.png','./lang-pt.js','./lang-en.js','./lang-es.js','./lang-fr.js','./lang-de.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CASCA)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{

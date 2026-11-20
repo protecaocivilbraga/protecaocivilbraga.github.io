@@ -169,6 +169,7 @@ const TABS=[
 ["kit",SV('<path d="M6 9.5A3.5 3.5 0 0 1 9.5 6h5A3.5 3.5 0 0 1 18 9.5V19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M9 6V4.8A1.8 1.8 0 0 1 10.8 3h2.4A1.8 1.8 0 0 1 15 4.8V6"/><rect x="9" y="13" width="6" height="4.5" rx="1"/>')],
 ["plan",SV('<circle cx="9" cy="8" r="3"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9.5" r="2.3"/><path d="M16.2 14.2a4.6 4.6 0 0 1 4.8 4.6"/>')],
 ["warn",SV('<path d="M12 4 21.5 20h-19z"/><path d="M12 10v4.5"/><path d="M12 17.4v.1"/>')],
+["contactos",SV('<path d="M5.2 4h3.6l1.7 4.6-2.2 1.4a11 11 0 0 0 5.7 5.7l1.4-2.2 4.6 1.7v3.6a2 2 0 0 1-2 2A15.6 15.6 0 0 1 3.2 6a2 2 0 0 1 2-2z"/>')],
 ["guide",SV('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v15h5.5a1.5 1.5 0 0 1 1.5 1.5z"/>')]];
 const KITS={
  mochila:{i:"🎒",cats:{agua:["agua","comida","abrelatas","talheres"],saude:["primeiros","medicacao","analgesico","termometro","mascaras","higiene","oculos","bebe"],energia:["lanterna","pilhas","radio","powerbank","carregador","apito","isqueiro"],docs:["copias","dinheiro","contactos","caderno"],conforto:["manta","roupa","impermeavel","colete","mascara_po","sacos"],outros:["chaves","multiusos","brinquedo","mapa"]}},
@@ -428,6 +429,9 @@ function go(tb,s){tab=tb;sub=s||null;confirmaLimpar=false;if(tb==="guide")gsec="
 const sos=()=>`<a class="sos" href="tel:112"><b>📞 112</b><span>${esc(t("sos"))}</span></a>`;
 const sosMun=()=>`<a class="mun" href="${tel(CFG.TEL_MUNICIPAL)}"><b>📞 ${esc(CFG.TEL_MUNICIPAL)}</b><span><strong>${esc(t("mun_t"))}</strong>, ${esc(t("mun_d"))}<br>${esc(t("mun_e"))}</span></a>`;
 
+function cardQueimas(){return `<div class="card"><h3>🔥 ${esc(t("qm_t"))}</h3><p class="mut">${esc(t("qm_d"))}</p>
+  <a class="btn" href="https://fogos.icnf.pt/InfoQueimasQueimadas/" target="_blank" rel="noopener">🔥 ${esc(t("qm_icnf"))}</a>
+  <a class="btn s" href="mailto:protecao.civil@cm-braga.pt?subject=Cuidar%20Braga">✉️ ${esc(t("qm_cb"))}</a></div>`}
 function home(){
   const ex=expiring();
   return sos()+sosMun()+avisosMun().map(cardMun).join("")+btnIpma()+blocoMeteo()+
@@ -436,8 +440,8 @@ function home(){
    <button class="tile" onclick="go('kit')"><span class="i">🎒</span><b>${esc(t("h_kits"))}</b><small>${esc(tx("kits","mochila"))}: ${kDone("mochila")} / ${kTot("mochila")}</small><div class="bar"><i style="width:${kPct("mochila")}%"></i></div></button>
    <button class="tile" onclick="go('plan')"><span class="i">👨‍👩‍👧</span><b>${esc(t("h_plan"))}</b><small>${esc(S.plan.pessoas.length?t("h_people",S.plan.pessoas.length):t("h_todo"))}</small></button>
    <button class="tile" onclick="go('guide')"><span class="i">📖</span><b>${esc(t("h_guides"))}</b><small>${esc(t("h_guides_d"))}</small></button>
-   <button class="tile" onclick="go('warn','contactos')"><span class="i">📞</span><b>${esc(t("h_contacts"))}</b><small>${esc(t("h_contacts_d"))}</small></button>
-  </div>`+cardInstalar()+
+   <button class="tile" onclick="go('contactos')"><span class="i">📞</span><b>${esc(t("h_contacts"))}</b><small>${esc(t("h_contacts_d"))}</small></button>
+  </div>`+cardQueimas()+cardInstalar()+
   cardFreguesia()+
   `<p class="foot">${esc(t("foot"))}</p>`;
 }
@@ -450,7 +454,7 @@ function ulpcTodas(){
   return `<div class="item" style="cursor:default;align-items:flex-start"><span style="flex:none">${ICPC}</span><span style="flex:1"><b>${esc(t("pc_ul_n"))}</b><br><small class="mut">${esc(t("pc_ul_d"))}</small>${L.length?`<details style="margin-top:6px"><summary style="cursor:pointer;color:var(--pri)">${esc(t("pc_ul_s",L.length))}</summary>${corpo}</details>`:""}</span></div>`}
 function contactos(){
   const Lc=CFG.LOCAL;
-  return `<button class="back" onclick="go('warn')">‹ ${esc(t("nav_warn"))}</button>`+sos()+sosMun()+
+  return sos()+sosMun()+
   `<div class="card"><h2>${esc(t("h_contacts"))}</h2><p class="mut">${esc(t("c_intro"))}</p></div>
   <div class="card"><h3>${esc(t("sec_seg"))}</h3>
   ${blocoBombeiros()}
@@ -472,10 +476,9 @@ function contactos(){
   ${LINES.map(x=>{const d=tx("lines",x[0]);return linha(x[1],d.n,d.d,[[x[3]?t(x[3]):"",x[2]]])}).join("")}</div>`;
 }
 function warn(){
-  if(sub==="contactos")return contactos();
   return `<div class="card"><h2>${esc(t("nav_warn"))}</h2><p class="mut">${esc(t("w_intro"))}</p></div>`+blocoAvisos()+
   `<button class="btn s" onclick="carregar()">${esc(W.loading?t("w_updating"):t("w_update"))}</button>
-  <button class="btn" onclick="go('warn','contactos')">📞 ${esc(t("h_contacts"))}</button>
+  <button class="btn" onclick="go('contactos')">📞 ${esc(t("h_contacts"))}</button>
   <p class="foot">${W.ts?esc(t("w_last",hm(W.ts)))+" ":""}${esc(t("w_sources"))}</p>`;
 }
 
@@ -491,7 +494,7 @@ function guide(){
   <div class="grid">${Object.keys(GUIDES).sort((x,y)=>tx("guides",x).n.localeCompare(tx("guides",y).n,lang)).map(k=>{const rk=rsk(k);return `<button class="tile" onclick="go('guide','${k}')"><span class="i">${GUIDES[k]}</span><b>${esc(tx("guides",k).n)}</b>${rk?`<small class="mut" style="font-weight:400;line-height:1.3;margin-top:4px;text-align:left">${esc(rk.t)}</small>`:""}</button>`}).join("")}</div>
   <p class="stat">${esc(t("risk_src"))}</p>`;
 }
-function render(){const y=$("#main").scrollTop;$("#hsub").textContent=t("sub");nav();$("#main").innerHTML={home,kit,plan,warn,guide}[tab]();$("#main").scrollTop=y}
+function render(){const y=$("#main").scrollTop;$("#hsub").textContent=t("sub");nav();$("#main").innerHTML={home,kit,plan,warn,contactos,guide}[tab]();$("#main").scrollTop=y}
 
 (async function arranque(){
   lang=pickLang();await loadLang(lang);if(!window.LANG[lang])lang="pt";L=LANG[lang];
