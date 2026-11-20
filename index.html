@@ -154,6 +154,8 @@ const CFG={
   // Contactos locais opcionais (não emergência). Vazio = só mostra o 112. Ex.: "253 000 000"
   LOCAL:{bombeiros:"",psp:"",gnr:"",smpc:""},
   HOSPITAL_TEL:"253 027 000",      // ULS Braga / Hospital de Braga (telefone geral)
+  CSREPC_TEL:["253 600 560","253 201 350"], // Comando Sub-regional Cávado (ANEPC), números publicados pela CM Braga
+  SMPC_TEL:"253 616 060", SMPC_EMAIL:"protecao.civil@cm-braga.pt",
   CRUZ_VERMELHA_TEL:"253 208 870"  // Cruz Vermelha Portuguesa, Delegação de Braga
 };
 const TZ="Europe/Lisbon";
@@ -439,8 +441,13 @@ function home(){
   cardFreguesia()+
   `<p class="foot">${esc(t("foot"))}</p>`;
 }
-function linha(ic,nome,desc,tels){
-  return `<div class="item" style="cursor:default;align-items:flex-start"><span style="font-size:24px">${ic}</span><span style="flex:1"><b>${esc(nome)}</b><br><small class="mut">${esc(desc)}</small>${tels.filter(x=>x[1]).map(x=>`<br><a href="${tel(x[1])}">📞 ${esc(x[1])}</a> <small class="mut">${esc(x[0])}</small>`).join("")}</span></div>`}
+const ICPC='<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" style="display:block"><path d="M13 3.2 24 22.2H2Z" fill="#f58220" stroke="#f58220" stroke-width="2.4" stroke-linejoin="round"/><path d="M13 9.2 18.6 19H7.4Z" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" opacity=".9"/></svg>';
+function linha(ic,nome,desc,tels,extra){
+  return `<div class="item" style="cursor:default;align-items:flex-start"><span style="font-size:24px">${ic}</span><span style="flex:1"><b>${esc(nome)}</b><br><small class="mut">${esc(desc)}</small>${tels.filter(x=>x[1]).map(x=>`<br><a href="${tel(x[1])}">📞 ${esc(x[1])}</a> <small class="mut">${esc(x[0])}</small>`).join("")}${extra||""}</span></div>`}
+function ulpcTodas(){
+  const L=listaUlpc().slice().sort((a,b)=>a.freguesia.localeCompare(b.freguesia,lang));
+  const corpo=L.map(u=>`<div class="item" style="cursor:default;align-items:flex-start;padding-left:0"><span style="flex:1"><b>${esc(u.freguesia)}</b>${u.contacto?`<br><a href="${tel(u.contacto)}">📞 ${esc(u.contacto)}</a>`:""}${u.email?`<br><a href="mailto:${esc(u.email)}">✉️ ${esc(u.email)}</a>`:""}</span></div>`).join("");
+  return `<div class="item" style="cursor:default;align-items:flex-start"><span style="flex:none">${ICPC}</span><span style="flex:1"><b>${esc(t("pc_ul_n"))}</b><br><small class="mut">${esc(t("pc_ul_d"))}</small>${L.length?`<details style="margin-top:6px"><summary style="cursor:pointer;color:var(--pri)">${esc(t("pc_ul_s",L.length))}</summary>${corpo}</details>`:""}</span></div>`}
 function contactos(){
   const Lc=CFG.LOCAL;
   return `<button class="back" onclick="go('warn')">‹ ${esc(t("nav_warn"))}</button>`+sos()+sosMun()+
@@ -451,15 +458,16 @@ function contactos(){
   ${linha("🛡️","GNR",t("c_112"),[[t("c_local"),Lc.gnr]])}
   ${linha("🚔",t("c_pm"),t("c_pm_d"),[[t("c_local"),"253 609 740"]])}
   </div>
+  <div class="card"><h3>${esc(t("sec_pc"))}</h3>
+  ${linha(ICPC,t("pc_cs_n"),t("pc_cs_d"),CFG.CSREPC_TEL.map(n=>[t("c_noemerg"),n]))}
+  ${linha(ICPC,t("pc_sm_n"),t("pc_sm_d"),[[t("c_noemerg"),CFG.SMPC_TEL]],`<br><a href="mailto:${CFG.SMPC_EMAIL}">✉️ ${esc(CFG.SMPC_EMAIL)}</a>`)}
+  ${ulpcTodas()}
+  </div>
   <div class="card"><h3>${esc(t("sec_saude"))}</h3>
   ${linha("🏥",t("c_hosp"),t("c_hosp_d"),[[t("c_hosp_t"),CFG.HOSPITAL_TEL]])}
   ${linha("➕",t("c_cv"),t("c_cv_d"),[[t("c_noemerg"),CFG.CRUZ_VERMELHA_TEL]])}
   ${linha("🩺",t("c_s24"),t("c_s24_d2"),[[t("hr24"),'808 24 24 24']])}
   </div>
-  ${(ulpcSel()||Lc.smpc)?`<div class="card"><h3>${esc(t("sec_pc"))}</h3>
-  ${ulpcSel()?linha("🛟","ULPC · "+ulpcSel().freguesia,t("c_ulpc_d"),[[t("c_noemerg"),ulpcSel().contacto]]):""}
-  ${Lc.smpc?linha("🛟",t("c_smpc"),t("c_smpc_d"),[[t("c_noemerg"),Lc.smpc]]):""}
-  </div>`:""}
   <div class="card"><h3>${esc(t("ln_title"))}</h3><p class="mut">${esc(t("ln_intro"))}</p>
   ${LINES.map(x=>{const d=tx("lines",x[0]);return linha(x[1],d.n,d.d,[[x[3]?t(x[3]):"",x[2]]])}).join("")}</div>`;
 }
