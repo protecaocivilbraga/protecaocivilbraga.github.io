@@ -116,7 +116,7 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 .pto{margin-top:6px}.ptb{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:13px}
 .lnk{border:0;background:none;color:var(--pri);font:inherit;font-size:13px;cursor:pointer;padding:2px 0;text-decoration:underline}
 .rk{width:100%;border:0;background:none;font:inherit;text-align:left;color:inherit;align-items:center}
-.item.gc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;margin-bottom:10px;width:100%}.rki{font-size:22px;width:34px;text-align:center}.chev2{font-size:22px;color:var(--mut)}
+.item.gc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;margin-bottom:10px;width:100%}.priv{color:var(--red);font-weight:700;font-size:13px;margin-top:8px}.rki{font-size:22px;width:34px;text-align:center}.chev2{font-size:22px;color:var(--mut)}
 .cartao h2{margin-bottom:10px}.cartao h3{margin:10px 0 2px}
 .cl{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
 .cl b{flex:none}.cl span{text-align:right;color:var(--ink)}
@@ -342,7 +342,7 @@ function kit(){
   const cats=Object.keys(KITS[kitSel].cats);if(!cats.includes(cat))cat=cats[0];
   const p=kPct(kitSel),rev=S.rev,vencida=!rev||dias(rev)<-180;
   const ex=expiring();
-  return `<div class="card"><h2>${esc(t("kit_title"))}</h2><p class="mut">${esc(t("kit_intro"))}</p></div>
+  return `<div class="card"><h2>${esc(t("kit_title"))}</h2><p class="mut">${esc(t("kit_intro"))}</p><p class="priv">${esc(t("priv"))}</p></div>
   <div class="tabs">${KITKEYS.map(k=>`<button class="${k===kitSel?'on':''}" onclick="setKit('${k}')">${KITS[k].i} ${esc(tx("kits",k))}</button>`).join("")}</div>
   <div class="card"><h3>${KITS[kitSel].i} ${esc(tx("kits",kitSel))}</h3><p class="mut">${esc(tx("kitd",kitSel))}</p><div class="bar"><i style="width:${p}%"></i></div><p class="mut" style="margin-top:6px">${kDone(kitSel)} / ${kTot(kitSel)} · ${p}%</p></div>
   <div class="tabs">${cats.map(c=>`<button class="${c===cat?'on':''}" onclick="cat='${c}';render()">${esc(tx("cats",c))}</button>`).join("")}</div>
@@ -395,7 +395,7 @@ function plan(){
   const P=S.plan,ev=P.ev||{},evDone=EVAC.filter((x,i)=>ev[i]).length;
   const pt=(x,i)=>`<div class="pto"><label class="f">${esc(t("pt"+(i+1)))}</label><input type="text" value="${esc(x.t||"")}" oninput="setPt(${i},this.value)" placeholder="${esc(t("pt_ph"))}">
     <div class="ptb">${x.lat!=null?`<a href="${linkMapa(x)}" target="_blank" rel="noopener">🗺️ ${esc(t("pt_map"))}</a> <button class="lnk" onclick="limparLoc(${i})">${esc(t("pt_rm"))}</button>`:`<button class="lnk" onclick="guardarLoc(${i})">📍 ${esc(t("pt_here"))}</button>${x.t?` <a href="${linkMapa(x)}" target="_blank" rel="noopener">🗺️ ${esc(t("pt_map"))}</a>`:""}`}</div></div>`;
-  return `<div class="card"><h2>${esc(t("plan_title"))}</h2><p class="mut">${esc(t("plan_intro"))}</p></div>
+  return `<div class="card"><h2>${esc(t("plan_title"))}</h2><p class="mut">${esc(t("plan_intro"))}</p><p class="priv">${esc(t("priv"))}</p></div>
   <div class="card"><h3>👨‍👩‍👧 ${esc(t("p_pessoas"))}</h3>
    ${P.pessoas.map((x,i)=>`<div class="item" style="cursor:default"><span style="flex:1"><b>${esc(x.n)}</b> ${x.t?`<a href="${tel(x.t)}">${esc(x.t)}</a>`:""}${x.o?`<br><small class="mut">${esc(x.o)}</small>`:""}</span><button class="del" aria-label="${esc(t("remove"))}" onclick="S.plan.pessoas.splice(${i},1);save();render()">✕</button></div>`).join("")||`<p class="mut">${esc(t("p_nobody"))}</p>`}
    <div class="row" style="margin-top:8px"><input type="text" id="pn" placeholder="${esc(t("p_name"))}" aria-label="${esc(t("p_name"))}"><input type="tel" id="pt" placeholder="${esc(t("p_phone"))}" aria-label="${esc(t("p_phone"))}"></div>
@@ -411,7 +411,7 @@ function plan(){
    ${EVAC.map((k,i)=>`<label class="item ${ev[i]?'done':''}"><input type="checkbox" ${ev[i]?'checked':''} onchange="evTick(${i},this.checked)"><span>${esc(t(k))}</span></label>`).join("")}
    <p class="mut" style="margin-top:6px">${evDone} / ${EVAC.length}</p></div>
   <button class="btn" onclick="abrirCartao()">🪪 ${esc(t("card_btn"))}</button>
-  <p class="foot">${esc(t("p_priv"))}</p>`;
+  `;
 }
 
 /* ===== ECRÃS ===== */
