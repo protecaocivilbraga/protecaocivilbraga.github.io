@@ -1,0 +1,17 @@
+{
+  "name": "Braga Resiliente – Proteção Civil",
+  "short_name": "Braga Resiliente",
+  "description": "Prepare a sua família para uma emergência: mochila de 72 h, plano familiar, avisos e o que fazer.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b5cab",
+  "theme_color": "#0b5cab",
+  "lang": "pt-PT",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}

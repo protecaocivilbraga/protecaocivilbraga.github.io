@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Braga Resiliente</title>
+<meta name="theme-color" content="#0b5cab">
+<meta name="description" content="Prepare a sua família para uma emergência: mochila de 72 h, plano familiar, avisos e o que fazer.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Braga Resiliente">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#1b2430;--mut:#667085;--line:#e4e7ec;--pri:#0b5cab;--pri2:#e8f1fb;--ok:#1a7f4b;--warn:#b54708;--warnbg:#fff4e5;--red:#c0262d;--redbg:#fdecec;--yel:#a16207;--yelbg:#fef7d6;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#d9dee5;color:var(--ink);display:flex;justify-content:center;align-items:center}
+.phone{width:430px;max-width:100%;height:100%;max-height:860px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+@media(min-width:520px){.phone{height:calc(100% - 40px);border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.25)}}
+@media(max-width:519px){.phone{max-height:none}}
+header{background:var(--pri);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 18px 12px}
+header h1{font-size:19px;font-weight:700}
+header p{font-size:12.5px;opacity:.85;margin-top:2px}
+main{flex:1;overflow-y:auto;padding:14px 14px 20px;-webkit-overflow-scrolling:touch}
+nav{display:flex;background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:0;background:none;padding:9px 2px 8px;font-size:11px;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+nav button .i{font-size:21px;line-height:1}
+nav button.on{color:var(--pri);font-weight:700}
+.card{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:12px;border:1px solid var(--line)}
+h2{font-size:16px;margin-bottom:8px}
+h3{font-size:14px;margin-bottom:4px}
+.mut{color:var(--mut);font-size:13px;line-height:1.4}
+a{color:var(--pri)}
+.sos{background:var(--red);color:#fff;border-radius:var(--r);padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:12px;text-decoration:none}
+.mun{background:#fff;border:2px solid var(--red);color:var(--ink);border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:12px;text-decoration:none}
+.mun b{font-size:19px;color:var(--red);white-space:nowrap}.mun span{font-size:12.5px;line-height:1.35}
+.sos b{font-size:22px}.sos span{font-size:12.5px;line-height:1.35;opacity:.95}
+.alert{border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:13.5px;line-height:1.4}
+.alert.i{background:var(--pri2);color:var(--pri)}.alert.y{background:var(--yelbg);color:var(--yel)}.alert.o{background:var(--warnbg);color:var(--warn)}.alert.r{background:var(--redbg);color:var(--red)}.alert.g{background:#e7f6ee;color:var(--ok)}
+.alert b{display:block;font-size:14px;margin-bottom:2px}
+.alert small{opacity:.85}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.tile{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 12px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.tile .i{font-size:28px;display:block;margin-bottom:6px}
+.tile b{font-size:14.5px;display:block}
+.tile small{color:var(--mut);font-size:12px}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto}
+.tabs button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 13px;font-size:13px;white-space:nowrap;cursor:pointer;color:var(--ink)}
+.tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.item{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line);font-size:14.5px;cursor:pointer}
+.item:last-child{border:0}
+.item input{width:22px;height:22px;accent-color:var(--ok);flex:none}
+.item.done span{text-decoration:line-through;color:var(--mut)}
+label.f{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
+input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid #cfd4dc;border-radius:10px;font:inherit;font-size:16px;background:#fff}
+.btn{display:block;width:100%;padding:13px;border:0;border-radius:12px;background:var(--pri);color:#fff;font-size:15px;font-weight:600;cursor:pointer;margin-top:12px;text-align:center;text-decoration:none}
+.btn.s{background:var(--pri2);color:var(--pri)}
+.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
+.step{display:flex;gap:10px;margin:8px 0;font-size:14px;line-height:1.4}
+.step em{flex:none;width:24px;height:24px;border-radius:50%;background:var(--pri);color:#fff;font-style:normal;display:grid;place-items:center;font-size:12px;font-weight:700}
+.back{border:0;background:none;color:var(--pri);font-size:14px;margin-bottom:8px;cursor:pointer;padding:2px 0}
+.del{border:0;background:none;color:var(--red);font-size:18px;cursor:pointer;padding:4px 8px}
+.wx{display:flex;gap:8px}
+.wx>div{flex:1;text-align:center;background:var(--bg);border-radius:12px;padding:10px 4px}
+.wx .d{font-size:12px;color:var(--mut)}
+.wx .e{font-size:26px;margin:2px 0}
+.wx .t{font-size:15px;font-weight:700}
+.wx .t small{font-weight:400;color:var(--mut)}
+.wx .p{font-size:11.5px;color:var(--mut);line-height:1.35;margin-top:3px}
+.stat{font-size:11.5px;color:var(--mut);margin-top:8px}
+.foot{font-size:11.5px;color:var(--mut);text-align:center;line-height:1.4;padding:4px 8px 0}
+</style>
+</head>
+<body>
+<div class="phone">
+  <header><h1>Braga Resiliente</h1><p>Proteção Civil · Município de Braga</p></header>
+  <main id="main"></main>
+  <nav id="nav"></nav>
+</div>
+
+<script>
+/* ===== CONFIGURAÇÃO (editar aqui) ===== */
+const CFG={
+  AREA_IPMA:"BRG",                 // código IPMA do distrito de Braga
+  LAT:41.5503, LON:-8.4200,        // Braga (centro) para a previsão
+  TEL_MUNICIPAL:"800 45 10 10",    // número municipal de emergência (situações urgentes)
+  // Contactos locais opcionais (não emergência). Vazio = só mostra o 112. Ex.: "253 000 000"
+  LOCAL:{bombeiros:"",psp:"",gnr:"",smpc:""},
+  HOSPITAL_TEL:"253 027 000",      // ULS Braga / Hospital de Braga (telefone geral)
+  CRUZ_VERMELHA_TEL:"253 208 870"  // Cruz Vermelha Portuguesa, Delegação de Braga
+};
+const TZ="Europe/Lisbon";
+
+/* ===== CONTEÚDO ===== */
+const TABS=[["home","🏠","Início"],["kit","🎒","Mochila"],["plan","👨‍👩‍👧","Plano"],["warn","⚠️","Avisos"],["guide","📖","Guias"]];
+const KIT={
+ "Água e comida":["Água (3 L por pessoa)","Alimentos que não precisam de cozinhar","Abre-latas / canivete","Comida e água para animais"],
+ "Saúde":["Medicação habitual (7 dias)","Estojo de primeiros socorros","Máscaras e gel desinfetante","Artigos de higiene pessoal","Fraldas / alimentação de bebé"],
+ "Energia e comunicação":["Lanterna e pilhas","Rádio a pilhas ou manivela","Powerbank carregado","Carregador do telemóvel","Apito"],
+ "Documentos":["Cópias de documentos de identificação","Cópias de apólices e receitas","Dinheiro em notas e moedas","Lista de contactos em papel"],
+ "Conforto e proteção":["Mantas térmicas","Muda de roupa e calçado robusto","Impermeável","Saco-cama / cobertor","Sacos do lixo"],
+ "Outros":["Chaves de casa e carro","Brinquedo ou jogo para crianças","Mapa em papel da zona"]
+};
+const GUIDES={
+ "Sismo":{i:"🌍",s:["Dentro de casa: proteja-se debaixo de uma mesa resistente ou junto a uma parede interior.","Afaste-se de janelas, espelhos e objetos que possam cair.","Não use elevadores.","Depois do abalo: saia com calma pelas escadas e vá para um local aberto.","Esteja preparado para réplicas."]},
+ "Incêndio florestal":{i:"🔥",s:["Siga as indicações das autoridades; se mandarem sair, saia cedo.","Feche portas e janelas; afaste material inflamável.","Ao conduzir, ligue os faróis e feche as janelas.","Não use estradas de acesso a bombeiros.","Ligue 112 se vir fogo."]},
+ "Cheias":{i:"🌊",s:["Suba para pisos superiores; nunca atravesse água a pé ou de carro.","Desligue eletricidade e gás se for seguro.","Afaste-se de rios e linhas de água.","Guarde documentos em local alto.","Ligue 112 se estiver em perigo."]},
+ "Onda de calor":{i:"🌡️",s:["Beba água com frequência, mesmo sem sede.","Evite o sol entre as 11h e as 17h.","Proteja crianças, idosos e animais.","Nunca deixe pessoas ou animais no carro.","Procure sombra e locais frescos."]},
+ "Tempestade / vento":{i:"🌬️",s:["Fique em casa; afaste-se de janelas.","Retire objetos soltos de varandas e quintais.","Não se abrigue debaixo de árvores.","Evite conduzir; cuidado com ramos e cabos caídos.","Tenha lanterna e rádio à mão."]},
+ "Apagão":{i:"🔌",s:["Use lanterna, não velas.","Mantenha o frigorífico fechado.","Use rádio a pilhas e poupe a bateria do telemóvel.","Desligue aparelhos sensíveis.","Tenha água e comida para pelo menos 72 horas."]}
+};
+const WMO={0:["☀️","Céu limpo"],1:["🌤️","Pouco nublado"],2:["⛅","Nuvens e abertas"],3:["☁️","Nublado"],45:["🌫️","Nevoeiro"],48:["🌫️","Nevoeiro"],51:["🌦️","Chuvisco"],53:["🌦️","Chuvisco"],55:["🌦️","Chuvisco"],56:["🌧️","Chuvisco gelado"],57:["🌧️","Chuvisco gelado"],61:["🌧️","Chuva fraca"],63:["🌧️","Chuva"],65:["🌧️","Chuva forte"],66:["🌧️","Chuva gelada"],67:["🌧️","Chuva gelada"],71:["🌨️","Neve fraca"],73:["🌨️","Neve"],75:["❄️","Neve forte"],77:["🌨️","Neve granulada"],80:["🌦️","Aguaceiros"],81:["🌧️","Aguaceiros"],82:["⛈️","Aguaceiros fortes"],85:["🌨️","Aguaceiros de neve"],86:["🌨️","Aguaceiros de neve"],95:["⛈️","Trovoada"],96:["⛈️","Trovoada com granizo"],99:["⛈️","Trovoada com granizo"]};
+const NIVEL={yellow:{c:"y",t:"Amarelo",n:1},orange:{c:"o",t:"Laranja",n:2},red:{c:"r",t:"Vermelho",n:3}};
+
+/* ===== ESTADO ===== */
+let S={};try{S=JSON.parse(localStorage.getItem("bp")||"{}")}catch(e){}
+S.kit=S.kit||{};S.plan=S.plan||{pessoas:[],fora:"",encontro1:"",encontro2:""};S.freg=S.freg||"";
+function save(){try{localStorage.setItem("bp",JSON.stringify(S))}catch(e){}}
+let W={ipma:null,meteo:null,mun:null,ts:null,offline:false,loading:true};
+try{const c=JSON.parse(localStorage.getItem("bp_cache")||"null");if(c){W=Object.assign(W,c);W.loading=true}}catch(e){}
+let tab="home",sub=null,cat=Object.keys(KIT)[0],confirmaLimpar=false,pedidoInstalar=null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const total=Object.values(KIT).flat().length;
+const done=()=>Object.values(S.kit).filter(Boolean).length;
+const agoraNaive=()=>new Date().toLocaleString("sv-SE",{timeZone:TZ}).replace(" ","T").slice(0,16);
+const hm=ts=>ts?new Date(ts).toLocaleTimeString("pt-PT",{timeZone:TZ,hour:"2-digit",minute:"2-digit"}):"";
+const dhm=s=>{try{const d=new Date(s);return d.toLocaleString("pt-PT",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}catch(e){return s}};
+
+/* ===== DADOS ===== */
+async function getJSON(u,ms){const c=new AbortController(),t=setTimeout(()=>c.abort(),ms||15000);try{const r=await fetch(u,{signal:c.signal,cache:"no-store"});if(!r.ok)throw new Error(r.status);return await r.json()}finally{clearTimeout(t)}}
+async function carregar(){
+  W.loading=true;render();
+  const metUrl=`https://api.open-meteo.com/v1/forecast?latitude=${CFG.LAT}&longitude=${CFG.LON}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_gusts_10m_max&timezone=${encodeURIComponent(TZ)}&forecast_days=3`;
+  const [a,m,v]=await Promise.allSettled([
+    getJSON("https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json"),
+    getJSON(metUrl),
+    getJSON("avisos.json?t="+Date.now())
+  ]);
+  let falhou=false;
+  if(a.status==="fulfilled"&&Array.isArray(a.value)){W.ipma=a.value.filter(x=>x.idAreaAviso===CFG.AREA_IPMA).map(x=>({tipo:x.awarenessTypeName,nivel:x.awarenessLevelID,inicio:x.startTime,fim:x.endTime,texto:x.text||""}))}else falhou=true;
+  if(m.status==="fulfilled"&&m.value&&m.value.daily){W.meteo=m.value.daily}else falhou=true;
+  if(v.status==="fulfilled"){W.mun=v.value}
+  W.offline=falhou;W.loading=false;
+  if(!falhou)W.ts=Date.now();
+  try{localStorage.setItem("bp_cache",JSON.stringify({ipma:W.ipma,meteo:W.meteo,mun:W.mun,ts:W.ts}))}catch(e){}
+  render();
+}
+function avisosIpma(){
+  const ag=agoraNaive();
+  return (W.ipma||[]).filter(x=>x.nivel&&x.nivel!=="green"&&NIVEL[x.nivel]&&!/agita/i.test(x.tipo||"")&&String(x.fim||"").slice(0,16)>ag).sort((p,q)=>NIVEL[q.nivel].n-NIVEL[p.nivel].n||String(p.inicio).localeCompare(String(q.inicio)));
+}
+function avisosMun(){
+  const ag=new Date();
+  return ((W.mun&&W.mun.avisos)||[]).filter(x=>x&&x.titulo&&(!x.validoAte||new Date(x.validoAte)>ag));
+}
+function cardAviso(a){return `<div class="alert ${NIVEL[a.nivel].c}"><b>⚠️ Aviso ${NIVEL[a.nivel].t} · ${esc(a.tipo)}</b>${esc(a.texto)}<br><small>${dhm(a.inicio)} → ${dhm(a.fim)} · Fonte: IPMA</small></div>`}
+function cardMun(a){const c={vermelho:"r",laranja:"o",amarelo:"y"}[String(a.nivel||"").toLowerCase()]||"i";return `<div class="alert ${c}"><b>📣 ${esc(a.titulo)}</b>${esc(a.texto||"")}<br><small>Município de Braga${W.mun&&W.mun.atualizado?" · "+dhm(W.mun.atualizado):""}</small></div>`}
+function blocoAvisos(){
+  const M=avisosMun(),I=avisosIpma();
+  let h=M.map(cardMun).join("")+I.map(cardAviso).join("");
+  if(!h){h=W.ipma||W.mun?`<div class="alert g"><b>Sem avisos ativos</b>Não há avisos do IPMA para o distrito de Braga nem avisos municipais neste momento.</div>`:(W.loading?`<div class="alert i"><b>A carregar avisos…</b></div>`:`<div class="alert i"><b>Avisos indisponíveis</b>Sem ligação à internet. Consulte <a href="https://www.ipma.pt" target="_blank" rel="noopener">ipma.pt</a>.</div>`)}
+  return h;
+}
+function blocoMeteo(){
+  const d=W.meteo;
+  if(!d)return `<div class="card"><h3>Previsão para Braga</h3><p class="mut">${W.loading?"A carregar…":"Sem ligação. A previsão volta quando tiver internet."}</p></div>`;
+  const nomes=["Hoje","Amanhã","Depois"];
+  const dia=i=>{const w=WMO[d.weather_code[i]]||["❔","—"];const p=d.precipitation_sum[i],pp=d.precipitation_probability_max[i],r=d.wind_gusts_10m_max[i];
+    return `<div><div class="d">${nomes[i]}</div><div class="e">${w[0]}</div><div class="t">${Math.round(d.temperature_2m_max[i])}° <small>${Math.round(d.temperature_2m_min[i])}°</small></div><div class="p">${w[1]}<br>💧 ${p!=null?Math.round(p*10)/10:"–"} mm${pp!=null?" ("+pp+"%)":""}<br>💨 ${r!=null?Math.round(r):"–"} km/h</div></div>`};
+  return `<div class="card"><h3>Previsão para Braga</h3><div class="wx">${[0,1,2].map(dia).join("")}</div><p class="stat">${W.offline?"Sem ligação: dados guardados às "+hm(W.ts)+". ":"Atualizado às "+hm(W.ts)+". "}Rajadas máximas e chuva acumulada por dia. Fontes: Open-Meteo e IPMA.</p></div>`;
+}
+
+/* ===== INSTALAÇÃO ===== */
+const standalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;
+const ios=()=>/iphone|ipad|ipod/i.test(navigator.userAgent);
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();pedidoInstalar=e;if(tab==="home")render()});
+window.addEventListener("appinstalled",()=>{pedidoInstalar=null;render()});
+async function instalar(){if(!pedidoInstalar)return;pedidoInstalar.prompt();try{await pedidoInstalar.userChoice}catch(e){}pedidoInstalar=null;render()}
+function cardInstalar(){
+  if(standalone())return "";
+  if(pedidoInstalar)return `<div class="card"><h3>📲 Instale a aplicação</h3><p class="mut">Fica no ecrã principal e abre mais depressa, mesmo sem internet.</p><button class="btn" onclick="instalar()">Instalar aplicação</button></div>`;
+  if(ios())return `<div class="card"><h3>📲 Instale a aplicação</h3><p class="mut">No Safari, toque em <b>Partilhar</b> (⬆️) e depois em <b>Adicionar ao ecrã principal</b>. Se abriu esta página a partir do WhatsApp, escolha primeiro "Abrir no Safari".</p></div>`;
+  return "";
+}
+
+/* ===== ECRÃS ===== */
+function nav(){$("#nav").innerHTML=TABS.map(t=>`<button class="${tab===t[0]?'on':''}" onclick="go('${t[0]}')"><span class="i">${t[1]}</span>${t[2]}</button>`).join("")}
+function go(t,s){tab=t;sub=s||null;confirmaLimpar=false;render();$("#main").scrollTop=0}
+const tel=n=>"tel:"+String(n).replace(/\s/g,"");
+const sos=()=>`<a class="sos" href="tel:112"><b>📞 112</b><span>Número europeu de emergência. Em caso de emergência, ligue sempre 112. Esta app não o substitui.</span></a>`;
+const sosMun=()=>`<a class="mun" href="${tel(CFG.TEL_MUNICIPAL)}"><b>📞 ${esc(CFG.TEL_MUNICIPAL)}</b><span><strong>Número municipal de emergência</strong>, para situações urgentes no concelho de Braga.<br>Em caso de emergência, ligue sempre 112.</span></a>`;
+
+function home(){
+  const p=Math.round(done()/total*100);
+  return sos()+sosMun()+blocoAvisos()+blocoMeteo()+
+  `<div class="grid">
+   <button class="tile" onclick="go('kit')"><span class="i">🎒</span><b>Mochila de 72 h</b><small>${done()} de ${total} itens</small><div class="bar"><i style="width:${p}%"></i></div></button>
+   <button class="tile" onclick="go('plan')"><span class="i">👨‍👩‍👧</span><b>Plano da família</b><small>${S.plan.pessoas.length?S.plan.pessoas.length+' pessoa(s)':'Por preencher'}</small></button>
+   <button class="tile" onclick="go('guide')"><span class="i">📖</span><b>O que fazer</b><small>Sismo, incêndio, cheias…</small></button>
+   <button class="tile" onclick="go('warn','contactos')"><span class="i">📞</span><b>Contactos de emergência</b><small>Bombeiros, polícia, hospital…</small></button>
+  </div>`+cardInstalar()+
+  `<div class="card"><h3>A minha freguesia</h3><input type="text" placeholder="Ex.: São Vicente" value="${esc(S.freg)}" oninput="S.freg=this.value;save()" aria-label="A minha freguesia"></div>
+  <p class="foot">Informação de apoio. Não substitui os avisos oficiais nem as indicações das autoridades. Os seus dados ficam só neste telemóvel.</p>`;
+}
+function kit(){
+  const cats=Object.keys(KIT),p=Math.round(done()/total*100);
+  return `<div class="card"><h2>Mochila de emergência</h2><p class="mut">Tudo o que precisa para as primeiras 72 horas, se tiver de sair de casa.</p><div class="bar"><i style="width:${p}%"></i></div><p class="mut" style="margin-top:6px">${done()} de ${total} · ${p}%</p></div>
+  <div class="tabs">${cats.map((c,i)=>`<button class="${c===cat?'on':''}" onclick="cat=Object.keys(KIT)[${i}];render()">${c}</button>`).join("")}</div>
+  <div class="card">${KIT[cat].map((it,i)=>{const k=cat+"|"+it;return `<label class="item ${S.kit[k]?'done':''}"><input type="checkbox" ${S.kit[k]?'checked':''} onchange="tick(${Object.keys(KIT).indexOf(cat)},${i},this.checked)"><span>${esc(it)}</span></label>`}).join("")}</div>
+  <button class="btn s" onclick="limpar()">${confirmaLimpar?"Toque outra vez para confirmar":"Limpar lista"}</button>`;
+}
+function tick(c,i,v){const k=Object.keys(KIT)[c];S.kit[k+"|"+KIT[k][i]]=v;save();render()}
+function limpar(){if(!confirmaLimpar){confirmaLimpar=true;render();return}S.kit={};confirmaLimpar=false;save();render()}
+function plan(){
+  const P=S.plan;
+  return `<div class="card"><h2>Plano da família</h2><p class="mut">Se algo acontecer, todos devem saber o que fazer e onde se encontrar.</p></div>
+  <div class="card"><h3>Quem vive em casa</h3>
+   ${P.pessoas.map((x,i)=>`<div class="item" style="cursor:default"><span style="flex:1">${esc(x.n)} ${x.t?`<a href="tel:${esc(x.t.replace(/\s/g,''))}">${esc(x.t)}</a>`:""}</span><button class="del" aria-label="Remover" onclick="S.plan.pessoas.splice(${i},1);save();render()">✕</button></div>`).join("")||'<p class="mut">Ainda ninguém.</p>'}
+   <div class="row" style="margin-top:8px"><input type="text" id="pn" placeholder="Nome" aria-label="Nome"><input type="tel" id="pt" placeholder="Telemóvel" aria-label="Telemóvel"></div>
+   <button class="btn s" onclick="addP()">+ Adicionar pessoa</button></div>
+  <div class="card"><h3>Combinar</h3>
+   <label class="f">Contacto fora da região</label><input type="text" value="${esc(P.fora)}" oninput="S.plan.fora=this.value;save()" placeholder="Nome e telefone">
+   <label class="f">1.º ponto de encontro (perto de casa)</label><input type="text" value="${esc(P.encontro1)}" oninput="S.plan.encontro1=this.value;save()" placeholder="Ex.: praça da freguesia">
+   <label class="f">2.º ponto de encontro (fora do bairro)</label><input type="text" value="${esc(P.encontro2)}" oninput="S.plan.encontro2=this.value;save()" placeholder="Ex.: casa de familiar">
+  </div>
+  <p class="foot">Os dados ficam apenas neste dispositivo.</p>`;
+}
+function addP(){const n=$("#pn").value.trim();if(!n)return;S.plan.pessoas.push({n,t:$("#pt").value.trim()});save();render()}
+function linha(ic,nome,desc,tels){
+  return `<div class="item" style="cursor:default;align-items:flex-start"><span style="font-size:24px">${ic}</span><span style="flex:1"><b>${esc(nome)}</b><br><small class="mut">${desc}</small>${tels.filter(t=>t[1]).map(t=>`<br><a href="${tel(t[1])}">📞 ${esc(t[1])}</a> <small class="mut">${esc(t[0])}</small>`).join("")}</span></div>`}
+function contactos(){
+  const L=CFG.LOCAL;
+  return `<button class="back" onclick="go('warn')">‹ Avisos</button>`+sos()+sosMun()+
+  `<div class="card"><h2>Contactos de emergência</h2><p class="mut">Em caso de emergência ligue sempre 112: o 112 encaminha para bombeiros, polícia, GNR e emergência médica. Os números abaixo servem para contactos que não são emergências.</p>
+  ${linha("🚒","Bombeiros","Emergência: ligue 112",[["Contacto local (não é emergência)",L.bombeiros]])}
+  ${linha("👮","Polícia de Segurança Pública (PSP)","Emergência: ligue 112",[["Contacto local (não é emergência)",L.psp]])}
+  ${linha("🛡️","GNR","Emergência: ligue 112",[["Contacto local (não é emergência)",L.gnr]])}
+  ${linha("🏥","Hospital de Braga (ULS Braga)","Emergência médica: ligue 112. Sete Fontes, São Victor.",[["telefone geral (não é linha de urgência)",CFG.HOSPITAL_TEL]])}
+  ${linha("➕","Cruz Vermelha Portuguesa","Delegação de Braga.",[["não é linha de emergência",CFG.CRUZ_VERMELHA_TEL]])}
+  ${linha("🩺","Saúde 24 (SNS 24)","Aconselhamento de saúde.",[["",'808 24 24 24']])}
+  ${L.smpc?linha("🛟","Proteção Civil de Braga","Informação e prevenção.",[["não é linha de emergência",L.smpc]]):""}
+  </div>`;
+}
+function warn(){
+  if(sub==="contactos")return contactos();
+  return `<div class="card"><h2>Avisos</h2><p class="mut">Avisos meteorológicos do IPMA e comunicados do Município de Braga.</p></div>`+blocoAvisos()+
+  `<button class="btn s" onclick="carregar()">${W.loading?"A atualizar…":"Atualizar agora"}</button>
+  <button class="btn" onclick="go('warn','contactos')">📞 Contactos de emergência</button>
+  <p class="foot">${W.ts?"Última atualização às "+hm(W.ts)+".":""} Fontes: IPMA (avisos) e Município de Braga.</p>`;
+}
+function guide(){
+  if(sub){const g=GUIDES[sub];return `<button class="back" onclick="go('guide')">‹ Guias</button><div class="card"><h2>${g.i} ${esc(sub)}</h2>${g.s.map((x,i)=>`<div class="step"><em>${i+1}</em><span>${esc(x)}</span></div>`).join("")}</div><div style="margin-top:12px">${sos()}${sosMun()}</div>`}
+  return `<div class="card"><h2>O que fazer</h2><p class="mut">Passos simples para cada situação. Siga sempre as indicações das autoridades.</p></div><div class="grid">${Object.keys(GUIDES).map((k,i)=>`<button class="tile" onclick="go('guide',Object.keys(GUIDES)[${i}])"><span class="i">${GUIDES[k].i}</span><b>${esc(k)}</b></button>`).join("")}</div>`;
+}
+function render(){const y=$("#main").scrollTop;nav();$("#main").innerHTML={home,kit,plan,warn,guide}[tab]();$("#main").scrollTop=y}
+
+render();carregar();
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&(!W.ts||Date.now()-W.ts>600000))carregar()});
+if("serviceWorker" in navigator&&location.protocol==="https:")window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
