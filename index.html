@@ -116,7 +116,7 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 .pto{margin-top:6px}.ptb{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:13px}
 .lnk{border:0;background:none;color:var(--pri);font:inherit;font-size:13px;cursor:pointer;padding:2px 0;text-decoration:underline}
 .rk{width:100%;border:0;background:none;font:inherit;text-align:left;color:inherit;align-items:center}
-.rki{font-size:22px;width:34px;text-align:center}.chev2{font-size:22px;color:var(--mut)}
+.item.gc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;margin-bottom:10px;width:100%}.rki{font-size:22px;width:34px;text-align:center}.chev2{font-size:22px;color:var(--mut)}
 .cartao h2{margin-bottom:10px}.cartao h3{margin:10px 0 2px}
 .cl{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
 .cl b{flex:none}.cl span{text-align:right;color:var(--ink)}
@@ -197,6 +197,7 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 let lang="pt",L=window.LANG.pt;
 function pickLang(){const s=S.lang;if(s&&LOC[s])return s;const n=(navigator.language||"pt").slice(0,2).toLowerCase();return LOC[n]?n:"pt"}
 function t(k,...a){let v=L.ui&&L.ui[k];if(v==null)v=LANG.pt.ui[k];if(v==null)return k;return a.length?v.replace(/\{(\d+)\}/g,(m,i)=>a[i]!=null?a[i]:""):v}
+function rsk(k){const r=tx("risks",k);return r&&typeof r==="object"?r:null}
 function tx(sec,k){const d=L[sec]&&L[sec][k];return d!=null?d:((LANG.pt[sec]||{})[k]!=null?LANG.pt[sec][k]:k)}
 function loadLang(l){return new Promise(r=>{if(window.LANG[l])return r();const s=document.createElement("script");s.src="lang-"+l+".js";s.onload=r;s.onerror=r;document.head.appendChild(s)})}
 async function setLang(l){await loadLang(l);if(!window.LANG[l])l="pt";lang=l;L=LANG[l];S.lang=l;save();document.documentElement.lang=l;$("#langCod").textContent=l.toUpperCase();relogio();fecharModal();render()}
@@ -460,15 +461,14 @@ function warn(){
 /* ===== GUIAS ===== */
 function guide(){
   if(sub&&GUIDES[sub]){
-    const g=tx("guides",sub),secs=[["a","g_antes"],["d","g_durante"],["p","g_depois"]],ic=GUIDES[sub];
+    const g=tx("guides",sub),rk0=rsk(sub),secs=[["a","g_antes"],["d","g_durante"],["p","g_depois"]],ic=GUIDES[sub];
     const lista=(g&&g[gsec])||[];
-    return `<button class="back" onclick="go('guide')">‹ ${esc(t("nav_guide"))}</button><div class="card"><h2>${ic} ${esc(g.n)}</h2>
+    return `<button class="back" onclick="go('guide')">‹ ${esc(t("nav_guide"))}</button><div class="card"><h2>${ic} ${esc(g.n)}</h2>${rk0?`<p class="mut"><span class="bdg o">${esc(t("risk_tag"))}</span> ${esc(rk0.t)}</p>`:""}
     <div class="tabs">${secs.map(s=>`<button class="${s[0]===gsec?'on':''}" onclick="gsec='${s[0]}';render()">${esc(t(s[1]))}</button>`).join("")}</div>
     ${lista.map((x,i)=>`<div class="step"><em>${i+1}</em><span>${esc(x)}</span></div>`).join("")}</div><div style="margin-top:12px">${sos()}${sosMun()}</div>`}
   return `<div class="card"><h2>${esc(t("guide_title"))}</h2><p class="mut">${esc(t("guide_intro"))}</p></div>
-  <div class="card"><h3>📍 ${esc(t("risk_title"))}</h3><p class="mut">${esc(t("risk_intro"))}</p>${RISKS.map(r=>{const x=tx("risks",r[0]);return `<button class="item rk" onclick="go('guide','${r[0]}')"><span class="rki">${r[1]}</span><span style="flex:1;text-align:left"><b>${esc(x.n)}</b><br><small class="mut">${esc(x.t)}</small></span><span class="chev2">›</span></button>`}).join("")}<p class="stat">${esc(t("risk_src"))}</p></div>
-  <h3 style="margin:4px 2px 8px">${esc(t("guide_all"))}</h3>
-  <div class="grid">${Object.keys(GUIDES).map(k=>`<button class="tile" onclick="go('guide','${k}')"><span class="i">${GUIDES[k]}</span><b>${esc(tx("guides",k).n)}</b></button>`).join("")}</div>`;
+  ${Object.keys(GUIDES).map(k=>{const rk=rsk(k);return `<button class="item rk gc" onclick="go('guide','${k}')"><span class="rki">${GUIDES[k]}</span><span style="flex:1;text-align:left"><b>${esc(tx("guides",k).n)}</b>${rk?`<br><small class="bdg o">${esc(t("risk_tag"))}</small><br><small class="mut">${esc(rk.t)}</small>`:""}</span><span class="chev2">›</span></button>`}).join("")}
+  <p class="stat">${esc(t("risk_src"))}</p>`;
 }
 function render(){const y=$("#main").scrollTop;$("#hsub").textContent=t("sub");nav();$("#main").innerHTML={home,kit,plan,warn,guide}[tab]();$("#main").scrollTop=y}
 
