@@ -1,3 +1,59 @@
 {
-  "unidades": []
+ "unidades": [
+  {
+   "freguesia": "Braga (São Vítor)",
+   "contacto": "253 274 815",
+   "email": "geral@juntasvictor.pt"
+  },
+  {
+   "freguesia": "Espinho",
+   "contacto": "253 281 371",
+   "email": "jf.espinho@hotmail.com"
+  },
+  {
+   "freguesia": "Esporões",
+   "contacto": "253 685 542",
+   "email": "info@jf-esporoes.pt"
+  },
+  {
+   "freguesia": "Pedralva",
+   "contacto": "253 636 951",
+   "email": "jfpedralva@gmail.com"
+  },
+  {
+   "freguesia": "Sobreposta",
+   "contacto": "253 636 948",
+   "email": "geral@jfsobreposta.pt"
+  },
+  {
+   "freguesia": "União das freguesias de Arentim e Cunha",
+   "contacto": "253 951 827",
+   "email": "geral@jf-arentimecunha.pt"
+  },
+  {
+   "freguesia": "União das freguesias de Este (São Pedro e São Mamede)",
+   "contacto": "253 679 726",
+   "email": "geral@freguesiadeeste.pt"
+  },
+  {
+   "freguesia": "União das freguesias de Lomar e Arcos",
+   "contacto": "253 684 080",
+   "email": "geral@ufla.pt"
+  },
+  {
+   "freguesia": "União das freguesias de Merelim (São Pedro) e Frossos",
+   "contacto": "937 957 314",
+   "email": "geral@jf-merelimsaopedroefrossos.com"
+  },
+  {
+   "freguesia": "União das freguesias de Nogueira, Fraião e Lamaçães",
+   "contacto": "253 257 439",
+   "email": "geral@nogueira-fraiao-lamacaes.pt"
+  },
+  {
+   "freguesia": "Palmeira",
+   "contacto": "253 626 669",
+   "email": "geral@freguesiadepalmeira.pt"
+  }
+ ]
 }
