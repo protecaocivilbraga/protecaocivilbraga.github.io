@@ -14,6 +14,7 @@ Aplicação web instalável (PWA) de autoproteção para a população de Braga:
 ## O que editar
 - `index.html`, bloco `CFG` no início do script: número verde de emergência municipal (`TEL_MUNICIPAL`), contactos locais opcionais (`LOCAL`: bombeiros, psp, gnr, smpc), telefones do hospital e da Cruz Vermelha, coordenadas e código IPMA (`BRG`).
 - `ulpc.json`: Unidades Locais de Proteção Civil por freguesia (freguesia, nome, contacto, email, responsavel, morada, horario). Só aparece na app quando tem pelo menos uma entrada. Usar apenas contactos institucionais: o ficheiro é público.
+- `bombeiros.json`: os dois corpos de bombeiros (nome, contacto, morada, lat/lon). Com coordenadas nos dois, a app oferece "Qual é o mais próximo de mim?" (localização só no telemóvel). Em `freguesias` pode indicar, por freguesia, o corpo prioritário (`"Sobreposta":"voluntarios"`). Só aparece com pelo menos um contacto preenchido.
 - `avisos.json`: avisos do Município (nivel: info | amarelo | laranja | vermelho; `validoAte` opcional, ISO 8601). Gravar o ficheiro no GitHub publica o aviso.
 - Guias e lista da mochila: constantes `GUIDES` e `KIT` em `index.html` (validar com SMPC/ANEPC).
 

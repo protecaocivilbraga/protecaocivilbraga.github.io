@@ -130,7 +130,8 @@ const NIVEL={yellow:{c:"y",t:"Amarelo",n:1},orange:{c:"o",t:"Laranja",n:2},red:{
 let S={};try{S=JSON.parse(localStorage.getItem("bp")||"{}")}catch(e){}
 S.kit=S.kit||{};S.plan=S.plan||{pessoas:[],fora:"",encontro1:"",encontro2:""};S.freg=S.freg||"";
 function save(){try{localStorage.setItem("bp",JSON.stringify(S))}catch(e){}}
-let W={ipma:null,meteo:null,mun:null,ulpc:null,ts:null,offline:false,loading:true};
+let W={ipma:null,meteo:null,mun:null,ulpc:null,bomb:null,ts:null,offline:false,loading:true};
+let pos=null,geoMsg="";
 try{const c=JSON.parse(localStorage.getItem("bp_cache")||"null");if(c){W=Object.assign(W,c);W.loading=true}}catch(e){}
 let tab="home",sub=null,cat=Object.keys(KIT)[0],confirmaLimpar=false,pedidoInstalar=null;
 const $=s=>document.querySelector(s);
@@ -146,20 +147,22 @@ async function getJSON(u,ms){const c=new AbortController(),t=setTimeout(()=>c.ab
 async function carregar(){
   W.loading=true;render();
   const metUrl=`https://api.open-meteo.com/v1/forecast?latitude=${CFG.LAT}&longitude=${CFG.LON}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_gusts_10m_max&timezone=${encodeURIComponent(TZ)}&forecast_days=3`;
-  const [a,m,v,u]=await Promise.allSettled([
+  const [a,m,v,u,bb]=await Promise.allSettled([
     getJSON("https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json"),
     getJSON(metUrl),
     getJSON("avisos.json?t="+Date.now()),
-    getJSON("ulpc.json?t="+Date.now())
+    getJSON("ulpc.json?t="+Date.now()),
+    getJSON("bombeiros.json?t="+Date.now())
   ]);
   let falhou=false;
   if(a.status==="fulfilled"&&Array.isArray(a.value)){W.ipma=a.value.filter(x=>x.idAreaAviso===CFG.AREA_IPMA).map(x=>({tipo:x.awarenessTypeName,nivel:x.awarenessLevelID,inicio:x.startTime,fim:x.endTime,texto:x.text||""}))}else falhou=true;
   if(m.status==="fulfilled"&&m.value&&m.value.daily){W.meteo=m.value.daily}else falhou=true;
   if(v.status==="fulfilled"){W.mun=v.value}
   if(u.status==="fulfilled"){W.ulpc=u.value}
+  if(bb.status==="fulfilled"){W.bomb=bb.value}
   W.offline=falhou;W.loading=false;
   if(!falhou)W.ts=Date.now();
-  try{localStorage.setItem("bp_cache",JSON.stringify({ipma:W.ipma,meteo:W.meteo,mun:W.mun,ulpc:W.ulpc,ts:W.ts}))}catch(e){}
+  try{localStorage.setItem("bp_cache",JSON.stringify({ipma:W.ipma,meteo:W.meteo,mun:W.mun,ulpc:W.ulpc,bomb:W.bomb,ts:W.ts}))}catch(e){}
   render();
 }
 function avisosIpma(){
@@ -178,6 +181,28 @@ function blocoAvisos(){
   if(!h){h=W.ipma||W.mun?`<div class="alert g"><b>Sem avisos ativos</b>Não há avisos do IPMA para o distrito de Braga nem avisos municipais neste momento.</div>`:(W.loading?`<div class="alert i"><b>A carregar avisos…</b></div>`:`<div class="alert i"><b>Avisos indisponíveis</b>Sem ligação à internet. Consulte <a href="https://www.ipma.pt" target="_blank" rel="noopener">ipma.pt</a>.</div>`)}
   return h;
 }
+const corpos=()=>((W.bomb&&W.bomb.corporacoes)||[]).filter(c=>c&&c.nome);
+const km=(a,b)=>{const R=6371,r=x=>x*Math.PI/180,dl=r(b.lat-a.lat),dn=r(b.lon-a.lon),h=Math.sin(dl/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+function prioBomb(){
+  const C=corpos();if(C.length<2)return null;
+  const m=(W.bomb&&W.bomb.freguesias)||{};
+  if(S.freg&&m[S.freg]&&C.some(c=>c.id===m[S.freg]))return {id:m[S.freg],por:"freguesia"};
+  if(pos){let best=null;C.forEach(c=>{if(c.lat!=null&&c.lon!=null){const d=km(pos,{lat:+c.lat,lon:+c.lon});if(!best||d<best.d)best={id:c.id,d,por:"local"}}});return best}
+  return null}
+function localizar(){
+  if(!navigator.geolocation){geoMsg="Este dispositivo não permite obter a localização.";render();return}
+  geoMsg="A obter a localização…";render();
+  navigator.geolocation.getCurrentPosition(p=>{pos={lat:p.coords.latitude,lon:p.coords.longitude};geoMsg="";render()},()=>{geoMsg="Não foi possível obter a localização. Verifique a autorização do telemóvel.";render()},{timeout:15000,maximumAge:60000})}
+function blocoBombeiros(){
+  const C=corpos(),L=CFG.LOCAL;
+  if(!C.some(c=>c.contacto))return linha("🚒","Bombeiros","Emergência: ligue 112",[["Contacto local (não é emergência)",L.bombeiros]]);
+  const pr=prioBomb(),ord=C.slice().sort((a,b)=>(pr&&b.id===pr.id?1:0)-(pr&&a.id===pr.id?1:0));
+  const podeGeo=C.length>1&&C.every(c=>c.lat!=null&&c.lon!=null)&&!pos;
+  const mapa=c=>c.lat!=null&&c.lon!=null?`<br><a href="https://www.google.com/maps?q=${encodeURIComponent(c.lat+","+c.lon)}" target="_blank" rel="noopener">Como chegar</a>`:"";
+  return `<div class="item" style="cursor:default;align-items:flex-start;flex-direction:column;gap:6px"><span><span style="font-size:24px">🚒</span> <b>Bombeiros</b><br><small class="mut">Emergência: ligue 112. O 112 aciona o corpo de bombeiros competente. Os contactos abaixo são para situações que não são emergência.</small></span>
+  ${ord.map(c=>{const p=pr&&c.id===pr.id;return `<div style="width:100%;border:${p?"2px solid var(--ok)":"1px solid var(--line)"};border-radius:12px;padding:9px 11px;${p?"background:#e7f6ee":""}">${p?`<small style="color:var(--ok);font-weight:700">⭐ Contactar primeiro: ${pr.por==="local"?"mais próximo de si (em linha reta, cerca de "+pr.d.toFixed(1).replace(".",",")+" km)":"corpo de bombeiros da sua freguesia"}</small><br>`:""}<b>${esc(c.nome)}</b>${c.morada?"<br><small class='mut'>"+esc(c.morada)+"</small>":""}${c.contacto?`<br><a href="${tel(c.contacto)}">📞 ${esc(c.contacto)}</a>`:""}${mapa(c)}</div>`}).join("")}
+  ${podeGeo?`<button class="btn s" style="margin-top:2px" onclick="localizar()">📍 Qual é o mais próximo de mim?</button>`:""}
+  ${geoMsg?`<small class="mut">${esc(geoMsg)}</small>`:""}${pos?`<small class="mut">A localização é usada só neste ecrã e não é guardada nem enviada.</small>`:""}</div>`}
 function listaUlpc(){return ((W.ulpc&&W.ulpc.unidades)||[]).filter(x=>x&&x.freguesia)}
 function ulpcSel(){return listaUlpc().find(x=>x.freguesia===S.freg)||null}
 function ulpcInfo(u){
@@ -283,7 +308,7 @@ function contactos(){
   const L=CFG.LOCAL;
   return `<button class="back" onclick="go('warn')">‹ Avisos</button>`+sos()+sosMun()+
   `<div class="card"><h2>Contactos de emergência</h2><p class="mut">Em caso de emergência ligue sempre 112: o 112 encaminha para bombeiros, polícia, GNR e emergência médica. Os números abaixo servem para contactos que não são emergências.</p>
-  ${linha("🚒","Bombeiros","Emergência: ligue 112",[["Contacto local (não é emergência)",L.bombeiros]])}
+  ${blocoBombeiros()}
   ${linha("👮","Polícia de Segurança Pública (PSP)","Emergência: ligue 112",[["Contacto local (não é emergência)",L.psp]])}
   ${linha("🛡️","GNR","Emergência: ligue 112",[["Contacto local (não é emergência)",L.gnr]])}
   ${linha("🏥","Hospital de Braga (ULS Braga)","Emergência médica: ligue 112. Sete Fontes, São Victor.",[["telefone geral (não é linha de urgência)",CFG.HOSPITAL_TEL]])}

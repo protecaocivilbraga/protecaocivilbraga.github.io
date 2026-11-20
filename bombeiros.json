@@ -1,0 +1,7 @@
+{
+  "corporacoes": [
+    {"id": "sapadores", "nome": "Bombeiros Sapadores de Braga", "contacto": "", "morada": "", "lat": null, "lon": null},
+    {"id": "voluntarios", "nome": "Bombeiros Voluntários de Braga", "contacto": "", "morada": "", "lat": null, "lon": null}
+  ],
+  "freguesias": {}
+}
