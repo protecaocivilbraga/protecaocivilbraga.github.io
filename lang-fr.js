@@ -33,12 +33,12 @@ ev_title:"S'il faut quitter la maison",ev_intro:"Étapes pour une évacuation ra
 ev1:"Couper l'électricité, l'eau et le gaz",ev2:"Prendre le sac et les documents",ev3:"Prendre les médicaments, le téléphone et le chargeur",ev4:"Prévenir les voisins, surtout les personnes âgées",ev5:"Fermer la maison et suivre les consignes des autorités",ev6:"Aller au point de rencontre et prévenir le contact hors de la région",
 card_btn:"Carte d'urgence (imprimer ou PDF)",card_t:"Carte d'urgence de la famille",card_112:"Urgence",card_foot:"Générée dans l'application Braga Resiliente. Les données restent uniquement sur cet appareil.",card_print:"Imprimer / enregistrer en PDF",card_share:"Partager",
 priv:"Les données saisies dans cette application sont conservées exclusivement sur cet appareil.",p_priv:"Les données restent uniquement sur cet appareil.",
-h_kits:"Kits d'urgence",h_plan:"Plan familial",h_todo:"À remplir",h_people:"{0} personne(s)",h_guides:"Que faire",h_guides_d:"Avant, pendant et après",h_contacts:"Contacts d'urgence",h_contacts_d:"Pompiers, police, hôpital…",
+h_kits:"Kits d'urgence",h_plan:"Plan familial",h_todo:"À remplir",h_people:"{0} personne(s)",h_guides:"Que faire",h_guides_d:"Avant, pendant et après",h_contacts:"Contacts utiles",h_contacts_d:"Pompiers, police, hôpital…",
 foot:"Information d'appui. Elle ne remplace pas les alertes officielles ni les consignes des autorités. Vos données restent uniquement sur ce téléphone.",
 c_intro:"En cas d'urgence, appelez toujours le 112 : le 112 oriente vers les pompiers, la police, la GNR et l'urgence médicale. Les numéros ci-dessous servent aux contacts qui ne sont pas des urgences.",c_pm:"Police municipale",c_psp:"Police de sécurité publique (PSP)",c_hosp:"Hôpital de Braga (ULS Braga)",c_hosp_d:"Urgence médicale : appelez le 112. Sete Fontes, São Victor.",c_hosp_t:"standard (pas une ligne d'urgence)",c_cv:"Croix-Rouge portugaise",c_cv_d:"Délégation de Braga.",c_noemerg:"pas une ligne d'urgence",c_s24:"Saúde 24 (SNS 24)",c_s24_d:"Conseil de santé.",c_ulpc_d:"Unité locale de protection civile de votre paroisse.",c_smpc:"Protection civile de Braga",c_smpc_d:"Information et prévention.",
 w_intro:"Alertes météorologiques de l'IPMA et communiqués de la Municipalité de Braga.",w_update:"Actualiser maintenant",w_updating:"Actualisation…",w_last:"Dernière mise à jour à {0}.",w_sources:"Sources : IPMA (alertes) et Municipalité de Braga.",
 g_antes:"Avant",g_durante:"Pendant",g_depois:"Après",guide_title:"Que faire",guide_intro:"Des étapes simples pour chaque situation : avant, pendant et après. Suivez toujours les consignes des autorités.",guide_all:"Tous les guides",
-ln_title:"Autres lignes d'aide",ln_intro:"Aide spécialisée. En danger immédiat, appelez toujours le 112.",risk_tag:"📍 Risque à Braga",risk_title:"Risques à Braga",risk_intro:"Les dangers auxquels la commune est le plus exposée. Touchez pour voir quoi faire.",risk_src:"Information fondée sur des études des dangers de la commune. L'évaluation officielle figure dans le Plan municipal d'urgence de protection civile."
+ln_title:"Lignes d'aide",ln_intro:"Aide spécialisée. En danger immédiat, appelez toujours le 112.",sec_seg:"Sécurité et secours",sec_saude:"Santé",sec_pc:"Protection civile",c_pm_d:"Police municipale de Braga. R. do Farto, 4700-426 Braga.",c_s24_d2:"Conseil et orientation de santé par téléphone.",hr24:"Ouvert 24 h/24",hrw:"Jours ouvrables, 9 h 30–17 h 30",hra:"De 9 h à 21 h",risk_tag:"📍 Risque à Braga",risk_title:"Risques à Braga",risk_intro:"Les dangers auxquels la commune est le plus exposée. Touchez pour voir quoi faire.",risk_src:"Information fondée sur des études des dangers de la commune. L'évaluation officielle figure dans le Plan municipal d'urgence de protection civile."
 },
 kits:{mochila:"Sac à dos",casa:"Maison",carro:"Voiture",animais:"Animaux"},
 kitd:{mochila:"Pour quitter vite la maison (évacuation). Un par personne.",casa:"Réserve pour rester chez soi pendant 72 heures.",carro:"Pour qui reste bloqué sur la route ou doit se déplacer.",animais:"Ce dont votre animal a besoin pendant 72 heures."},
@@ -66,16 +66,16 @@ apagao:{n:"",t:"Les coupures d'électricité peuvent durer des heures : ayez une
 agua:{n:"",t:"Des coupures d'approvisionnement peuvent survenir : gardez une réserve d'eau potable à la maison."}
 },
 lines:{
-ciav:{n:"Intoxications (CIAV, INEM)",d:"Conseil médical sur les intoxications, 24 h/24, appel gratuit. En cas grave, appelez le 112."},
-suic:{n:"Prévention du suicide",d:"Ligne nationale gratuite, 24 h/24, pour toute personne en détresse ou inquiète pour un proche."},
-psi:{n:"Soutien psychologique (SNS 24)",d:"Appelez et choisissez l'option 4. Disponible 24 h/24."},
-apav:{n:"Aide aux victimes (APAV)",d:"Aide gratuite et confidentielle aux victimes d'infractions. De 9 h à 21 h."},
-vd:{n:"Violences conjugales",d:"Service d'information gratuit, 24 h/24. Aussi par SMS au 3060."},
+ciav:{n:"Intoxications (CIAV, INEM)",d:"Conseil médical sur les intoxications, appel gratuit. En cas grave, appelez le 112."},
+suic:{n:"Prévention du suicide",d:"Ligne nationale gratuite, pour toute personne en détresse ou inquiète pour un proche."},
+psi:{n:"Soutien psychologique (SNS 24)",d:"Appelez et choisissez l'option 4."},
+apav:{n:"Aide aux victimes (APAV)",d:"Aide gratuite et confidentielle aux victimes d'infractions."},
+vd:{n:"Violences conjugales",d:"Service d'information gratuit. Aussi par SMS au 3060."},
 crianca:{n:"SOS Enfant",d:"Ligne d'aide aux enfants et aux jeunes, et à ceux qui s'inquiètent pour un enfant."},
-social:{n:"Urgence sociale",d:"Pour les personnes en situation de vulnérabilité, par exemple sans abri ou sans soutien immédiat. 24 h/24, gratuite."},
-idoso:{n:"Ligne des Seniors (Médiateur)",d:"Information et soutien aux personnes âgées. Jours ouvrables, de 9 h 30 à 17 h 30."},
+social:{n:"Urgence sociale",d:"Pour les personnes en situation de vulnérabilité, par exemple sans abri ou sans soutien immédiat."},
+idoso:{n:"Ligne des Seniors (Médiateur)",d:"Information et soutien aux personnes âgées."},
 droga:{n:"SOS Drogue",d:"Ligne d'information et d'aide sur la consommation de drogues."},
-ambiente:{n:"SOS Environnement et Territoire (GNR)",d:"Signalement d'infractions environnementales et d'incendies ou brûlages illégaux. 24 h/24."}
+ambiente:{n:"SOS Environnement et Territoire (GNR)",d:"Signalement d'infractions environnementales et d'incendies ou brûlages illégaux."}
 },
 guides:{
 sismo:{n:"Séisme",

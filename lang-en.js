@@ -33,12 +33,12 @@ ev_title:"If you have to leave home",ev_intro:"Steps for a quick and orderly eva
 ev1:"Switch off electricity, water and gas",ev2:"Take the backpack and documents",ev3:"Take medication, phone and charger",ev4:"Warn neighbours, especially elderly ones",ev5:"Lock up and follow the authorities' instructions",ev6:"Go to the meeting point and tell the contact outside the region",
 card_btn:"Emergency card (print or PDF)",card_t:"Family emergency card",card_112:"Emergency",card_foot:"Generated in the Braga Resiliente app. Data stays only on this device.",card_print:"Print / save as PDF",card_share:"Share",
 priv:"The data entered in this app is stored exclusively on this device.",p_priv:"Data stays only on this device.",
-h_kits:"Emergency kits",h_plan:"Family plan",h_todo:"To fill in",h_people:"{0} person(s)",h_guides:"What to do",h_guides_d:"Before, during and after",h_contacts:"Emergency contacts",h_contacts_d:"Fire, police, hospital…",
+h_kits:"Emergency kits",h_plan:"Family plan",h_todo:"To fill in",h_people:"{0} person(s)",h_guides:"What to do",h_guides_d:"Before, during and after",h_contacts:"Useful contacts",h_contacts_d:"Fire, police, hospital…",
 foot:"Support information. It does not replace official warnings or the authorities' instructions. Your data stays only on this phone.",
 c_intro:"In an emergency always call 112: 112 routes to the fire brigade, police, GNR and medical emergency. The numbers below are for non-emergency contact.",c_pm:"Municipal Police",c_psp:"Public Security Police (PSP)",c_hosp:"Braga Hospital (ULS Braga)",c_hosp_d:"Medical emergency: call 112. Sete Fontes, São Victor.",c_hosp_t:"main number (not an emergency line)",c_cv:"Portuguese Red Cross",c_cv_d:"Braga branch.",c_noemerg:"not an emergency line",c_s24:"Saúde 24 (SNS 24)",c_s24_d:"Health advice line.",c_ulpc_d:"Local Civil Protection Unit of your parish.",c_smpc:"Braga Civil Protection",c_smpc_d:"Information and prevention.",
 w_intro:"IPMA weather warnings and notices from the Municipality of Braga.",w_update:"Update now",w_updating:"Updating…",w_last:"Last update at {0}.",w_sources:"Sources: IPMA (warnings) and Municipality of Braga.",
 g_antes:"Before",g_durante:"During",g_depois:"After",guide_title:"What to do",guide_intro:"Simple steps for each situation: before, during and after. Always follow the authorities' instructions.",guide_all:"All guides",
-ln_title:"Other helplines",ln_intro:"Specialist support. In immediate danger, always call 112.",risk_tag:"📍 Risk in Braga",risk_title:"Risks in Braga",risk_intro:"The hazards the municipality is most exposed to. Tap to see what to do.",risk_src:"Information based on studies of the municipality's hazards. The official assessment is in the Municipal Civil Protection Emergency Plan."
+ln_title:"Support helplines",ln_intro:"Specialist support. In immediate danger, always call 112.",sec_seg:"Safety and rescue",sec_saude:"Health",sec_pc:"Civil Protection",c_pm_d:"Municipal Police of Braga. R. do Farto, 4700-426 Braga.",c_s24_d2:"Health advice and triage by phone.",hr24:"Open 24 hours",hrw:"Working days, 9:30–17:30",hra:"9:00 to 21:00",risk_tag:"📍 Risk in Braga",risk_title:"Risks in Braga",risk_intro:"The hazards the municipality is most exposed to. Tap to see what to do.",risk_src:"Information based on studies of the municipality's hazards. The official assessment is in the Municipal Civil Protection Emergency Plan."
 },
 kits:{mochila:"Backpack",casa:"Home",carro:"Car",animais:"Pets"},
 kitd:{mochila:"To leave home quickly (evacuation). One per person.",casa:"Supplies to stay at home for 72 hours.",carro:"For anyone stranded on the road or who has to travel.",animais:"What your pet needs for 72 hours."},
@@ -66,16 +66,16 @@ apagao:{n:"",t:"Power cuts can last for hours: keep a torch, a battery radio and
 agua:{n:"",t:"Supply interruptions can happen: keep a reserve of drinking water at home."}
 },
 lines:{
-ciav:{n:"Poisoning (CIAV, INEM)",d:"Medical advice on poisoning, 24 hours, free call. In serious cases call 112."},
-suic:{n:"Suicide prevention",d:"Free national line, 24 hours, for anyone in distress or worried about someone."},
-psi:{n:"Psychological counselling (SNS 24)",d:"Call and choose option 4. Available 24 hours."},
-apav:{n:"Victim support (APAV)",d:"Free, confidential support for victims of crime. 9:00 to 21:00."},
-vd:{n:"Domestic violence",d:"Free information service, 24 hours. Also by SMS to 3060."},
+ciav:{n:"Poisoning (CIAV, INEM)",d:"Medical advice on poisoning, free call. In serious cases call 112."},
+suic:{n:"Suicide prevention",d:"Free national line, for anyone in distress or worried about someone."},
+psi:{n:"Psychological counselling (SNS 24)",d:"Call and choose option 4."},
+apav:{n:"Victim support (APAV)",d:"Free, confidential support for victims of crime."},
+vd:{n:"Domestic violence",d:"Free information service. Also by SMS to 3060."},
 crianca:{n:"SOS Child",d:"Helpline for children and young people, and for anyone worried about a child."},
-social:{n:"Social emergency",d:"For people in vulnerable situations, such as homelessness or no immediate support. 24 hours, free."},
-idoso:{n:"Senior Citizens' Line (Ombudsman)",d:"Information and support for older people. Working days, 9:30 to 17:30."},
+social:{n:"Social emergency",d:"For people in vulnerable situations, such as homelessness or no immediate support."},
+idoso:{n:"Senior Citizens' Line (Ombudsman)",d:"Information and support for older people."},
 droga:{n:"SOS Drugs",d:"Information and support line on drug use."},
-ambiente:{n:"SOS Environment and Territory (GNR)",d:"Report environmental offences and illegal fires or burning. 24 hours."}
+ambiente:{n:"SOS Environment and Territory (GNR)",d:"Report environmental offences and illegal fires or burning."}
 },
 guides:{
 sismo:{n:"Earthquake",

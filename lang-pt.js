@@ -33,12 +33,12 @@ ev_title:"Se tiver de sair de casa",ev_intro:"Passos para uma evacuação rápid
 ev1:"Desligar a eletricidade, a água e o gás",ev2:"Levar a mochila e os documentos",ev3:"Levar a medicação, o telemóvel e o carregador",ev4:"Avisar vizinhos, sobretudo idosos",ev5:"Fechar a casa e seguir as indicações das autoridades",ev6:"Ir ao ponto de encontro e avisar o contacto fora da região",
 card_btn:"Cartão de emergência (imprimir ou PDF)",card_t:"Cartão de emergência da família",card_112:"Emergência",card_foot:"Gerado na app Braga Resiliente. Os dados ficam só neste dispositivo.",card_print:"Imprimir / guardar em PDF",card_share:"Partilhar",
 priv:"Os dados inseridos nesta aplicação ficam guardados exclusivamente neste dispositivo.",p_priv:"Os dados ficam apenas neste dispositivo.",
-h_kits:"Kits de emergência",h_plan:"Plano da família",h_todo:"Por preencher",h_people:"{0} pessoa(s)",h_guides:"O que fazer",h_guides_d:"Antes, durante e depois",h_contacts:"Contactos de emergência",h_contacts_d:"Bombeiros, polícia, hospital…",
+h_kits:"Kits de emergência",h_plan:"Plano da família",h_todo:"Por preencher",h_people:"{0} pessoa(s)",h_guides:"O que fazer",h_guides_d:"Antes, durante e depois",h_contacts:"Contactos úteis",h_contacts_d:"Bombeiros, polícia, hospital…",
 foot:"Informação de apoio. Não substitui os avisos oficiais nem as indicações das autoridades. Os seus dados ficam só neste telemóvel.",
 c_intro:"Em caso de emergência ligue sempre 112: o 112 encaminha para bombeiros, polícia, GNR e emergência médica. Os números abaixo servem para contactos que não são emergências.",c_pm:"Polícia Municipal",c_psp:"Polícia de Segurança Pública (PSP)",c_hosp:"Hospital de Braga (ULS Braga)",c_hosp_d:"Emergência médica: ligue 112. Sete Fontes, São Victor.",c_hosp_t:"telefone geral (não é linha de urgência)",c_cv:"Cruz Vermelha Portuguesa",c_cv_d:"Delegação de Braga.",c_noemerg:"não é linha de emergência",c_s24:"Saúde 24 (SNS 24)",c_s24_d:"Aconselhamento de saúde.",c_ulpc_d:"Unidade Local de Proteção Civil da sua freguesia.",c_smpc:"Proteção Civil de Braga",c_smpc_d:"Informação e prevenção.",
 w_intro:"Avisos meteorológicos do IPMA e comunicados do Município de Braga.",w_update:"Atualizar agora",w_updating:"A atualizar…",w_last:"Última atualização às {0}.",w_sources:"Fontes: IPMA (avisos) e Município de Braga.",
 g_antes:"Antes",g_durante:"Durante",g_depois:"Depois",guide_title:"O que fazer",guide_intro:"Passos simples para cada situação, antes, durante e depois. Siga sempre as indicações das autoridades.",guide_all:"Todos os guias",
-ln_title:"Outras linhas de apoio",ln_intro:"Apoio especializado. Em perigo imediato, ligue sempre 112.",risk_tag:"📍 Risco em Braga",risk_title:"Riscos em Braga",risk_intro:"Os perigos a que o concelho está mais exposto. Toque para ver o que fazer.",risk_src:"Informação baseada em estudos sobre os perigos do concelho. A avaliação oficial está no Plano Municipal de Emergência de Proteção Civil."
+ln_title:"Linhas de apoio",ln_intro:"Apoio especializado. Em perigo imediato, ligue sempre 112.",sec_seg:"Segurança e socorro",sec_saude:"Saúde",sec_pc:"Proteção Civil",c_pm_d:"Polícia do Município de Braga. R. do Farto, 4700-426 Braga.",c_s24_d2:"Aconselhamento e triagem de saúde por telefone.",hr24:"Atendimento 24 horas",hrw:"Dias úteis, 9h30–17h30",hra:"Das 9h às 21h",risk_tag:"📍 Risco em Braga",risk_title:"Riscos em Braga",risk_intro:"Os perigos a que o concelho está mais exposto. Toque para ver o que fazer.",risk_src:"Informação baseada em estudos sobre os perigos do concelho. A avaliação oficial está no Plano Municipal de Emergência de Proteção Civil."
 },
 kits:{mochila:"Mochila",casa:"Casa",carro:"Carro",animais:"Animais"},
 kitd:{mochila:"Para sair de casa rapidamente (evacuação). Uma por pessoa.",casa:"Reserva para ficar em casa durante 72 horas.",carro:"Para quem ficar retido na estrada ou tiver de se deslocar.",animais:"O que o seu animal de companhia precisa durante 72 horas."},
@@ -66,16 +66,16 @@ apagao:{n:"",t:"Os cortes de eletricidade podem durar horas: tenha lanterna, rá
 agua:{n:"",t:"Podem ocorrer falhas no abastecimento: mantenha uma reserva de água potável em casa."}
 },
 lines:{
-ciav:{n:"Intoxicações (CIAV, INEM)",d:"Informação médica sobre intoxicações, 24 horas, chamada gratuita. Em caso grave, ligue 112."},
-suic:{n:"Prevenção do suicídio",d:"Linha nacional gratuita, 24 horas, para quem está em sofrimento ou quer ajudar alguém."},
-psi:{n:"Aconselhamento psicológico (SNS 24)",d:"Ligue e escolha a opção 4. Disponível 24 horas."},
-apav:{n:"Apoio à vítima (APAV)",d:"Apoio gratuito e confidencial a vítimas de crime. Das 9h às 21h."},
-vd:{n:"Violência doméstica",d:"Serviço de informação gratuito, 24 horas. Também por SMS para o 3060."},
+ciav:{n:"Intoxicações (CIAV, INEM)",d:"Informação médica sobre intoxicações. Chamada gratuita. Em caso grave, ligue 112."},
+suic:{n:"Prevenção do suicídio",d:"Linha nacional gratuita, para quem está em sofrimento ou quer ajudar alguém."},
+psi:{n:"Aconselhamento psicológico (SNS 24)",d:"Ligue e escolha a opção 4."},
+apav:{n:"Apoio à vítima (APAV)",d:"Apoio gratuito e confidencial a vítimas de crime."},
+vd:{n:"Violência doméstica",d:"Serviço de informação gratuito. Também por SMS para o 3060."},
 crianca:{n:"SOS Criança",d:"Linha de apoio a crianças e jovens e a quem se preocupa com uma criança."},
-social:{n:"Emergência social",d:"Para pessoas em situação de desproteção, como sem-abrigo ou sem apoio imediato. 24 horas, gratuita."},
-idoso:{n:"Linha do Idoso (Provedor de Justiça)",d:"Informação e apoio a pessoas idosas. Dias úteis, das 9h30 às 17h30."},
+social:{n:"Emergência social",d:"Para pessoas em situação de desproteção, como sem-abrigo ou sem apoio imediato."},
+idoso:{n:"Linha do Idoso (Provedor de Justiça)",d:"Informação e apoio a pessoas idosas."},
 droga:{n:"SOS Droga",d:"Linha de informação e apoio sobre consumo de drogas."},
-ambiente:{n:"SOS Ambiente e Território (GNR)",d:"Denúncia de infrações ambientais e de incêndios ou queimadas ilegais. 24 horas."}
+ambiente:{n:"SOS Ambiente e Território (GNR)",d:"Denúncia de infrações ambientais e de incêndios ou queimadas ilegais."}
 },
 guides:{
 sismo:{n:"Sismo",
