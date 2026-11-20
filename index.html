@@ -130,7 +130,7 @@ const NIVEL={yellow:{c:"y",t:"Amarelo",n:1},orange:{c:"o",t:"Laranja",n:2},red:{
 let S={};try{S=JSON.parse(localStorage.getItem("bp")||"{}")}catch(e){}
 S.kit=S.kit||{};S.plan=S.plan||{pessoas:[],fora:"",encontro1:"",encontro2:""};S.freg=S.freg||"";
 function save(){try{localStorage.setItem("bp",JSON.stringify(S))}catch(e){}}
-let W={ipma:null,meteo:null,mun:null,ts:null,offline:false,loading:true};
+let W={ipma:null,meteo:null,mun:null,ulpc:null,ts:null,offline:false,loading:true};
 try{const c=JSON.parse(localStorage.getItem("bp_cache")||"null");if(c){W=Object.assign(W,c);W.loading=true}}catch(e){}
 let tab="home",sub=null,cat=Object.keys(KIT)[0],confirmaLimpar=false,pedidoInstalar=null;
 const $=s=>document.querySelector(s);
@@ -146,18 +146,20 @@ async function getJSON(u,ms){const c=new AbortController(),t=setTimeout(()=>c.ab
 async function carregar(){
   W.loading=true;render();
   const metUrl=`https://api.open-meteo.com/v1/forecast?latitude=${CFG.LAT}&longitude=${CFG.LON}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_gusts_10m_max&timezone=${encodeURIComponent(TZ)}&forecast_days=3`;
-  const [a,m,v]=await Promise.allSettled([
+  const [a,m,v,u]=await Promise.allSettled([
     getJSON("https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json"),
     getJSON(metUrl),
-    getJSON("avisos.json?t="+Date.now())
+    getJSON("avisos.json?t="+Date.now()),
+    getJSON("ulpc.json?t="+Date.now())
   ]);
   let falhou=false;
   if(a.status==="fulfilled"&&Array.isArray(a.value)){W.ipma=a.value.filter(x=>x.idAreaAviso===CFG.AREA_IPMA).map(x=>({tipo:x.awarenessTypeName,nivel:x.awarenessLevelID,inicio:x.startTime,fim:x.endTime,texto:x.text||""}))}else falhou=true;
   if(m.status==="fulfilled"&&m.value&&m.value.daily){W.meteo=m.value.daily}else falhou=true;
   if(v.status==="fulfilled"){W.mun=v.value}
+  if(u.status==="fulfilled"){W.ulpc=u.value}
   W.offline=falhou;W.loading=false;
   if(!falhou)W.ts=Date.now();
-  try{localStorage.setItem("bp_cache",JSON.stringify({ipma:W.ipma,meteo:W.meteo,mun:W.mun,ts:W.ts}))}catch(e){}
+  try{localStorage.setItem("bp_cache",JSON.stringify({ipma:W.ipma,meteo:W.meteo,mun:W.mun,ulpc:W.ulpc,ts:W.ts}))}catch(e){}
   render();
 }
 function avisosIpma(){
@@ -176,6 +178,18 @@ function blocoAvisos(){
   if(!h){h=W.ipma||W.mun?`<div class="alert g"><b>Sem avisos ativos</b>Não há avisos do IPMA para o distrito de Braga nem avisos municipais neste momento.</div>`:(W.loading?`<div class="alert i"><b>A carregar avisos…</b></div>`:`<div class="alert i"><b>Avisos indisponíveis</b>Sem ligação à internet. Consulte <a href="https://www.ipma.pt" target="_blank" rel="noopener">ipma.pt</a>.</div>`)}
   return h;
 }
+function listaUlpc(){return ((W.ulpc&&W.ulpc.unidades)||[]).filter(x=>x&&x.freguesia)}
+function ulpcSel(){return listaUlpc().find(x=>x.freguesia===S.freg)||null}
+function ulpcInfo(u){
+  const t=u.contacto?`<a href="${tel(u.contacto)}">📞 ${esc(u.contacto)}</a><br>`:"";
+  const e=u.email?`<a href="mailto:${esc(u.email)}">✉️ ${esc(u.email)}</a><br>`:"";
+  return `<div class="alert i" style="margin:10px 0 0"><b>🛟 ${esc(u.nome||("ULPC de "+u.freguesia))}</b>${u.responsavel?"Responsável: "+esc(u.responsavel)+"<br>":""}${u.morada?esc(u.morada)+"<br>":""}${u.horario?"Horário: "+esc(u.horario)+"<br>":""}${t}${e}<small>Informação e apoio local (não é linha de emergência). Em emergência, ligue 112.</small></div>`}
+function cardFreguesia(){
+  const L=listaUlpc();if(!L.length)return "";
+  const sel=ulpcSel();
+  return `<div class="card"><h3>A minha freguesia (com Unidades Locais de Proteção Civil)</h3>
+  <select aria-label="A minha freguesia" onchange="S.freg=this.value;save();render()"><option value="">Escolha a sua freguesia…</option>${L.map(x=>`<option value="${esc(x.freguesia)}" ${x.freguesia===S.freg?"selected":""}>${esc(x.freguesia)}</option>`).join("")}</select>
+  ${sel?ulpcInfo(sel):'<p class="mut" style="margin-top:8px">Escolha a freguesia para ver o contacto da Unidade Local de Proteção Civil.</p>'}</div>`}
 function btnIpma(){
   const I=avisosIpma();let c="g",t="Sem avisos ativos";
   if(!W.ipma){c="i";t=W.loading?"A carregar…":"Indisponível sem ligação"}
@@ -236,8 +250,8 @@ function home(){
    <button class="tile" onclick="go('guide')"><span class="i">📖</span><b>O que fazer</b><small>Sismo, incêndio, cheias…</small></button>
    <button class="tile" onclick="go('warn','contactos')"><span class="i">📞</span><b>Contactos de emergência</b><small>Bombeiros, polícia, hospital…</small></button>
   </div>`+cardInstalar()+
-  `<div class="card"><h3>A minha freguesia</h3><input type="text" placeholder="Ex.: São Vicente" value="${esc(S.freg)}" oninput="S.freg=this.value;save()" aria-label="A minha freguesia"></div>
-  <p class="foot">Informação de apoio. Não substitui os avisos oficiais nem as indicações das autoridades. Os seus dados ficam só neste telemóvel.</p>`;
+  cardFreguesia()+
+  `<p class="foot">Informação de apoio. Não substitui os avisos oficiais nem as indicações das autoridades. Os seus dados ficam só neste telemóvel.</p>`;
 }
 function kit(){
   const cats=Object.keys(KIT),p=Math.round(done()/total*100);
@@ -275,6 +289,7 @@ function contactos(){
   ${linha("🏥","Hospital de Braga (ULS Braga)","Emergência médica: ligue 112. Sete Fontes, São Victor.",[["telefone geral (não é linha de urgência)",CFG.HOSPITAL_TEL]])}
   ${linha("➕","Cruz Vermelha Portuguesa","Delegação de Braga.",[["não é linha de emergência",CFG.CRUZ_VERMELHA_TEL]])}
   ${linha("🩺","Saúde 24 (SNS 24)","Aconselhamento de saúde.",[["",'808 24 24 24']])}
+  ${ulpcSel()?linha("🛟","ULPC de "+ulpcSel().freguesia,"Unidade Local de Proteção Civil da sua freguesia.",[["não é linha de emergência",ulpcSel().contacto]]):""}
   ${L.smpc?linha("🛟","Proteção Civil de Braga","Informação e prevenção.",[["não é linha de emergência",L.smpc]]):""}
   </div>`;
 }
