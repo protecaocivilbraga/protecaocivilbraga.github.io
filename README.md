@@ -12,7 +12,7 @@ Aplicação web instalável (PWA) de autoproteção para a população de Braga:
 - iPhone: abrir no Safari → Partilhar → "Adicionar ao ecrã principal" (o browser interno do WhatsApp não instala).
 
 ## O que editar
-- `index.html`, bloco `CFG` no início do script: número municipal (`TEL_MUNICIPAL`), contactos locais opcionais (`LOCAL`: bombeiros, psp, gnr, smpc), telefones do hospital e da Cruz Vermelha, coordenadas e código IPMA (`BRG`).
+- `index.html`, bloco `CFG` no início do script: número verde de emergência municipal (`TEL_MUNICIPAL`), contactos locais opcionais (`LOCAL`: bombeiros, psp, gnr, smpc), telefones do hospital e da Cruz Vermelha, coordenadas e código IPMA (`BRG`).
 - `avisos.json`: avisos do Município (nivel: info | amarelo | laranja | vermelho; `validoAte` opcional, ISO 8601). Gravar o ficheiro no GitHub publica o aviso.
 - Guias e lista da mochila: constantes `GUIDES` e `KIT` em `index.html` (validar com SMPC/ANEPC).
 
