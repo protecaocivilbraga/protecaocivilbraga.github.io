@@ -212,7 +212,7 @@ function ulpcInfo(u){
 function cardFreguesia(){
   const L=listaUlpc();if(!L.length)return "";
   const sel=ulpcSel();
-  return `<div class="card"><h3>A minha freguesia (com Unidades Locais de Proteção Civil)</h3>
+  return `<div class="card"><h3>A minha freguesia (com Unidade Local de Proteção Civil)</h3>
   <select aria-label="A minha freguesia" onchange="S.freg=this.value;save();render()"><option value="">Escolha a sua freguesia…</option>${L.map(x=>`<option value="${esc(x.freguesia)}" ${x.freguesia===S.freg?"selected":""}>${esc(x.freguesia)}</option>`).join("")}</select>
   ${sel?ulpcInfo(sel):'<p class="mut" style="margin-top:8px">Escolha a freguesia para ver o contacto da Unidade Local de Proteção Civil.</p>'}</div>`}
 function btnIpma(){
