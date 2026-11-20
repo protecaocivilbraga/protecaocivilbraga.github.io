@@ -60,7 +60,10 @@ incendio:{n:"Wildfires",t:"The municipality has forest and rural areas: know the
 tempestade:{n:"Storms and strong wind",t:"Follow the IPMA warnings in this app."},
 calor:{n:"Heatwaves",t:"Protect children, the elderly and pets."},
 gases:{n:"Hazardous substance accidents",t:"At industrial sites and in the transport of dangerous goods."},
-sismo:{n:"Earthquakes",t:"The municipality lies in seismic intensity zone VI; being prepared matters."}
+sismo:{n:"Earthquakes",t:"The municipality lies in seismic intensity zone VI; being prepared matters."},
+frio:{n:"",t:"Cold spells and frost: protect the elderly, children and pets, and watch out for ice on the roads."},
+apagao:{n:"",t:"Power cuts can last for hours: keep a torch, a battery radio and power banks at hand."},
+agua:{n:"",t:"Supply interruptions can happen: keep a reserve of drinking water at home."}
 },
 guides:{
 sismo:{n:"Earthquake",

@@ -60,7 +60,10 @@ incendio:{n:"Incendios rurales",t:"Hay zonas forestales y rurales en el municipi
 tempestade:{n:"Tormentas y viento fuerte",t:"Siga los avisos del IPMA en esta app."},
 calor:{n:"Olas de calor",t:"Proteja a niños, mayores y animales."},
 gases:{n:"Accidentes con sustancias peligrosas",t:"En industrias y en el transporte de mercancías peligrosas."},
-sismo:{n:"Terremotos",t:"El municipio está en una zona de intensidad sísmica VI; la preparación es importante."}
+sismo:{n:"Terremotos",t:"El municipio está en una zona de intensidad sísmica VI; la preparación es importante."},
+frio:{n:"",t:"Olas de frío y heladas: proteja a mayores, niños y animales y tenga cuidado con el hielo en las carreteras."},
+apagao:{n:"",t:"Los cortes de electricidad pueden durar horas: tenga linterna, radio de pilas y cargadores portátiles."},
+agua:{n:"",t:"Pueden producirse cortes de suministro: mantenga una reserva de agua potable en casa."}
 },
 guides:{
 sismo:{n:"Terremoto",

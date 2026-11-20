@@ -60,7 +60,10 @@ incendio:{n:"Incêndios rurais",t:"Há espaços florestais e rurais no concelho:
 tempestade:{n:"Tempestades e vento forte",t:"Acompanhe os avisos do IPMA nesta app."},
 calor:{n:"Ondas de calor",t:"Proteja crianças, idosos e animais."},
 gases:{n:"Acidentes com substâncias perigosas",t:"Em indústrias e no transporte de mercadorias perigosas."},
-sismo:{n:"Sismos",t:"O concelho está numa zona de intensidade sísmica VI; a preparação é importante."}
+sismo:{n:"Sismos",t:"O concelho está numa zona de intensidade sísmica VI; a preparação é importante."},
+frio:{n:"",t:"Vagas de frio e geada: proteja idosos, crianças e animais e tenha cuidado com o gelo nas estradas."},
+apagao:{n:"",t:"Os cortes de eletricidade podem durar horas: tenha lanterna, rádio a pilhas e carregadores portáteis."},
+agua:{n:"",t:"Podem ocorrer falhas no abastecimento: mantenha uma reserva de água potável em casa."}
 },
 guides:{
 sismo:{n:"Sismo",

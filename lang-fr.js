@@ -60,7 +60,10 @@ incendio:{n:"Incendies de forêt",t:"La commune compte des espaces forestiers et
 tempestade:{n:"Tempêtes et vent fort",t:"Suivez les alertes de l'IPMA dans cette application."},
 calor:{n:"Canicules",t:"Protégez les enfants, les personnes âgées et les animaux."},
 gases:{n:"Accidents avec des substances dangereuses",t:"Dans l'industrie et le transport de marchandises dangereuses."},
-sismo:{n:"Séismes",t:"La commune se situe dans une zone d'intensité sismique VI ; la préparation est importante."}
+sismo:{n:"Séismes",t:"La commune se situe dans une zone d'intensité sismique VI ; la préparation est importante."},
+frio:{n:"",t:"Vagues de froid et gel : protégez les personnes âgées, les enfants et les animaux, et attention au verglas sur les routes."},
+apagao:{n:"",t:"Les coupures d'électricité peuvent durer des heures : ayez une lampe, une radio à piles et des batteries externes."},
+agua:{n:"",t:"Des coupures d'approvisionnement peuvent survenir : gardez une réserve d'eau potable à la maison."}
 },
 guides:{
 sismo:{n:"Séisme",

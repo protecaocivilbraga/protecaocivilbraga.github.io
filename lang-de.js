@@ -60,7 +60,10 @@ incendio:{n:"Wald- und Flächenbrände",t:"Die Gemeinde hat Wald- und ländliche
 tempestade:{n:"Stürme und starker Wind",t:"Beachten Sie die IPMA-Warnungen in dieser App."},
 calor:{n:"Hitzewellen",t:"Schützen Sie Kinder, ältere Menschen und Tiere."},
 gases:{n:"Unfälle mit Gefahrstoffen",t:"In Industrieanlagen und beim Transport gefährlicher Güter."},
-sismo:{n:"Erdbeben",t:"Die Gemeinde liegt in der Erdbebenzone der Intensität VI; Vorbereitung ist wichtig."}
+sismo:{n:"Erdbeben",t:"Die Gemeinde liegt in der Erdbebenzone der Intensität VI; Vorbereitung ist wichtig."},
+frio:{n:"",t:"Kälte und Frost: Schützen Sie ältere Menschen, Kinder und Tiere und achten Sie auf Eis auf den Straßen."},
+apagao:{n:"",t:"Stromausfälle können Stunden dauern: Halten Sie Taschenlampe, Batterieradio und Powerbanks bereit."},
+agua:{n:"",t:"Es kann zu Unterbrechungen der Versorgung kommen: Halten Sie einen Vorrat an Trinkwasser bereit."}
 },
 guides:{
 sismo:{n:"Erdbeben",
