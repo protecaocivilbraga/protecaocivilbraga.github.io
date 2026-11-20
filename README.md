@@ -20,3 +20,11 @@ Aplicação web instalável (PWA) de autoproteção para a população de Braga:
 
 ## Fontes
 IPMA (avisos, dados abertos) e Open-Meteo (previsão). Não usa dados internos do CCOM.
+
+## Novidades (kits, plano, guias e idiomas)
+
+- **Kits** de emergência: mochila, casa, carro e animais, com validades (aviso no Início quando faltam 30 dias ou menos) e lembrete de revisão de 6 em 6 meses.
+- **Plano da família** completo: pessoas e notas, contacto fora da região, 3 pontos de encontro (com localização opcional guardada só no telemóvel), dados da casa, passos de evacuação e **cartão de emergência** para imprimir ou guardar em PDF.
+- **Guias** com antes, durante e depois (sismo, cheias, incêndio rural, calor, frio, tempestade, apagão, gases tóxicos, falta de água, deslizamentos) e secção **Riscos em Braga**.
+- **Idiomas**: português, inglês, espanhol, francês e alemão. Os textos estão em `lang-pt.js`, `lang-en.js`, `lang-es.js`, `lang-fr.js` e `lang-de.js` (mesmas chaves em todos). Os avisos municipais e o texto dos avisos do IPMA ficam em português.
+- Fontes dos conteúdos: recomendações da ANEPC/Proteção Civil. Rever com o SMPC antes de divulgar.
