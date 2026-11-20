@@ -21,14 +21,37 @@ body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background
 .phone{width:430px;max-width:100%;height:100%;max-height:860px;background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
 @media(min-width:520px){.phone{height:calc(100% - 40px);border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.25)}}
 @media(max-width:519px){.phone{max-height:none}}
-header{background:var(--pri);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 18px 12px}
-header h1{font-size:19px;font-weight:700}
-header p{font-size:12.5px;opacity:.85;margin-top:2px}
-main{flex:1;overflow-y:auto;padding:14px 14px 20px;-webkit-overflow-scrolling:touch}
-nav{display:flex;background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-nav button{flex:1;border:0;background:none;padding:9px 2px 8px;font-size:11px;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
-nav button .i{font-size:21px;line-height:1}
+header{background:linear-gradient(135deg,#0a4f95 0%,#0b6fd0 60%,#1a8ae6 100%);color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;border-radius:0 0 26px 26px;box-shadow:0 8px 24px rgba(11,92,171,.28);position:relative;z-index:2}
+.hd1{display:flex;align-items:center;justify-content:space-between;gap:10px}
+header h1{font-size:20px;font-weight:800;letter-spacing:-.2px;line-height:1.1}
+header p{font-size:11.5px;opacity:.9;margin-top:4px;white-space:nowrap}
+.logos{background:#fff;border-radius:14px;padding:5px 9px;display:flex;box-shadow:0 2px 10px rgba(0,0,0,.18);flex:none}
+.logos img{height:34px;width:auto;display:block}
+.relogio{margin:12px auto 0;width:max-content;max-width:100%;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:99px;padding:6px 16px;font-variant-numeric:tabular-nums}
+.relogio b{font-size:19px;font-weight:800;letter-spacing:.5px}
+.relogio span{font-size:12px;opacity:.95;text-transform:capitalize;border-left:1px solid rgba(255,255,255,.4);padding-left:10px}
+main{flex:1;overflow-y:auto;padding:16px 14px 20px;-webkit-overflow-scrolling:touch}
+nav{display:flex;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px 24px 0 0;box-shadow:0 -6px 24px rgba(16,24,40,.1);padding:7px 6px calc(7px + env(safe-area-inset-bottom));position:relative;z-index:2}
+nav button{flex:1;border:0;background:none;padding:2px 0;font-size:11px;font-weight:500;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:color .2s}
+nav button .i{width:54px;height:30px;border-radius:99px;display:grid;place-items:center;position:relative;transition:background .25s,transform .25s}
+nav button .i svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+nav button:active .i{transform:scale(.9)}
 nav button.on{color:var(--pri);font-weight:700}
+nav button.on .i{background:var(--pri2)}
+nav button.on .i svg{fill:rgba(11,92,171,.16);animation:pop .35s ease}
+nav .pt{position:absolute;top:2px;right:11px;width:9px;height:9px;border-radius:50%;background:var(--red);border:2px solid #fff}
+@keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+main>*{animation:up .38s both}
+main>*:nth-child(2){animation-delay:.04s}main>*:nth-child(3){animation-delay:.08s}main>*:nth-child(4){animation-delay:.12s}main>*:nth-child(5){animation-delay:.16s}main>*:nth-child(n+6){animation-delay:.2s}
+.card,.tile,.alert,.mun{border-color:transparent;box-shadow:0 1px 2px rgba(16,24,40,.05),0 6px 18px rgba(16,24,40,.07)}
+.card,.tile,.alert,.sos,.mun{border-radius:20px}
+.sos{background:linear-gradient(135deg,#c0262d,#e0453b);box-shadow:0 8px 20px rgba(192,38,45,.35)}
+.mun{border:2px solid rgba(192,38,45,.85)}
+.tile,.sos,.mun,.tabs button{transition:transform .15s,box-shadow .15s}
+.tile:active,.sos:active,.mun:active,.tabs button:active{transform:scale(.97)}
+.tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start}
+.tile .i{width:46px;height:46px;border-radius:15px;background:var(--pri2);display:grid;place-items:center;font-size:25px;margin-bottom:9px}
 .card{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:12px;border:1px solid var(--line)}
 h2{font-size:16px;margin-bottom:8px}
 h3{font-size:14px;margin-bottom:4px}
@@ -44,7 +67,6 @@ a{color:var(--pri)}
 .alert small{opacity:.85}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 .tile{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 12px;text-align:left;cursor:pointer;font:inherit;color:inherit}
-.tile .i{font-size:28px;display:block;margin-bottom:6px}
 .tile b{font-size:14.5px;display:block}
 .tile small{color:var(--mut);font-size:12px}
 .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
@@ -87,7 +109,11 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 </head>
 <body>
 <div class="phone">
-  <header><h1>Braga Resiliente</h1><p>Proteção Civil · Município de Braga</p></header>
+  <header>
+    <div class="hd1"><div><h1>Braga Resiliente</h1><p>Município de Braga | Proteção Civil</p></div>
+    <div class="logos"><img src="logos.png" width="468" height="138" alt="Município de Braga e Serviço Municipal de Proteção Civil"></div></div>
+    <div class="relogio" aria-live="off"><b id="rHora">--:--</b><span id="rData"></span></div>
+  </header>
   <main id="main"></main>
   <nav id="nav"></nav>
 </div>
@@ -106,7 +132,13 @@ const CFG={
 const TZ="Europe/Lisbon";
 
 /* ===== CONTEÚDO ===== */
-const TABS=[["home","🏠","Início"],["kit","🎒","Mochila"],["plan","👨‍👩‍👧","Plano"],["warn","⚠️","Avisos"],["guide","📖","Guias"]];
+const SV=p=>`<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
+const TABS=[
+["home",SV('<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/>'),"Início"],
+["kit",SV('<path d="M6 9.5A3.5 3.5 0 0 1 9.5 6h5A3.5 3.5 0 0 1 18 9.5V19a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M9 6V4.8A1.8 1.8 0 0 1 10.8 3h2.4A1.8 1.8 0 0 1 15 4.8V6"/><rect x="9" y="13" width="6" height="4.5" rx="1"/>'),"Mochila"],
+["plan",SV('<circle cx="9" cy="8" r="3"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9.5" r="2.3"/><path d="M16.2 14.2a4.6 4.6 0 0 1 4.8 4.6"/>'),"Plano"],
+["warn",SV('<path d="M12 4 21.5 20h-19z"/><path d="M12 10v4.5"/><path d="M12 17.4v.1"/>'),"Avisos"],
+["guide",SV('<path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H13v15h5.5a1.5 1.5 0 0 1 1.5 1.5z"/>'),"Guias"]];
 const KIT={
  "Água e comida":["Água (3 L por pessoa)","Alimentos que não precisam de cozinhar","Abre-latas / canivete","Comida e água para animais"],
  "Saúde":["Medicação habitual (7 dias)","Estojo de primeiros socorros","Máscaras e gel desinfetante","Artigos de higiene pessoal","Fraldas / alimentação de bebé"],
@@ -260,7 +292,9 @@ function cardInstalar(){
 }
 
 /* ===== ECRÃS ===== */
-function nav(){$("#nav").innerHTML=TABS.map(t=>`<button class="${tab===t[0]?'on':''}" onclick="go('${t[0]}')"><span class="i">${t[1]}</span>${t[2]}</button>`).join("")}
+function nav(){const tem=avisosIpma().length+avisosMun().length>0;$("#nav").innerHTML=TABS.map(t=>`<button class="${tab===t[0]?'on':''}" onclick="go('${t[0]}')"><span class="i">${t[1]}${t[0]==="warn"&&tem?'<i class="pt"></i>':''}</span>${t[2]}</button>`).join("")}
+function relogio(){const d=new Date();$("#rHora").textContent=new Intl.DateTimeFormat("pt-PT",{timeZone:TZ,hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(d);$("#rData").textContent=new Intl.DateTimeFormat("pt-PT",{timeZone:TZ,weekday:"short",day:"numeric",month:"short"}).format(d).replace(/\./g,"")}
+relogio();setInterval(relogio,15000);
 function go(t,s){tab=t;sub=s||null;confirmaLimpar=false;render();$("#main").scrollTop=0}
 const tel=n=>"tel:"+String(n).replace(/\s/g,"");
 const sos=()=>`<a class="sos" href="tel:112"><b>📞 112</b><span>Número europeu de emergência. Em caso de emergência, ligue sempre 112. Esta app não o substitui.</span></a>`;
