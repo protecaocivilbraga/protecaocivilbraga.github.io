@@ -429,7 +429,7 @@ function go(tb,s){tab=tb;sub=s||null;confirmaLimpar=false;if(tb==="guide")gsec="
 const sos=()=>`<a class="sos" href="tel:112"><b>📞 112</b><span>${esc(t("sos"))}</span></a>`;
 const sosMun=()=>`<a class="mun" href="${tel(CFG.TEL_MUNICIPAL)}"><b>📞 ${esc(CFG.TEL_MUNICIPAL)}</b><span><strong>${esc(t("mun_t"))}</strong>, ${esc(t("mun_d"))}<br>${esc(t("mun_e"))}</span></a>`;
 
-const MAIL_CB="mailto:protecao.civil@cm-braga.pt?subject="+encodeURIComponent("Cuidar Braga")+"&body="+encodeURIComponent("Venho por este meio solicitar o contacto para agendamento do serviço Cuidar Braga.\nPara o efeito indico de seguida o meu nome, morada e contacto.\nAnexo foto dos sobrantes a destroçar e/ou recolher.\n\n");
+const MAIL_CB="mailto:protecao.civil@cm-braga.pt?subject="+encodeURIComponent("Cuidar Braga")+"&body="+encodeURIComponent("Venho por este meio solicitar o contacto para agendamento do serviço Cuidar Braga.\r\nPara o efeito indico de seguida o meu nome, morada e contacto.\r\n\r\nNome:\r\nMorada:\r\nContacto:\r\n\r\nAnexo fotos dos sobrantes a destroçar e/ou recolher.");
 function cardQueimas(){return `<div class="card"><h3>🔥 ${esc(t("qm_t"))}</h3><p class="mut">${esc(t("qm_d"))}</p>
   <a class="btn" href="https://fogos.icnf.pt/InfoQueimasQueimadas/" target="_blank" rel="noopener">🔥 ${esc(t("qm_icnf"))}</a>
   <a class="btn s" href="${MAIL_CB}">✉️ ${esc(t("qm_cb"))}</a></div>`}
