@@ -38,7 +38,7 @@ foot:"Informação de apoio. Não substitui os avisos oficiais nem as indicaçõ
 c_intro:"Em caso de emergência ligue sempre 112: o 112 encaminha para bombeiros, polícia, GNR e emergência médica. Os números abaixo servem para contactos que não são emergências.",c_pm:"Polícia Municipal",c_psp:"Polícia de Segurança Pública (PSP)",c_hosp:"Hospital de Braga (ULS Braga)",c_hosp_d:"Emergência médica: ligue 112. Sete Fontes, São Victor.",c_hosp_t:"telefone geral (não é linha de urgência)",c_cv:"Cruz Vermelha Portuguesa",c_cv_d:"Delegação de Braga.",c_noemerg:"não é linha de emergência",c_s24:"Saúde 24 (SNS 24)",c_s24_d:"Aconselhamento de saúde.",c_ulpc_d:"Unidade Local de Proteção Civil da sua freguesia.",c_smpc:"Proteção Civil de Braga",c_smpc_d:"Informação e prevenção.",
 w_intro:"Avisos meteorológicos do IPMA e comunicados do Município de Braga.",w_update:"Atualizar agora",w_updating:"A atualizar…",w_last:"Última atualização às {0}.",w_sources:"Fontes: IPMA (avisos) e Município de Braga.",
 g_antes:"Antes",g_durante:"Durante",g_depois:"Depois",guide_title:"O que fazer",guide_intro:"Passos simples para cada situação, antes, durante e depois. Siga sempre as indicações das autoridades.",guide_all:"Todos os guias",
-ln_title:"Linhas de apoio",ln_intro:"Apoio especializado. Em perigo imediato, ligue sempre 112.",sec_seg:"Segurança e socorro",sec_saude:"Saúde",sec_pc:"Proteção Civil",c_pm_d:"Polícia do Município de Braga. R. do Farto, 4700-426 Braga.",c_s24_d2:"Aconselhamento e triagem de saúde por telefone.",hr24:"Atendimento 24 horas",hrw:"Dias úteis, 9h30–17h30",hra:"Das 9h às 21h",pc_cs_n:"Comando Sub-regional de Emergência e Proteção Civil do Cávado",pc_cs_d:"Estrutura da ANEPC em Braga que coordena a proteção e o socorro na sub-região do Cávado. Não é linha de emergência: para emergências ligue 112.",pc_sm_n:"Serviço Municipal de Proteção Civil de Braga",pc_sm_d:"Prevenção, planeamento e informação. Rua do Ferraz, 4700-380 Braga. Atendimento presencial das 9h às 18h. Não é linha de emergência.",pc_ul_n:"Unidades Locais de Proteção Civil",pc_ul_d:"Contacto de cada freguesia que tem Unidade Local de Proteção Civil.",pc_ul_s:"Ver as {0} unidades",qm_t:"Queimas e queimadas",qm_d:"Para queimar sobrantes ou fazer uma queimada, consulte as regras e faça o pedido ou a comunicação prévia na plataforma do ICNF.",qm_cb_d:"Cuidar Braga: serviço de destroçamento e/ou recolha de sobrantes. É a alternativa mais segura, ambientalmente mais responsável e gratuita. Solicite o agendamento por email à Proteção Civil.",qm_icnf:"Plataforma de queimas e queimadas (ICNF)",qm_cb:"Cuidar Braga (email à Proteção Civil)",sos_s:"Emergência",mun_s:"Emergência municipal (número verde)",h_freg:"A minha freguesia",h_freg_d:"Unidade Local de Proteção Civil",h_freg_p:"Escolher freguesia",qm_s:"ICNF e Cuidar Braga",risk_tag:"📍 Risco em Braga",risk_title:"Riscos em Braga",risk_intro:"Os perigos a que o concelho está mais exposto. Toque para ver o que fazer.",risk_src:"Informação baseada em estudos sobre os perigos do concelho. A avaliação oficial está no Plano Municipal de Emergência de Proteção Civil."
+ln_title:"Linhas de apoio",ln_intro:"Apoio especializado. Em perigo imediato, ligue sempre 112.",sec_seg:"Segurança e socorro",sec_saude:"Saúde",sec_pc:"Proteção Civil",c_pm_d:"Polícia do Município de Braga. R. do Farto, 4700-426 Braga.",c_s24_d2:"Aconselhamento e triagem de saúde por telefone.",hr24:"Atendimento 24 horas",hrw:"Dias úteis, 9h30–17h30",hra:"Das 9h às 21h",pc_cs_n:"Comando Sub-regional de Emergência e Proteção Civil do Cávado",pc_cs_d:"Estrutura da ANEPC em Braga que coordena a proteção e o socorro na sub-região do Cávado. Não é linha de emergência: para emergências ligue 112.",pc_sm_n:"Serviço Municipal de Proteção Civil de Braga",pc_sm_d:"Prevenção, planeamento e informação. Rua do Ferraz, 4700-380 Braga. Atendimento presencial das 9h às 18h. Não é linha de emergência.",pc_ul_n:"Unidades Locais de Proteção Civil",pc_ul_d:"Contacto de cada freguesia que tem Unidade Local de Proteção Civil.",pc_ul_s:"Ver as {0} unidades",qm_t:"Queimas e queimadas",qm_d:"Para queimar sobrantes ou fazer uma queimada, consulte as regras e faça o pedido ou a comunicação prévia na plataforma do ICNF.",qm_cb_d:"Cuidar Braga: serviço de destroçamento e/ou recolha de sobrantes. É a alternativa mais segura, ambientalmente mais responsável e gratuita. Solicite o agendamento por email à Proteção Civil.",qm_icnf:"Plataforma de queimas e queimadas (ICNF)",qm_cb:"Cuidar Braga (email à Proteção Civil)",sos_s:"Emergência",mun_s:"Emergência municipal (número verde)",h_freg:"A minha freguesia",h_freg_d:"Unidade Local de Proteção Civil",h_freg_p:"Escolher freguesia",qm_s:"ICNF e Cuidar Braga",bb_nota_tel:"Telefone / Emergência",bb_sap:"Bombeiros profissionais municipais",bb_vol:"Bombeiros voluntários",risk_tag:"📍 Risco em Braga",risk_title:"Riscos em Braga",risk_intro:"Os perigos a que o concelho está mais exposto. Toque para ver o que fazer.",risk_src:"Informação baseada em estudos sobre os perigos do concelho. A avaliação oficial está no Plano Municipal de Emergência de Proteção Civil."
 },
 kits:{mochila:"Mochila",casa:"Casa",carro:"Carro",animais:"Animais"},
 kitd:{mochila:"Para sair de casa rapidamente (evacuação). Uma por pessoa.",casa:"Reserva para ficar em casa durante 72 horas.",carro:"Para quem ficar retido na estrada ou tiver de se deslocar.",animais:"O que o seu animal de companhia precisa durante 72 horas."},
@@ -118,5 +118,31 @@ deslizamento:{n:"Deslizamento de terras",
 a:["Veja se a sua casa está junto de encostas ou taludes e observe fendas, árvores, muros ou postes inclinados.","Não mexa em taludes sem orientação técnica e mantenha a drenagem desimpedida.","Combine um plano de evacuação e um ponto de encontro."],
 d:["Com chuva forte, se ouvir ruídos estranhos (árvores a partir, pedras a rolar) ou vir lama a descer, afaste-se de imediato, para o lado e longe da trajetória.","Se houver risco para a casa, saia e vá para um local seguro. Ligue 112.","Não atravesse zonas com lama ou terras deslocadas."],
 p:["Afaste-se da zona: os deslizamentos podem repetir-se.","Informe as autoridades e não volte a casa sem autorização.","Verifique danos na casa, na água, no gás e na eletricidade e evite cabos caídos."]}
+},
+avm:{
+ "cheias": {
+  "t": "Risco de cheias: mantenha-se afastado de zonas inundáveis",
+  "x": "Não atravesse zonas alagadas a pé nem de carro. Evite túneis, passagens inferiores e margens de rios e ribeiras. Siga as indicações das autoridades. Em emergência, ligue 112."
+ },
+ "incendio": {
+  "t": "Risco de incêndio rural: não faça lume",
+  "x": "Evite queimas, fogueiras e trabalhos que possam originar faíscas. Se vir fogo ou fumo, ligue 112. Se lhe pedirem para sair, siga as indicações das autoridades."
+ },
+ "calor": {
+  "t": "Calor intenso: proteja-se e beba água",
+  "x": "Beba água com frequência, evite o sol entre as 11h e as 17h e proteja crianças, idosos e animais. Nunca deixe pessoas ou animais dentro de carros estacionados. Em emergência, ligue 112; para aconselhamento de saúde, SNS 24: 808 24 24 24."
+ },
+ "vento": {
+  "t": "Vento forte e tempestade: fique em segurança",
+  "x": "Fique em casa, longe de janelas, e evite deslocações desnecessárias. Retire ou prenda objetos soltos em varandas e quintais. Afaste-se de árvores, andaimes e fios caídos. Em emergência, ligue 112."
+ },
+ "agua": {
+  "t": "Interrupção no abastecimento de água",
+  "x": "Poderá haver falta de água. Faça reserva de água potável e poupe a que tiver. Siga as informações do Município e da entidade gestora. Em emergência, ligue 112."
+ },
+ "apagao": {
+  "t": "Corte de eletricidade",
+  "x": "Use lanternas em vez de velas e mantenha o frigorífico e o congelador fechados. Desligue aparelhos sensíveis e poupe a bateria do telemóvel. Veja se vizinhos idosos precisam de ajuda. Em emergência, ligue 112."
+ }
 }
 };

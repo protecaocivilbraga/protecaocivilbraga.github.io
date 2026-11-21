@@ -38,7 +38,7 @@ foot:"Support information. It does not replace official warnings or the authorit
 c_intro:"In an emergency always call 112: 112 routes to the fire brigade, police, GNR and medical emergency. The numbers below are for non-emergency contact.",c_pm:"Municipal Police",c_psp:"Public Security Police (PSP)",c_hosp:"Braga Hospital (ULS Braga)",c_hosp_d:"Medical emergency: call 112. Sete Fontes, São Victor.",c_hosp_t:"main number (not an emergency line)",c_cv:"Portuguese Red Cross",c_cv_d:"Braga branch.",c_noemerg:"not an emergency line",c_s24:"Saúde 24 (SNS 24)",c_s24_d:"Health advice line.",c_ulpc_d:"Local Civil Protection Unit of your parish.",c_smpc:"Braga Civil Protection",c_smpc_d:"Information and prevention.",
 w_intro:"IPMA weather warnings and notices from the Municipality of Braga.",w_update:"Update now",w_updating:"Updating…",w_last:"Last update at {0}.",w_sources:"Sources: IPMA (warnings) and Municipality of Braga.",
 g_antes:"Before",g_durante:"During",g_depois:"After",guide_title:"What to do",guide_intro:"Simple steps for each situation: before, during and after. Always follow the authorities' instructions.",guide_all:"All guides",
-ln_title:"Support helplines",ln_intro:"Specialist support. In immediate danger, always call 112.",sec_seg:"Safety and rescue",sec_saude:"Health",sec_pc:"Civil Protection",c_pm_d:"Municipal Police of Braga. R. do Farto, 4700-426 Braga.",c_s24_d2:"Health advice and triage by phone.",hr24:"Open 24 hours",hrw:"Working days, 9:30–17:30",hra:"9:00 to 21:00",pc_cs_n:"Cávado Sub-regional Emergency and Civil Protection Command",pc_cs_d:"The ANEPC structure in Braga that coordinates protection and rescue in the Cávado sub-region. Not an emergency line: in an emergency call 112.",pc_sm_n:"Braga Municipal Civil Protection Service",pc_sm_d:"Prevention, planning and information. Rua do Ferraz, 4700-380 Braga. In-person service 9:00 to 18:00. Not an emergency line.",pc_ul_n:"Local Civil Protection Units",pc_ul_d:"Contact for each parish that has a Local Civil Protection Unit.",pc_ul_s:"See the {0} units",qm_t:"Burning and controlled burns",qm_d:"To burn garden waste or carry out a controlled burn, check the rules and submit your request or prior notice on the ICNF platform.",qm_cb_d:"Cuidar Braga: a shredding and/or collection service for garden waste. It is the safer, more environmentally responsible and free alternative. Request a booking by email to Civil Protection.",qm_icnf:"Burning and controlled burns platform (ICNF)",qm_cb:"Cuidar Braga (email Civil Protection)",sos_s:"Emergency",mun_s:"Municipal emergency (toll-free)",h_freg:"My parish",h_freg_d:"Local Civil Protection Unit",h_freg_p:"Choose your parish",qm_s:"ICNF and Cuidar Braga",risk_tag:"📍 Risk in Braga",risk_title:"Risks in Braga",risk_intro:"The hazards the municipality is most exposed to. Tap to see what to do.",risk_src:"Information based on studies of the municipality's hazards. The official assessment is in the Municipal Civil Protection Emergency Plan."
+ln_title:"Support helplines",ln_intro:"Specialist support. In immediate danger, always call 112.",sec_seg:"Safety and rescue",sec_saude:"Health",sec_pc:"Civil Protection",c_pm_d:"Municipal Police of Braga. R. do Farto, 4700-426 Braga.",c_s24_d2:"Health advice and triage by phone.",hr24:"Open 24 hours",hrw:"Working days, 9:30–17:30",hra:"9:00 to 21:00",pc_cs_n:"Cávado Sub-regional Emergency and Civil Protection Command",pc_cs_d:"The ANEPC structure in Braga that coordinates protection and rescue in the Cávado sub-region. Not an emergency line: in an emergency call 112.",pc_sm_n:"Braga Municipal Civil Protection Service",pc_sm_d:"Prevention, planning and information. Rua do Ferraz, 4700-380 Braga. In-person service 9:00 to 18:00. Not an emergency line.",pc_ul_n:"Local Civil Protection Units",pc_ul_d:"Contact for each parish that has a Local Civil Protection Unit.",pc_ul_s:"See the {0} units",qm_t:"Burning and controlled burns",qm_d:"To burn garden waste or carry out a controlled burn, check the rules and submit your request or prior notice on the ICNF platform.",qm_cb_d:"Cuidar Braga: a shredding and/or collection service for garden waste. It is the safer, more environmentally responsible and free alternative. Request a booking by email to Civil Protection.",qm_icnf:"Burning and controlled burns platform (ICNF)",qm_cb:"Cuidar Braga (email Civil Protection)",sos_s:"Emergency",mun_s:"Municipal emergency (toll-free)",h_freg:"My parish",h_freg_d:"Local Civil Protection Unit",h_freg_p:"Choose your parish",qm_s:"ICNF and Cuidar Braga",bb_nota_tel:"Phone / Emergency",bb_sap:"Municipal professional firefighters",bb_vol:"Volunteer firefighters",risk_tag:"📍 Risk in Braga",risk_title:"Risks in Braga",risk_intro:"The hazards the municipality is most exposed to. Tap to see what to do.",risk_src:"Information based on studies of the municipality's hazards. The official assessment is in the Municipal Civil Protection Emergency Plan."
 },
 kits:{mochila:"Backpack",casa:"Home",carro:"Car",animais:"Pets"},
 kitd:{mochila:"To leave home quickly (evacuation). One per person.",casa:"Supplies to stay at home for 72 hours.",carro:"For anyone stranded on the road or who has to travel.",animais:"What your pet needs for 72 hours."},
@@ -118,5 +118,31 @@ deslizamento:{n:"Landslide",
 a:["Check whether your home is near slopes or embankments and look for cracks or leaning trees, walls or poles.","Do not alter embankments without technical advice and keep drainage clear.","Agree on an evacuation plan and a meeting point."],
 d:["In heavy rain, if you hear strange noises (trees snapping, rocks rolling) or see mud moving, move away at once, sideways and out of the path.","If your home is at risk, leave and go to a safe place. Call 112.","Do not cross areas with mud or displaced earth."],
 p:["Stay away from the area: landslides can happen again.","Tell the authorities and do not return home without permission.","Check the home, water, gas and electricity for damage and avoid fallen cables."]}
+},
+avm:{
+ "cheias": {
+  "t": "Flood risk: stay away from flood-prone areas",
+  "x": "Do not cross flooded areas on foot or by car. Avoid tunnels, underpasses and the banks of rivers and streams. Follow the authorities' instructions. In an emergency, call 112."
+ },
+ "incendio": {
+  "t": "Wildfire risk: do not light fires",
+  "x": "Avoid burning, bonfires and any work that could cause sparks. If you see fire or smoke, call 112. If you are told to leave, follow the authorities' instructions."
+ },
+ "calor": {
+  "t": "Extreme heat: protect yourself and drink water",
+  "x": "Drink water often, avoid the sun between 11:00 and 17:00, and protect children, older people and animals. Never leave people or animals in parked cars. In an emergency, call 112; for health advice, call SNS 24 on 808 24 24 24."
+ },
+ "vento": {
+  "t": "Strong wind and storm: stay safe",
+  "x": "Stay indoors, away from windows, and avoid unnecessary travel. Remove or secure loose objects on balconies and in yards. Keep away from trees, scaffolding and fallen wires. In an emergency, call 112."
+ },
+ "agua": {
+  "t": "Interruption to the water supply",
+  "x": "There may be no water. Store drinking water and use what you have sparingly. Follow information from the Municipality and the water utility. In an emergency, call 112."
+ },
+ "apagao": {
+  "t": "Power cut",
+  "x": "Use torches instead of candles and keep the fridge and freezer closed. Unplug sensitive appliances and save your phone battery. Check whether elderly neighbours need help. In an emergency, call 112."
+ }
 }
 };

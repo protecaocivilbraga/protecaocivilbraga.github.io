@@ -254,13 +254,20 @@ function avisosMun(){
   return ((W.mun&&W.mun.avisos)||[]).filter(x=>x&&x.titulo&&(!x.validoAte||new Date(x.validoAte)>ag));
 }
 function cardAviso(a){return `<div class="alert ${NIVEL[a.nivel].c}"><b>⚠️ ${esc(t("aviso",t(NIVEL[a.nivel].k),tipoIpma(a.tipo)))}</b>${esc(a.texto)}<br><small>${dhm(a.inicio)} → ${dhm(a.fim)} · ${esc(t("fonte_ipma"))}${lang!=="pt"?" · "+esc(t("ipma_pt")):""}</small></div>`}
-function cardMun(a){const c={vermelho:"r",laranja:"o",amarelo:"y"}[String(a.nivel||"").toLowerCase()]||"i";return `<div class="alert ${c}"><b>📣 ${esc(a.titulo)}</b>${esc(a.texto||"")}<br><small>${esc(t("mun_nome"))}${W.mun&&W.mun.atualizado?" · "+dhm(W.mun.atualizado):""}${lang!=="pt"?" · "+esc(t("mun_pt")):""}</small></div>`}
+function avTxt(a){
+  if(lang==="pt")return{t:a.titulo,x:a.texto||"",pt:false};
+  const tr=a.trad&&a.trad[lang];if(tr&&tr.titulo)return{t:tr.titulo,x:tr.texto||"",pt:false};
+  const m=a.modelo&&L.avm&&L.avm[a.modelo];if(m)return{t:m.t,x:m.x,pt:false};
+  return{t:a.titulo,x:a.texto||"",pt:true}}
+function cardMun(a){const c={vermelho:"r",laranja:"o",amarelo:"y"}[String(a.nivel||"").toLowerCase()]||"i",v=avTxt(a);return `<div class="alert ${c}"><b>📣 ${esc(v.t)}</b>${esc(v.x)}<br><small>${esc(t("mun_nome"))}${W.mun&&W.mun.atualizado?" · "+dhm(W.mun.atualizado):""}${v.pt?" · "+esc(t("mun_pt")):""}</small></div>`}
 function blocoAvisos(){
   const M=avisosMun(),I=avisosIpma();
   let h=M.map(cardMun).join("")+I.map(cardAviso).join("");
   if(!h){h=W.ipma||W.mun?`<div class="alert g"><b>${esc(t("av_none_t"))}</b>${esc(t("av_none"))}</div>`:(W.loading?`<div class="alert i"><b>${esc(t("av_load"))}</b></div>`:`<div class="alert i"><b>${esc(t("av_off_t"))}</b>${esc(t("av_off"))} <a href="https://www.ipma.pt" target="_blank" rel="noopener">ipma.pt</a>.</div>`)}
   return h;
 }
+const bbTipo=c=>({sapadores:"bb_sap",voluntarios:"bb_vol"}[c.id])?t({sapadores:"bb_sap",voluntarios:"bb_vol"}[c.id]):"";
+const bbNota=n=>n==="Telefone / Emergência"?t("bb_nota_tel"):n;
 const corpos=()=>((W.bomb&&W.bomb.corporacoes)||[]).filter(c=>c&&c.nome);
 const km=(a,b)=>{const R=6371,r=x=>x*Math.PI/180,dl=r(b.lat-a.lat),dn=r(b.lon-a.lon),h=Math.sin(dl/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
 function prioBomb(){
@@ -280,7 +287,7 @@ function blocoBombeiros(){
   const podeGeo=C.length>1&&C.every(c=>c.lat!=null&&c.lon!=null)&&!pos;
   const mapa=c=>{const q=c.lat!=null&&c.lon!=null?c.lat+","+c.lon:(c.morada?c.morada:"");return q?`<br><a href="https://www.google.com/maps?q=${encodeURIComponent(q)}" target="_blank" rel="noopener">${esc(t("b_route"))}</a>`:""};
   return `<div class="item" style="cursor:default;align-items:flex-start;flex-direction:column;gap:6px"><span><span style="font-size:24px">🚒</span> <b>${esc(t("c_bomb"))}</b><br><small class="mut">${esc(t("b_112"))}</small></span>
-  ${ord.filter(c=>c.contacto||c.morada).map(c=>{const p=pr&&c.id===pr.id;return `<div style="width:100%;border:${p?"2px solid var(--ok)":"1px solid var(--line)"};border-radius:12px;padding:9px 11px;${p?"background:var(--okbg)":""}">${p?`<small style="color:var(--ok);font-weight:700">⭐ ${esc(pr.por==="local"?t("b_first_geo",pr.d.toFixed(1).replace(".",",")):t("b_first_freg"))}</small><br>`:""}<b>${esc(c.nome)}</b>${c.nota?" <small class='mut'>· "+esc(c.nota)+"</small>":""}${c.morada?"<br><small class='mut'>"+esc(c.morada)+"</small>":""}${c.contacto?`<br><a href="${tel(c.contacto)}">📞 ${esc(c.contacto)}</a>`:""}${c.email?`<br><a href="mailto:${esc(c.email)}">✉️ ${esc(c.email)}</a>`:""}${mapa(c)}</div>`}).join("")}
+  ${ord.filter(c=>c.contacto||c.morada).map(c=>{const p=pr&&c.id===pr.id;return `<div style="width:100%;border:${p?"2px solid var(--ok)":"1px solid var(--line)"};border-radius:12px;padding:9px 11px;${p?"background:var(--okbg)":""}">${p?`<small style="color:var(--ok);font-weight:700">⭐ ${esc(pr.por==="local"?t("b_first_geo",pr.d.toFixed(1).replace(".",",")):t("b_first_freg"))}</small><br>`:""}<b>${esc(c.nome)}</b>${bbTipo(c)?" <small class='mut'>· "+esc(bbTipo(c))+"</small>":""}${c.nota?" <small class='mut'>· "+esc(bbNota(c.nota))+"</small>":""}${c.morada?"<br><small class='mut'>"+esc(c.morada)+"</small>":""}${c.contacto?`<br><a href="${tel(c.contacto)}">📞 ${esc(c.contacto)}</a>`:""}${c.email?`<br><a href="mailto:${esc(c.email)}">✉️ ${esc(c.email)}</a>`:""}${mapa(c)}</div>`}).join("")}
   ${podeGeo?`<button class="btn s" style="margin-top:2px" onclick="localizar()">📍 ${esc(t("b_nearest"))}</button>`:""}
   ${geoMsg?`<small class="mut">${esc(geoMsg)}</small>`:""}${pos?`<small class="mut">${esc(t("b_geo_priv"))}</small>`:""}</div>`}
 function listaUlpc(){return ((W.ulpc&&W.ulpc.unidades)||[]).filter(x=>x&&x.freguesia)}
