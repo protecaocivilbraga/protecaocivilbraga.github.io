@@ -54,12 +54,13 @@ main>*:nth-child(2){animation-delay:.04s}main>*:nth-child(3){animation-delay:.08
 .tile,.sos,.mun,.tabs button{transition:transform .15s,box-shadow .15s}
 .tile:active,.sos:active,.mun:active,.tabs button:active{transform:scale(.97)}
 .tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start}
-.tile .i{width:46px;height:46px;border-radius:15px;background:var(--pri2);display:grid;place-items:center;font-size:25px;margin-bottom:9px}
+.tile .i{width:36px;height:36px;border-radius:12px;background:var(--pri2);display:grid;place-items:center;font-size:20px;margin-bottom:6px}.tile .i svg{width:22px;height:22px}
 .card{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:12px;border:1px solid var(--line)}
 h2{font-size:16px;margin-bottom:8px}
 h3{font-size:14px;margin-bottom:4px}
 .mut{color:var(--mut);font-size:13px;line-height:1.4}
 a{color:var(--pri)}
+.sosrow{display:grid;grid-template-columns:1fr 1.35fr;gap:10px;margin-bottom:12px}.sosrow a{text-decoration:none;border-radius:var(--r);padding:11px 13px;display:block}.sosrow b{font-size:21px;display:block;line-height:1.2}.sosrow span{font-size:12px;line-height:1.25;display:block;margin-top:2px}.s1{background:linear-gradient(135deg,#c62828,#e5483d);color:#fff}.s2{background:var(--card);border:2px solid var(--red);color:var(--ink)}.s2 b{color:var(--red)}
 .sos{background:linear-gradient(135deg,#c62828,#e5483d);color:#fff;border-radius:var(--r);padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:12px;text-decoration:none}
 .mun{background:var(--card);border:2px solid var(--red);color:var(--ink);border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:12px;text-decoration:none}
 .mun b{font-size:19px;color:var(--red);white-space:nowrap}.mun span{font-size:12.5px;line-height:1.35}
@@ -68,10 +69,10 @@ a{color:var(--pri)}
 .alert.i{background:var(--pri2);color:var(--pri)}.alert.y{background:#ffd600;color:#2b2300}.alert.o{background:#ff9800;color:#241500}.alert.r{background:#d32f2f;color:#fff}.alert.g{background:var(--okbg);color:var(--ok)}
 .alert.y,.alert.o,.alert.r{font-weight:500}.alert small{opacity:1;font-weight:600}.alert b{display:block;font-size:14px;margin-bottom:2px}
 .alert small{opacity:.85}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 12px;text-align:left;cursor:pointer;font:inherit;color:inherit}
-.tile b{font-size:14.5px;display:block}
-.tile small{color:var(--mut);font-size:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.tile b{font-size:14px;display:block;line-height:1.2}
+.tile small{color:var(--mut);font-size:11.5px;line-height:1.25;margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
 .bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
 .tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto}
@@ -423,7 +424,7 @@ function plan(){
 }
 
 /* ===== ECRÃS ===== */
-function nav(){const tem=avisosIpma().length+avisosMun().length>0;$("#nav").innerHTML=TABS.map(x=>`<button class="${tab===x[0]?'on':''}" onclick="go('${x[0]}')"><span class="i">${x[1]}${x[0]==="warn"&&tem?'<i class="pt"></i>':''}</span>${esc(t("nav_"+x[0]))}</button>`).join("")}
+function nav(){const tem=avisosIpma().length+avisosMun().length>0;$("#nav").innerHTML=TABS.map(x=>`<button class="${(({queimas:'home',freg:'home',tempo:'home'})[tab]||tab)===x[0]?'on':''}" onclick="go('${x[0]}')"><span class="i">${x[1]}${x[0]==="warn"&&tem?'<i class="pt"></i>':''}</span>${esc(t("nav_"+x[0]))}</button>`).join("")}
 function relogio(){const d=new Date();$("#rHora").textContent=fmt(d,{hour:"2-digit",minute:"2-digit",hourCycle:"h23"});$("#rData").textContent=fmt(d,{weekday:"short",day:"numeric",month:"short"}).replace(/\./g,"")}
 function go(tb,s){tab=tb;sub=s||null;confirmaLimpar=false;if(tb==="guide")gsec="d";render();$("#main").scrollTop=0}
 const sos=()=>`<a class="sos" href="tel:112"><b>📞 112</b><span>${esc(t("sos"))}</span></a>`;
@@ -434,17 +435,28 @@ function cardQueimas(){return `<div class="card"><h3>🔥 ${esc(t("qm_t"))}</h3>
   <a class="btn" href="https://fogos.icnf.pt/InfoQueimasQueimadas/" target="_blank" rel="noopener">🔥 ${esc(t("qm_icnf"))}</a>
   <p class="mut" style="margin-top:14px">${esc(t("qm_cb_d"))}</p>
   <a class="btn s" href="${MAIL_CB}">✉️ ${esc(t("qm_cb"))}</a></div>`}
+const sosCompacto=()=>`<div class="sosrow"><a class="s1" href="tel:112"><b>📞 112</b><span>${esc(t("sos_s"))}</span></a><a class="s2" href="${tel(CFG.TEL_MUNICIPAL)}"><b>📞 ${esc(CFG.TEL_MUNICIPAL)}</b><span>${esc(t("mun_s"))}</span></a></div>`;
+function meteoCompacto(){
+  const d=W.meteo;
+  if(!d)return `<button class="avbtn i" onclick="go('tempo')"><span>🌦️ <b>${esc(t("meteo_t"))}</b><br><small>${esc(W.loading?t("meteo_load"):t("meteo_off"))}</small></span><span class="chev">›</span></button>`;
+  const w=WMO[d.weather_code[0]]||["❔",null],p=d.precipitation_sum[0];
+  return `<button class="avbtn i" onclick="go('tempo')"><span>${w[0]} <b>${Math.round(d.temperature_2m_max[0])}° / ${Math.round(d.temperature_2m_min[0])}°</b> · ${esc(w[1]?t(w[1]):"")}<br><small>${esc(t("meteo_t"))}${p!=null?" · 💧 "+Math.round(p*10)/10+" mm":""}</small></span><span class="chev">›</span></button>`}
+const voltar=()=>`<button class="back" onclick="go('home')">‹ ${esc(t("nav_home"))}</button>`;
+const pgQueimas=()=>voltar()+cardQueimas();
+const pgFreg=()=>voltar()+(cardFreguesia()||`<div class="card"><p class="mut">${esc(t("meteo_load"))}</p></div>`);
+const pgTempo=()=>voltar()+blocoMeteo();
 function home(){
   const ex=expiring();
-  return sos()+sosMun()+avisosMun().map(cardMun).join("")+btnIpma()+blocoMeteo()+
+  return sosCompacto()+avisosMun().map(cardMun).join("")+btnIpma()+meteoCompacto()+
   (ex.length?`<button class="avbtn o" onclick="go('kit')"><span>⏰ <b>${esc(t("v_alert",ex.length))}</b><br><small>${esc(tx("items",ex[0].id))} · ${esc(ex[0].n<0?t("v_expired"):t("v_soon",ex[0].n))}</small></span><span class="chev">›</span></button>`:"")+
   `<div class="grid">
    <button class="tile" onclick="go('kit')"><span class="i">🎒</span><b>${esc(t("h_kits"))}</b><small>${esc(tx("kits","mochila"))}: ${kDone("mochila")} / ${kTot("mochila")}</small><div class="bar"><i style="width:${kPct("mochila")}%"></i></div></button>
    <button class="tile" onclick="go('plan')"><span class="i">👨‍👩‍👧</span><b>${esc(t("h_plan"))}</b><small>${esc(S.plan.pessoas.length?t("h_people",S.plan.pessoas.length):t("h_todo"))}</small></button>
    <button class="tile" onclick="go('guide')"><span class="i">📖</span><b>${esc(t("h_guides"))}</b><small>${esc(t("h_guides_d"))}</small></button>
    <button class="tile" onclick="go('contactos')"><span class="i">📞</span><b>${esc(t("h_contacts"))}</b><small>${esc(t("h_contacts_d"))}</small></button>
-  </div>`+cardQueimas()+cardInstalar()+
-  cardFreguesia()+
+   <button class="tile" onclick="go('queimas')"><span class="i">🔥</span><b>${esc(t("qm_t"))}</b><small>${esc(t("qm_s"))}</small></button>
+   <button class="tile" onclick="go('freg')"><span class="i">${ICPC}</span><b>${esc(t("h_freg"))}</b><small>${esc(S.freg||t("h_freg_p"))}</small></button>
+  </div>`+(standalone()?"":`<button class="avbtn i" onclick="instalarFechado=false;popupInstalar()"><span>📲 <b>${esc(t("i_card_t"))}</b></span><span class="chev">›</span></button>`)+
   `<p class="foot">${esc(t("foot"))}</p>`;
 }
 const ICPC='<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true" style="display:block"><path d="M13 3.2 24 22.2H2Z" fill="#f58220" stroke="#f58220" stroke-width="2.4" stroke-linejoin="round"/><path d="M13 9.2 18.6 19H7.4Z" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round" opacity=".9"/></svg>';
@@ -496,7 +508,7 @@ function guide(){
   <div class="grid">${Object.keys(GUIDES).sort((x,y)=>tx("guides",x).n.localeCompare(tx("guides",y).n,lang)).map(k=>{const rk=rsk(k);return `<button class="tile" onclick="go('guide','${k}')"><span class="i">${GUIDES[k]}</span><b>${esc(tx("guides",k).n)}</b>${rk?`<small class="mut" style="font-weight:400;line-height:1.3;margin-top:4px;text-align:left">${esc(rk.t)}</small>`:""}</button>`}).join("")}</div>
   <p class="stat">${esc(t("risk_src"))}</p>`;
 }
-function render(){const y=$("#main").scrollTop;$("#hsub").textContent=t("sub");nav();$("#main").innerHTML={home,kit,plan,warn,contactos,guide}[tab]();$("#main").scrollTop=y}
+function render(){const y=$("#main").scrollTop;$("#hsub").textContent=t("sub");nav();$("#main").innerHTML={home,kit,plan,warn,contactos,guide,queimas:pgQueimas,freg:pgFreg,tempo:pgTempo}[tab]();$("#main").scrollTop=y}
 
 (async function arranque(){
   lang=pickLang();await loadLang(lang);if(!window.LANG[lang])lang="pt";L=LANG[lang];
