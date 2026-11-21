@@ -459,10 +459,10 @@ function contactos(){
   `<div class="card"><h2>${esc(t("h_contacts"))}</h2><p class="mut">${esc(t("c_intro"))}</p></div>
   <div class="card"><h3>${esc(t("sec_seg"))}</h3>
   ${blocoBombeiros()}
+  ${linha("➕",t("c_cv"),t("c_cv_d"),[[t("c_noemerg"),CFG.CRUZ_VERMELHA_TEL]])}
   ${linha("👮",t("c_psp"),t("c_112"),[[t("c_local"),Lc.psp]])}
   ${linha("🛡️","GNR",t("c_112"),[[t("c_local"),Lc.gnr]])}
   ${linha("🚔",t("c_pm"),t("c_pm_d"),[[t("c_local"),"253 609 740"]])}
-  ${linha("➕",t("c_cv"),t("c_cv_d"),[[t("c_noemerg"),CFG.CRUZ_VERMELHA_TEL]])}
   </div>
   <div class="card"><h3>${esc(t("sec_pc"))}</h3>
   ${linha(ICPC,t("pc_cs_n"),t("pc_cs_d"),CFG.CSREPC_TEL.map(n=>[t("c_noemerg"),n]))}
