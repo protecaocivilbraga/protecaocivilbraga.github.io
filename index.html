@@ -32,7 +32,7 @@ header p{font-size:11.5px;opacity:.9;margin-top:4px;white-space:nowrap}
 .logos img{height:34px;width:auto;display:block}
 .relogio{margin:12px auto 0;width:max-content;max-width:100%;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:99px;padding:6px 16px;font-variant-numeric:tabular-nums}
 .relogio b{font-size:19px;font-weight:800;letter-spacing:.5px}
-.relogio span{font-size:12px;opacity:.95;text-transform:capitalize;border-left:1px solid rgba(255,255,255,.4);padding-left:10px}
+.relogio span{font-size:12px;opacity:.95;text-transform:capitalize;border-inline-start:1px solid rgba(255,255,255,.4);padding-inline-start:10px}
 main{flex:1;overflow-y:auto;padding:16px 14px 20px;-webkit-overflow-scrolling:touch}
 nav{display:flex;background:var(--navbg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px 24px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.25);padding:7px 6px calc(7px + env(safe-area-inset-bottom));position:relative;z-index:2}
 nav button{flex:1;border:0;background:none;padding:2px 0;font-size:11px;font-weight:500;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:color .2s}
@@ -42,7 +42,7 @@ nav button:active .i{transform:scale(.9)}
 nav button.on{color:var(--pri);font-weight:700}
 nav button.on .i{background:var(--pri2)}
 nav button.on .i svg{fill:rgba(11,92,171,.16);animation:pop .35s ease}
-nav .pt{position:absolute;top:2px;right:11px;width:9px;height:9px;border-radius:50%;background:var(--red);border:2px solid var(--bg)}
+nav .pt{position:absolute;top:2px;inset-inline-end:11px;width:9px;height:9px;border-radius:50%;background:var(--red);border:2px solid var(--bg)}
 @keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
 @keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 main>*{animation:up .38s both}
@@ -70,7 +70,7 @@ a{color:var(--pri)}
 .alert.y,.alert.o,.alert.r{font-weight:500}.alert small{opacity:1;font-weight:600}.alert b{display:block;font-size:14px;margin-bottom:2px}
 .alert small{opacity:.85}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;text-align:start;cursor:pointer;font:inherit;color:inherit}
 .tile b{font-size:14px;display:block;line-height:1.2}
 .tile small{color:var(--mut);font-size:11.5px;line-height:1.25;margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
@@ -98,7 +98,8 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 .wx .t{font-size:15px;font-weight:700}
 .wx .t small{font-weight:400;color:var(--mut)}
 .wx .p{font-size:11.5px;color:var(--mut);line-height:1.35;margin-top:3px}
-.avbtn{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;border:0;border-radius:var(--r);padding:13px 14px;margin-bottom:12px;font:inherit;font-size:14px;cursor:pointer;line-height:1.3}
+.avbtn{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:start;border:0;border-radius:var(--r);padding:13px 14px;margin-bottom:12px;font:inherit;font-size:14px;cursor:pointer;line-height:1.3}
+.chev,.chev0{display:inline-block}[dir=rtl] .chev,[dir=rtl] .chev0{transform:scaleX(-1)}a[href^="tel:"],.num{direction:ltr;unicode-bidi:isolate;display:inline-block}
 .avbtn small{font-size:12.5px;opacity:.9}.avbtn .chev{font-size:26px;opacity:.7}
 .avbtn.g{background:var(--okbg);color:var(--ok)}.avbtn.y{background:#ffd600;color:#2b2300}.avbtn.o{background:#ff9800;color:#241500}.avbtn.r{background:#d32f2f;color:#fff}.avbtn.i{background:var(--pri2);color:var(--pri)}
 .modal{position:fixed;inset:0;background:rgba(2,6,14,.7);display:flex;align-items:flex-end;justify-content:center;z-index:50}
@@ -106,7 +107,7 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
 .sheet h2{font-size:18px;margin-bottom:6px}
 .sheet .logo{width:56px;height:56px;border-radius:14px;margin-bottom:10px}
-.sheet ol{padding-left:20px;margin:8px 0;font-size:14px;line-height:1.5}
+.sheet ol{padding-inline-start:20px;margin:8px 0;font-size:14px;line-height:1.5}
 .stat{font-size:11.5px;color:var(--mut);margin-top:8px}
 .foot{font-size:11.5px;color:var(--mut);text-align:center;line-height:1.4;padding:4px 8px 0}
 
@@ -119,11 +120,11 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 .bdg{border-radius:99px;padding:2px 8px;font-size:11.5px;font-weight:700}.bdg.r{background:var(--redbg);color:var(--red)}.bdg.o{background:var(--warnbg);color:var(--warn)}
 .pto{margin-top:6px}.ptb{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:13px}
 .lnk{border:0;background:none;color:var(--pri);font:inherit;font-size:13px;cursor:pointer;padding:2px 0;text-decoration:underline}
-.rk{width:100%;border:0;background:none;font:inherit;text-align:left;color:inherit;align-items:center}
+.rk{width:100%;border:0;background:none;font:inherit;text-align:start;color:inherit;align-items:center}
 .item.gc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:13px 14px;margin-bottom:10px;width:100%}.priv{color:var(--red);font-weight:700;font-size:13px;margin-top:8px}.rki{font-size:22px;width:34px;text-align:center}.chev2{font-size:22px;color:var(--mut)}
 .cartao h2{margin-bottom:10px}.cartao h3{margin:10px 0 2px}
 .cl{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
-.cl b{flex:none}.cl span{text-align:right;color:var(--ink)}
+.cl b{flex:none}.cl span{text-align:end;color:var(--ink)}
 .cl.big{font-size:17px}.cl.big b{color:var(--red)}
 @media print{
  :root[data-theme]{--ink:#111;--mut:#555;--line:#ddd;--card:#fff;--red:#c0262d;--pri:#0b5cab;--bg:#fff}
@@ -160,8 +161,8 @@ const CFG={
   CRUZ_VERMELHA_TEL:"253 208 870"  // Cruz Vermelha Portuguesa, Delegação de Braga
 };
 const TZ="Europe/Lisbon";
-const LOC={pt:"pt-PT",en:"en-GB",es:"es-ES",fr:"fr-FR",hi:"hi-IN",zh:"zh-CN"};
-const LANGS=[["pt","PT","Português"],["en","EN","English"],["es","ES","Español"],["fr","FR","Français"],["hi","HI","हिन्दी"],["zh","ZH","中文（简体）"]];
+const LOC={pt:"pt-PT",en:"en-GB",es:"es-ES",fr:"fr-FR",hi:"hi-IN",zh:"zh-CN",ne:"hi-IN",ur:"ur-PK"};
+const LANGS=[["pt","PT","Português"],["en","EN","English"],["es","ES","Español"],["fr","FR","Français"],["hi","HI","हिन्दी"],["ne","NE","नेपाली"],["ur","UR","اردو"],["zh","ZH","中文（简体）"]];
 
 /* ===== CONTEÚDO (estrutura; os textos estão em lang-xx.js) ===== */
 const SV=p=>`<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
@@ -209,7 +210,7 @@ function t(k,...a){let v=L.ui&&L.ui[k];if(v==null)v=LANG.pt.ui[k];if(v==null)ret
 function rsk(k){const r=tx("risks",k);return r&&typeof r==="object"?r:null}
 function tx(sec,k){const d=L[sec]&&L[sec][k];return d!=null?d:((LANG.pt[sec]||{})[k]!=null?LANG.pt[sec][k]:k)}
 function loadLang(l){return new Promise(r=>{if(window.LANG[l])return r();const s=document.createElement("script");s.src="lang-"+l+".js";s.onload=r;s.onerror=r;document.head.appendChild(s)})}
-async function setLang(l){await loadLang(l);if(!window.LANG[l])l="pt";lang=l;L=LANG[l];S.lang=l;save();document.documentElement.lang=l;$("#langCod").textContent=l.toUpperCase();relogio();fecharModal();render()}
+async function setLang(l){await loadLang(l);if(!window.LANG[l])l="pt";lang=l;L=LANG[l];S.lang=l;save();document.documentElement.lang=l;document.documentElement.dir=l==="ur"?"rtl":"ltr";$("#langCod").textContent=l.toUpperCase();relogio();fecharModal();render()}
 function abrirIdiomas(){abrirModal(`<h2>🌐 Language · Idioma</h2>${LANGS.map(x=>`<button class="btn ${x[0]===lang?'':'s'}" onclick="setLang('${x[0]}')">${x[0]===lang?"✓ ":""}${x[2]}</button>`).join("")}<p class="stat">${esc(t("lang_note"))}</p>`)}
 const fmt=(d,o)=>new Intl.DateTimeFormat(LOC[lang],Object.assign({timeZone:TZ},o)).format(d);
 const agoraNaive=()=>new Date().toLocaleString("sv-SE",{timeZone:TZ}).replace(" ","T").slice(0,16);
@@ -441,7 +442,7 @@ function meteoCompacto(){
   if(!d)return `<button class="avbtn i" onclick="go('tempo')"><span>🌦️ <b>${esc(t("meteo_t"))}</b><br><small>${esc(W.loading?t("meteo_load"):t("meteo_off"))}</small></span><span class="chev">›</span></button>`;
   const w=WMO[d.weather_code[0]]||["❔",null],p=d.precipitation_sum[0];
   return `<button class="avbtn i" onclick="go('tempo')"><span>${w[0]} <b>${Math.round(d.temperature_2m_max[0])}° / ${Math.round(d.temperature_2m_min[0])}°</b> · ${esc(w[1]?t(w[1]):"")}<br><small>${esc(t("meteo_t"))}${p!=null?" · 💧 "+Math.round(p*10)/10+" mm":""}</small></span><span class="chev">›</span></button>`}
-const voltar=()=>`<button class="back" onclick="go('home')">‹ ${esc(t("nav_home"))}</button>`;
+const voltar=()=>`<button class="back" onclick="go('home')"><span class="chev0">‹</span> ${esc(t("nav_home"))}</button>`;
 const pgQueimas=()=>voltar()+cardQueimas();
 const pgFreg=()=>voltar()+(cardFreguesia()||`<div class="card"><p class="mut">${esc(t("meteo_load"))}</p></div>`);
 const pgTempo=()=>voltar()+blocoMeteo();
@@ -464,7 +465,7 @@ function linha(ic,nome,desc,tels,extra){
   return `<div class="item" style="cursor:default;align-items:flex-start"><span style="font-size:24px">${ic}</span><span style="flex:1"><b>${esc(nome)}</b><br><small class="mut">${esc(desc)}</small>${tels.filter(x=>x[1]).map(x=>`<br><a href="${tel(x[1])}">📞 ${esc(x[1])}</a> <small class="mut">${esc(x[0])}</small>`).join("")}${extra||""}</span></div>`}
 function ulpcTodas(){
   const L=listaUlpc().slice().sort((a,b)=>a.freguesia.localeCompare(b.freguesia,lang));
-  const corpo=L.map(u=>`<div class="item" style="cursor:default;align-items:flex-start;padding-left:0"><span style="flex:1"><b>${esc(u.freguesia)}</b>${u.contacto?`<br><a href="${tel(u.contacto)}">📞 ${esc(u.contacto)}</a>`:""}${u.email?`<br><a href="mailto:${esc(u.email)}">✉️ ${esc(u.email)}</a>`:""}</span></div>`).join("");
+  const corpo=L.map(u=>`<div class="item" style="cursor:default;align-items:flex-start;padding-inline-start:0"><span style="flex:1"><b>${esc(u.freguesia)}</b>${u.contacto?`<br><a href="${tel(u.contacto)}">📞 ${esc(u.contacto)}</a>`:""}${u.email?`<br><a href="mailto:${esc(u.email)}">✉️ ${esc(u.email)}</a>`:""}</span></div>`).join("");
   return `<div class="item" style="cursor:default;align-items:flex-start"><span style="flex:none">${ICPC}</span><span style="flex:1"><b>${esc(t("pc_ul_n"))}</b><br><small class="mut">${esc(t("pc_ul_d"))}</small>${L.length?`<details style="margin-top:6px"><summary style="cursor:pointer;color:var(--pri)">${esc(t("pc_ul_s",L.length))}</summary>${corpo}</details>`:""}</span></div>`}
 function contactos(){
   const Lc=CFG.LOCAL;
@@ -501,18 +502,18 @@ function guide(){
   if(sub&&GUIDES[sub]){
     const g=tx("guides",sub),rk0=rsk(sub),secs=[["a","g_antes"],["d","g_durante"],["p","g_depois"]],ic=GUIDES[sub];
     const lista=(g&&g[gsec])||[];
-    return `<button class="back" onclick="go('guide')">‹ ${esc(t("nav_guide"))}</button><div class="card"><h2>${ic} ${esc(g.n)}</h2>${rk0?`<p class="mut">${esc(rk0.t)}</p>`:""}
+    return `<button class="back" onclick="go('guide')"><span class="chev0">‹</span> ${esc(t("nav_guide"))}</button><div class="card"><h2>${ic} ${esc(g.n)}</h2>${rk0?`<p class="mut">${esc(rk0.t)}</p>`:""}
     <div class="tabs">${secs.map(s=>`<button class="${s[0]===gsec?'on':''}" onclick="gsec='${s[0]}';render()">${esc(t(s[1]))}</button>`).join("")}</div>
     ${lista.map((x,i)=>`<div class="step"><em>${i+1}</em><span>${esc(x)}</span></div>`).join("")}</div><div style="margin-top:12px">${sos()}${sosMun()}</div>`}
   return `<div class="card"><h2>${esc(t("guide_title"))}</h2><p class="mut">${esc(t("guide_intro"))}</p></div>
-  <div class="grid">${Object.keys(GUIDES).sort((x,y)=>tx("guides",x).n.localeCompare(tx("guides",y).n,lang)).map(k=>{const rk=rsk(k);return `<button class="tile" onclick="go('guide','${k}')"><span class="i">${GUIDES[k]}</span><b>${esc(tx("guides",k).n)}</b>${rk?`<small class="mut" style="font-weight:400;line-height:1.3;margin-top:4px;text-align:left">${esc(rk.t)}</small>`:""}</button>`}).join("")}</div>
+  <div class="grid">${Object.keys(GUIDES).sort((x,y)=>tx("guides",x).n.localeCompare(tx("guides",y).n,lang)).map(k=>{const rk=rsk(k);return `<button class="tile" onclick="go('guide','${k}')"><span class="i">${GUIDES[k]}</span><b>${esc(tx("guides",k).n)}</b>${rk?`<small class="mut" style="font-weight:400;line-height:1.3;margin-top:4px;text-align:start">${esc(rk.t)}</small>`:""}</button>`}).join("")}</div>
   <p class="stat">${esc(t("risk_src"))}</p>`;
 }
 function render(){const y=$("#main").scrollTop;$("#hsub").textContent=t("sub");nav();$("#main").innerHTML={home,kit,plan,warn,contactos,guide,queimas:pgQueimas,freg:pgFreg,tempo:pgTempo}[tab]();$("#main").scrollTop=y}
 
 (async function arranque(){
   lang=pickLang();await loadLang(lang);if(!window.LANG[lang])lang="pt";L=LANG[lang];
-  document.documentElement.lang=lang;$("#langCod").textContent=lang.toUpperCase();
+  document.documentElement.lang=lang;document.documentElement.dir=lang==="ur"?"rtl":"ltr";$("#langCod").textContent=lang.toUpperCase();
   $("#btnLang").onclick=abrirIdiomas;
   const aplicaTema=()=>{const d=document.documentElement.dataset.theme;$("#btnTema").textContent=d==="dark"?"☀️":"🌙";$("#metaTema").content=d==="dark"?"#0b1220":"#0b5cab"};
   $("#btnTema").onclick=()=>{const n=document.documentElement.dataset.theme==="dark"?"light":"dark";document.documentElement.dataset.theme=n;try{localStorage.setItem("bp_theme",n)}catch(e){}aplicaTema()};aplicaTema();
