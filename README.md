@@ -3,9 +3,9 @@
 Aplicação web instalável (PWA) de autoproteção para a população de Braga: previsão e avisos reais (IPMA, Open-Meteo), mochila de 72 h, plano familiar, guias e contactos de emergência. Sem servidor e sem recolha de dados pessoais (o plano e a mochila ficam só no telemóvel).
 
 ## Publicar (GitHub Pages)
-1. Criar um repositório público (ex.: `braga-resiliente`) e carregar TODOS os ficheiros desta pasta na raiz.
-2. Settings → Pages → Deploy from a branch → `main` / root.
-3. O link será `https://<utilizador>.github.io/braga-resiliente/`. Enviar por WhatsApp.
+A app está na conta GitHub institucional `protecaocivilbraga` (Gmail da Proteção Civil), no repositório `protecaocivilbraga.github.io`, publicado em Settings → Pages → `main` / root.
+
+**Endereço público: https://protecaocivilbraga.github.io** (link e código QR `qr-braga-resiliente.png`). O painel CCOM está em `https://protecaocivilbraga.github.io/smpc-dashboard/`.
 
 ## Instalar no telemóvel
 - Android (Chrome): abrir o link → "Instalar aplicação".
