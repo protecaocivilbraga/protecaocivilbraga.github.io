@@ -1,11 +1,4 @@
 {
-  "atualizado": "2026-11-24T11:16:00",
-  "avisos": [
-    {
-      "nivel": "info",
-      "titulo": "Teste",
-      "texto": "",
-      "validoAte": "2026-11-24T17:16:00"
-    }
-  ]
+  "atualizado": "2026-11-24T16:27:00",
+  "avisos": []
 }
