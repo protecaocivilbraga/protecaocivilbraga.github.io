@@ -128,6 +128,7 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 .item2{border-bottom:1px solid var(--line)}.item2:last-child{border:0}.item2 .item{border:0;padding-bottom:4px}
 .vrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:0 2px 10px 34px;font-size:12.5px;color:var(--mut)}
 .vrow input[type=date]{border:1px solid var(--inpb);border-radius:8px;padding:5px 7px;font:inherit;font-size:13px;background:var(--inp);color:var(--ink);color-scheme:inherit}
+.meds{padding:0 2px 12px 34px;font-size:13px}.meds>b{display:block;margin-bottom:6px}.meds .mp{margin:8px 0 10px}.meds .mp>span{display:block;margin-bottom:4px}.mrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:4px 0}.mrow input[type=text]{flex:1 1 140px;min-width:0;border:1px solid var(--inpb);border-radius:8px;padding:6px 8px;font:inherit;font-size:14px;background:var(--inp);color:var(--ink)}.mrow input[type=date]{border:1px solid var(--inpb);border-radius:8px;padding:5px 7px;font:inherit;font-size:13px;background:var(--inp);color:var(--ink);color-scheme:inherit}
 .bdg{border-radius:99px;padding:2px 8px;font-size:11.5px;font-weight:700}.bdg.r{background:var(--redbg);color:var(--red)}.bdg.o{background:var(--warnbg);color:var(--warn)}
 .pto{margin-top:6px}.ptb{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px;font-size:13px}
 .lnk{border:0;background:none;color:var(--pri);font:inherit;font-size:13px;cursor:pointer;padding:2px 0;text-decoration:underline}
@@ -202,8 +203,9 @@ const TIPOS={"precipitação":"t_rain","vento":"t_wind","trovoada":"t_thunder","
 
 /* ===== ESTADO ===== */
 let S={};try{S=JSON.parse(localStorage.getItem("bp")||"{}")}catch(e){}
-S.k=S.k||{};S.val=S.val||{};S.freg=S.freg||"";S.rev=S.rev||"";
+S.k=S.k||{};S.val=S.val||{};S.meds=S.meds||{};if(!Array.isArray(S.meds.b))S.meds.b=[];S.meds.p=S.meds.p||{};S.freg=S.freg||"";S.rev=S.rev||"";
 S.plan=Object.assign({pessoas:[],fora:"",morada:"",mochila:"",desligar:"",pontos:[{},{},{}],ev:{}},S.plan||{});
+S.plan.pessoas.forEach(p=>{if(!p.id)p.id=uid()});
 if(S.plan.encontro1&&!S.plan.pontos[0].t)S.plan.pontos[0].t=S.plan.encontro1;
 if(S.plan.encontro2&&!S.plan.pontos[1].t)S.plan.pontos[1].t=S.plan.encontro2;
 function save(){try{localStorage.setItem("bp",JSON.stringify(S))}catch(e){}}
@@ -359,7 +361,29 @@ const kitItems=k=>Object.values(KITS[k].cats).flat();
 const kTot=k=>kitItems(k).length;
 const kDone=k=>kitItems(k).filter(id=>(S.k[k]||{})[id]).length;
 const kPct=k=>Math.round(kDone(k)/kTot(k)*100);
-function expiring(){const o=[];for(const k of KITKEYS)for(const id of kitItems(k)){const v=S.val[k+"|"+id];if(v){const n=dias(v);if(n<=30)o.push({k,id,n})}}return o.sort((a,b)=>a.n-b.n)}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function delP(i){const p=S.plan.pessoas[i];if(p&&p.id)delete S.meds.p[p.id];S.plan.pessoas.splice(i,1);save();render()}
+const medL=pid=>pid==="b"?S.meds.b:(S.meds.p[pid]=S.meds.p[pid]||[]);
+const medMax=pid=>pid==="b"?5:8;
+function medAdd(pid){const l=medL(pid);if(l.length>=medMax(pid))return;l.push({n:"",v:""});save();render()}
+function medSet(pid,i,f,v){const m=medL(pid)[i];if(!m)return;m[f]=v;save();if(f==="v")render()}
+function medDel(pid,i){medL(pid).splice(i,1);save();render()}
+function medRows(pid){const l=medL(pid);
+  return l.map((m,i)=>`<div class="mrow"><input type="text" maxlength="60" value="${esc(m.n)}" placeholder="${esc(t("med_nome"))}" aria-label="${esc(t("med_nome"))}" onchange="medSet('${pid}',${i},'n',this.value)"><input type="date" value="${esc(m.v||"")}" aria-label="${esc(t("v_label"))}" onchange="medSet('${pid}',${i},'v',this.value)"><button class="del" aria-label="${esc(t("med_rm"))}" onclick="medDel('${pid}',${i})">✕</button>${m.v?badgeVal(m.v):""}</div>`).join("")
+  +(l.length<medMax(pid)?`<button class="btn s" onclick="medAdd('${pid}')">＋ ${esc(t("med_add"))}</button>`:"")}
+function medEd(id){
+  const share=`<p class="mut" style="margin-top:6px"><small>${esc(t("med_share"))}</small></p>`;
+  if(id==="analgesico")return `<div class="meds"><b>${esc(t("med_h"))}</b>${medRows("b")}${share}</div>`;
+  const P=S.plan.pessoas;
+  if(!P.length)return `<div class="meds"><p class="mut">${esc(t("med_sem"))}</p><button class="btn s" onclick="go('plan')">${esc(t("med_ir"))}</button></div>`;
+  return `<div class="meds"><b>${esc(t("med_h"))}</b>${P.map(p=>`<div class="mp"><span>👤 <b>${esc(p.n)}</b></span>${medRows(p.id)}</div>`).join("")}${share}</div>`}
+const MEDKIT=id=>id==="medicacao"||id==="analgesico";
+function expiring(){const o=[];
+  for(const k of KITKEYS)for(const id of kitItems(k)){if(MEDKIT(id))continue;const v=S.val[k+"|"+id];if(v){const n=dias(v);if(n<=30)o.push({n,lab:tx("kits",k)+": "+tx("items",id)})}}
+  const add=(lab,m)=>{if(m&&m.v){const n=dias(m.v);if(n<=30)o.push({n,lab:"💊 "+lab+(m.n?": "+m.n:"")})}};
+  S.meds.b.forEach(m=>add(tx("items","analgesico"),m));
+  S.plan.pessoas.forEach(p=>(S.meds.p[p.id]||[]).forEach(m=>add(p.n,m)));
+  return o.sort((a,b)=>a.n-b.n)}
 function tick(k,id,v){S.k[k]=S.k[k]||{};S.k[k][id]=v;save();render()}
 function setVal(k,id,v){if(v)S.val[k+"|"+id]=v;else delete S.val[k+"|"+id];save();render()}
 function limpar(){if(!confirmaLimpar){confirmaLimpar=true;render();return}S.k[kitSel]={};kitItems(kitSel).forEach(id=>delete S.val[kitSel+"|"+id]);confirmaLimpar=false;save();render()}
@@ -375,15 +399,15 @@ function kit(){
   <div class="card"><h3>${KITS[kitSel].i} ${esc(tx("kits",kitSel))}</h3><p class="mut">${esc(tx("kitd",kitSel))}</p><div class="bar"><i style="width:${p}%"></i></div><p class="mut" style="margin-top:6px">${kDone(kitSel)} / ${kTot(kitSel)} · ${p}%</p></div>
   <div class="tabs">${cats.map(c=>`<button class="${c===cat?'on':''}" onclick="cat='${c}';render()">${esc(tx("cats",c))}</button>`).join("")}</div>
   <div class="card">${KITS[kitSel].cats[cat].map(id=>{const ok=(S.k[kitSel]||{})[id],v=S.val[kitSel+"|"+id]||"";
-    return `<div class="item2"><label class="item ${ok?'done':''}"><input type="checkbox" ${ok?'checked':''} onchange="tick('${kitSel}','${id}',this.checked)"><span>${esc(tx("items",id))}</span></label>${EXP.has(id)?`<div class="vrow"><span>📅 ${esc(t("v_label"))}</span><input type="date" value="${esc(v)}" onchange="setVal('${kitSel}','${id}',this.value)" aria-label="${esc(t("v_label"))}">${v?badgeVal(v):""}</div>`:""}</div>`}).join("")}</div>
-  ${ex.length&&tab==="kit"?`<div class="alert o"><b>⏰ ${esc(t("v_alert",ex.length))}</b>${ex.slice(0,6).map(x=>esc(tx("kits",x.k)+": "+tx("items",x.id)+" · "+(x.n<0?t("v_expired"):t("v_soon",x.n)))).join("<br>")}</div>`:""}
+    return `<div class="item2"><label class="item ${ok?'done':''}"><input type="checkbox" ${ok?'checked':''} onchange="tick('${kitSel}','${id}',this.checked)"><span>${esc(tx("items",id))}</span></label>${MEDKIT(id)?medEd(id):EXP.has(id)?`<div class="vrow"><span>📅 ${esc(t("v_label"))}</span><input type="date" value="${esc(v)}" onchange="setVal('${kitSel}','${id}',this.value)" aria-label="${esc(t("v_label"))}">${v?badgeVal(v):""}</div>`:""}</div>`}).join("")}</div>
+  ${ex.length&&tab==="kit"?`<div class="alert o"><b>⏰ ${esc(t("v_alert",ex.length))}</b>${ex.slice(0,6).map(x=>esc(x.lab+" · "+(x.n<0?t("v_expired"):t("v_soon",x.n)))).join("<br>")}</div>`:""}
   <div class="card"><h3>🔁 ${esc(t("rev_t"))}</h3><p class="mut">${esc(t("rev_d"))}</p><p class="mut" style="margin-top:6px">${rev?esc(t("rev_last",dmy(rev))):esc(t("rev_never"))}</p>${vencida&&kDone(kitSel)>0?`<div class="alert y" style="margin:8px 0 0">${esc(t("rev_due"))}</div>`:""}<button class="btn s" onclick="marcarRev()">${esc(t("rev_btn"))}</button></div>
   <p class="foot">${esc(t("kit_tip"))}</p>
   <button class="btn s" onclick="limpar()">${esc(confirmaLimpar?t("clear_confirm"):t("clear"))}</button>`;
 }
 
 /* ===== PLANO DA FAMÍLIA ===== */
-function addP(){const n=$("#pn").value.trim();if(!n)return;S.plan.pessoas.push({n,t:$("#pt").value.trim(),o:$("#po").value.trim()});save();render()}
+function addP(){const n=$("#pn").value.trim();if(!n)return;S.plan.pessoas.push({id:uid(),n,t:$("#pt").value.trim(),o:$("#po").value.trim()});save();render()}
 function setP(k,v){S.plan[k]=v;save()}
 function setPt(i,v){S.plan.pontos[i].t=v;save()}
 function evTick(i,v){S.plan.ev[i]=v;save();render()}
@@ -425,7 +449,7 @@ function plan(){
     <div class="ptb">${x.lat!=null?`<a href="${linkMapa(x)}" target="_blank" rel="noopener">🗺️ ${esc(t("pt_map"))}</a> <button class="lnk" onclick="limparLoc(${i})">${esc(t("pt_rm"))}</button>`:`<button class="lnk" onclick="guardarLoc(${i})">📍 ${esc(t("pt_here"))}</button>${x.t?` <a href="${linkMapa(x)}" target="_blank" rel="noopener">🗺️ ${esc(t("pt_map"))}</a>`:""}`}</div></div>`;
   return `<div class="card"><h2>${esc(t("plan_title"))}</h2><p class="mut">${esc(t("plan_intro"))}</p><p class="priv">${esc(t("priv"))}</p></div>
   <div class="card"><h3>👨‍👩‍👧 ${esc(t("p_pessoas"))}</h3>
-   ${P.pessoas.map((x,i)=>`<div class="item" style="cursor:default"><span style="flex:1"><b>${esc(x.n)}</b> ${x.t?`<a href="${tel(x.t)}">${esc(x.t)}</a>`:""}${x.o?`<br><small class="mut">${esc(x.o)}</small>`:""}</span><button class="del" aria-label="${esc(t("remove"))}" onclick="S.plan.pessoas.splice(${i},1);save();render()">✕</button></div>`).join("")||`<p class="mut">${esc(t("p_nobody"))}</p>`}
+   ${P.pessoas.map((x,i)=>`<div class="item" style="cursor:default"><span style="flex:1"><b>${esc(x.n)}</b> ${x.t?`<a href="${tel(x.t)}">${esc(x.t)}</a>`:""}${x.o?`<br><small class="mut">${esc(x.o)}</small>`:""}</span><button class="del" aria-label="${esc(t("remove"))}" onclick="delP(${i})">✕</button></div>`).join("")||`<p class="mut">${esc(t("p_nobody"))}</p>`}
    <div class="row" style="margin-top:8px"><input type="text" id="pn" placeholder="${esc(t("p_name"))}" aria-label="${esc(t("p_name"))}"><input type="tel" id="pt" placeholder="${esc(t("p_phone"))}" aria-label="${esc(t("p_phone"))}"></div>
    <input type="text" id="po" style="margin-top:8px" placeholder="${esc(t("p_notes"))}" aria-label="${esc(t("p_notes"))}">
    <button class="btn s" onclick="addP()">+ ${esc(t("p_add"))}</button></div>
@@ -467,7 +491,7 @@ const pgTempo=()=>voltar()+blocoMeteo();
 function home(){
   const ex=expiring();
   return sosCompacto()+avisosMun().map(cardMun).join("")+btnIpma()+meteoCompacto()+
-  (ex.length?`<button class="avbtn o" onclick="go('kit')"><span>⏰ <b>${esc(t("v_alert",ex.length))}</b><br><small>${esc(tx("items",ex[0].id))} · ${esc(ex[0].n<0?t("v_expired"):t("v_soon",ex[0].n))}</small></span><span class="chev">›</span></button>`:"")+
+  (ex.length?`<button class="avbtn o" onclick="go('kit')"><span>⏰ <b>${esc(t("v_alert",ex.length))}</b><br><small>${esc(ex[0].lab)} · ${esc(ex[0].n<0?t("v_expired"):t("v_soon",ex[0].n))}</small></span><span class="chev">›</span></button>`:"")+
   `<div class="grid">
    <button class="tile" onclick="go('kit')"><span class="i">🎒</span><b>${esc(t("h_kits"))}</b><small>${esc(tx("kits","mochila"))}: ${kDone("mochila")} / ${kTot("mochila")}</small><div class="bar"><i style="width:${kPct("mochila")}%"></i></div></button>
    <button class="tile" onclick="go('plan')"><span class="i">👨‍👩‍👧</span><b>${esc(t("h_plan"))}</b><small>${esc(S.plan.pessoas.length?t("h_people",S.plan.pessoas.length):t("h_todo"))}</small></button>
