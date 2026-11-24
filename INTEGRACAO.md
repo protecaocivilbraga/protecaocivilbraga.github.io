@@ -50,12 +50,12 @@ Identificadores: `cheias`, `incendio`, `calor`, `vento`, `agua`, `apagao`.
 
 - Texto em português: constante `BR_MODELOS` no `index.html` do painel (e `avm` em `lang-pt.js` da app, por consistência).
 - Traduções: secção `avm` de cada `lang-xx.js` da app.
-- Para alterar um modelo, mexer **nos dois lados**. Para criar um modelo novo: acrescentar o identificador em `BR_MODELOS` e no `<select id="brMod">` do painel, e a entrada `avm` nos oito ficheiros de língua.
+- Para alterar um modelo, mexer **nos dois lados**. Para criar um modelo novo: acrescentar o identificador em `BR_MODELOS` e no `<select id="brMod">` do painel, e a entrada `avm` nos nove ficheiros de língua.
 - As traduções dos modelos foram feitas por IA e **ainda não foram revistas por falantes nativos**.
 
 ## Idiomas da app
 
-`pt`, `en`, `es`, `fr`, `hi` (hindi), `ne` (nepalês), `ur` (urdu, da direita para a esquerda) e `zh` (chinês simplificado). Ficheiros `lang-xx.js` com as mesmas chaves em todos. Ao acrescentar um texto, acrescentá-lo nos oito. O urdu ativa `dir="rtl"` no documento; usar propriedades CSS lógicas (`inline-start`, `inline-end`), não `left`/`right`.
+`pt`, `en`, `es`, `fr`, `hi` (hindi), `ne` (nepalês), `ur` (urdu, da direita para a esquerda) e `zh` (chinês simplificado) e `uk` (ucraniano). Ficheiros `lang-xx.js` com as mesmas chaves em todos. Ao acrescentar um texto, acrescentá-lo nos nove. O urdu ativa `dir="rtl"` no documento; usar propriedades CSS lógicas (`inline-start`, `inline-end`), não `left`/`right`.
 
 ## Outros dados da app (só no repositório da app)
 
