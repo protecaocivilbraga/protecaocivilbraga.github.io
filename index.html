@@ -242,7 +242,7 @@ async function getJSON(u,ms){const c=new AbortController(),tm=setTimeout(()=>c.a
 async function carregar(){
   W.loading=true;render();
   const metUrl=`https://api.open-meteo.com/v1/forecast?latitude=${CFG.LAT}&longitude=${CFG.LON}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_gusts_10m_max&timezone=${encodeURIComponent(TZ)}&forecast_days=5`;
-  const [a,m,v,u,bb,ip,r0,r1]=await Promise.allSettled([
+  const [a,m,v,u,bb,ip,r0,r1,pc]=await Promise.allSettled([
     getJSON("https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json"),
     getJSON(metUrl),
     getJSON("avisos.json?t="+Date.now()),
@@ -250,13 +250,15 @@ async function carregar(){
     getJSON("bombeiros.json?t="+Date.now()),
     getJSON(`https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/${CFG.IPMA_LOCAL}.json`),
     getJSON("https://api.ipma.pt/open-data/forecast/meteorology/rcm/rcm-d0.json"),
-    getJSON("https://api.ipma.pt/open-data/forecast/meteorology/rcm/rcm-d1.json")
+    getJSON("https://api.ipma.pt/open-data/forecast/meteorology/rcm/rcm-d1.json"),
+    getJSON("previsao.json?t="+Date.now())
   ]);
   let falhou=false;
   if(a.status==="fulfilled"&&Array.isArray(a.value)){W.ipma=a.value.filter(x=>x.idAreaAviso===CFG.AREA_IPMA).map(x=>({tipo:x.awarenessTypeName,nivel:x.awarenessLevelID,inicio:x.startTime,fim:x.endTime,texto:x.text||""}))}else falhou=true;
   if(m.status==="fulfilled"&&m.value&&m.value.daily){W.meteo=m.value.daily}
   const pi=ip.status==="fulfilled"?prevIpma(ip.value):null;
-  W.prev=pi&&pi.length>=3?pi:prevOM(W.meteo);if(!W.prev)falhou=true;
+  const pcc=pc.status==="fulfilled"?prevCcom(pc.value):null;
+  W.prev=pcc||(pi&&pi.length>=3?pi:prevOM(W.meteo));if(!W.prev)falhou=true;
   const rc=[r0,r1].map(x=>{try{const d=x.status==="fulfilled"&&x.value,n=d&&d.local&&d.local[CFG.DICO]&&d.local[CFG.DICO].data.rcm;return n>=1&&n<=5?{d:d.dataPrev,n:n}:null}catch(e){return null}});
   if(rc[0]||rc[1])W.rcm=rc;
   if(v.status==="fulfilled"){W.mun=v.value}
@@ -275,6 +277,14 @@ function prevIpma(j){
   const d=j&&Array.isArray(j.data)?j.data:null;if(!d)return null;
   const hoje=agoraNaive().slice(0,10);
   return d.filter(x=>x.forecastDate>=hoje).slice(0,5).map(x=>({data:x.forecastDate,wx:IPMA_WX[x.idWeatherType]??null,tmax:+x.tMax,tmin:+x.tMin,prob:x.precipitaProb!=null&&x.precipitaProb!==""?Math.round(+x.precipitaProb):null,vdir:x.predWindDir||"",vcls:+x.classWindSpeed||0,src:"ipma"}));
+}
+// previsão do painel CCOM (consenso de 6 modelos), publicada de hora a hora pelo Apps Script; só se tiver menos de 8 h
+function prevCcom(j){
+  if(!j||!j.gerado||!Array.isArray(j.dias))return null;
+  const ag=agoraNaive(),h=(new Date(ag+":00Z")-new Date(String(j.gerado).slice(0,16)+":00Z"))/36e5;
+  if(!(h>=-1&&h<8))return null;
+  const D=j.dias.filter(x=>x.data>=ag.slice(0,10)&&x.mm!=null&&x.tmax!=null).slice(0,5);
+  return D.length>=3?D.map(x=>({data:x.data,wx:x.wx,tmax:x.tmax,tmin:x.tmin,prob:x.prob,mm:x.mm,raj:x.raj,src:"ccom"})):null;
 }
 function prevOM(d){
   if(!d||!d.time)return null;
@@ -377,10 +387,10 @@ function blocoMeteo(){
   const P=W.prev;
   if(!P||!P.length)return `<div class="card"><h3>${esc(t("meteo_t"))}</h3><p class="mut">${esc(W.loading?t("meteo_load"):t("meteo_off"))}</p></div>`;
   const dia=(x,i)=>{const w=wxIcone(x.wx);
-    const chuva=x.prob!=null?`💧 ${x.prob}%`:"",mm=x.mm!=null?` · ${Math.round(x.mm*10)/10} mm`:"";
+    const chuva=x.prob!=null?`💧 ${x.prob}%`:"",mm=x.mm!=null?` · ${(Math.round(x.mm*10)/10).toLocaleString(lang==="zh"?"zh-CN":lang)} mm`:"";
     const vento=x.src==="ipma"?(x.vcls?`💨 ${SETA[x.vdir]||""} ${esc(t("wind_"+x.vcls))}`:""):(x.raj!=null?`💨 ${Math.round(x.raj)} km/h`:"");
     return `<div><div class="d">${esc(nomeDia(x.data,i))}</div><div class="e">${w[0]}</div><div class="t">${Math.round(x.tmax)}° <small>${Math.round(x.tmin)}°</small></div><div class="p">${esc(w[1]?t(w[1]):"—")}<br>${chuva}${mm}<br>${vento}</div></div>`};
-  const fonte=P[0].src==="ipma"?t("meteo_foot_ipma"):t("meteo_foot_om");
+  const fonte=t({ipma:"meteo_foot_ipma",ccom:"meteo_foot_ccom"}[P[0].src]||"meteo_foot_om");
   return `<div class="card"><h3>${esc(t("meteo_t"))}</h3><div class="wx">${P.map(dia).join("")}</div><p class="stat">${esc(W.offline?t("meteo_cached",hm(W.ts)):t("upd",hm(W.ts)))} ${esc(fonte)}</p></div>`+
     `<div class="card"><h3>🔥 ${esc(t("rcm_t"))}</h3>${blocoRcm()}</div>`;
 }
