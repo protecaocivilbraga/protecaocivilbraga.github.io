@@ -102,7 +102,7 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 .step em{flex:none;width:24px;height:24px;border-radius:50%;background:var(--btn);color:#fff;font-style:normal;display:grid;place-items:center;font-size:12px;font-weight:700}
 .back{border:0;background:none;color:var(--pri);font-size:14px;margin-bottom:8px;cursor:pointer;padding:2px 0}
 .del{border:0;background:none;color:var(--red);font-size:18px;cursor:pointer;padding:4px 8px}
-.wx{display:flex;gap:8px}
+.wx{display:flex;gap:6px;overflow-x:auto}.wx>div{min-width:62px}
 .wx>div{flex:1;text-align:center;background:var(--bg);border-radius:12px;padding:10px 4px}
 .wx .d{font-size:12px;color:var(--mut)}
 .wx .e{font-size:26px;margin:2px 0}
@@ -112,7 +112,7 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 .avbtn{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:start;border:0;border-radius:var(--r);padding:13px 14px;margin-bottom:12px;font:inherit;font-size:14px;cursor:pointer;line-height:1.3}
 .chev,.chev0{display:inline-block}[dir=rtl] .chev,[dir=rtl] .chev0{transform:scaleX(-1)}a[href^="tel:"],.num{direction:ltr;unicode-bidi:isolate;display:inline-block}
 .avbtn small{font-size:12.5px;opacity:.9}.avbtn .chev{font-size:26px;opacity:.7}
-.avbtn.g{background:var(--okbg);color:var(--ok)}.avbtn.y{background:#ffd600;color:#2b2300}.avbtn.o{background:#ff9800;color:#241500}.avbtn.r{background:#d32f2f;color:#fff}.avbtn.i{background:var(--pri2);color:var(--pri)}
+.avbtn.m,.alert.m{background:#7f0000;color:#fff}.avbtn.g{background:var(--okbg);color:var(--ok)}.avbtn.y{background:#ffd600;color:#2b2300}.avbtn.o{background:#ff9800;color:#241500}.avbtn.r{background:#d32f2f;color:#fff}.avbtn.i{background:var(--pri2);color:var(--pri)}
 .modal{position:fixed;inset:0;background:rgba(2,6,14,.7);display:flex;align-items:flex-end;justify-content:center;z-index:50}
 .sheet{background:var(--bg);width:100%;max-width:430px;max-height:88%;overflow-y:auto;border-radius:22px 22px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom));animation:up .25s ease}
 @keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
@@ -162,7 +162,9 @@ input[type=text],input[type=tel],select{width:100%;padding:11px;border:1px solid
 <script>
 /* ===== CONFIGURAÇÃO (editar aqui) ===== */
 const CFG={
-  AREA_IPMA:"BRG",                 // código IPMA do distrito de Braga
+  AREA_IPMA:"BRG",                 // código IPMA do distrito de Braga (avisos)
+  IPMA_LOCAL:1030300,              // código IPMA da cidade de Braga (previsão diária a 5 dias)
+  DICO:"0303",                     // código do concelho de Braga (perigo de incêndio rural)
   LAT:41.5503, LON:-8.4200,        // Braga (centro) para a previsão
   TEL_MUNICIPAL:"800 45 10 10",    // número verde de emergência municipal (situações urgentes)
   // Contactos locais opcionais (não emergência). Vazio = só mostra o 112. Ex.: "253 000 000"
@@ -209,7 +211,7 @@ S.plan.pessoas.forEach(p=>{if(!p.id)p.id=uid()});
 if(S.plan.encontro1&&!S.plan.pontos[0].t)S.plan.pontos[0].t=S.plan.encontro1;
 if(S.plan.encontro2&&!S.plan.pontos[1].t)S.plan.pontos[1].t=S.plan.encontro2;
 function save(){try{localStorage.setItem("bp",JSON.stringify(S))}catch(e){}}
-let W={ipma:null,meteo:null,mun:null,ulpc:null,bomb:null,ts:null,offline:false,loading:true};
+let W={ipma:null,meteo:null,prev:null,rcm:null,mun:null,ulpc:null,bomb:null,ts:null,offline:false,loading:true};
 let pos=null,geoMsg="";
 try{const c=JSON.parse(localStorage.getItem("bp_cache")||"null");if(c){W=Object.assign(W,c);W.loading=true}}catch(e){}
 let tab="home",sub=null,kitSel="mochila",cat="agua",gsec="d",confirmaLimpar=false,pedidoInstalar=null,instalarFechado=false;
@@ -239,25 +241,69 @@ const tipoIpma=s=>{const k=String(s||"").toLowerCase().trim();return TIPOS[k]?t(
 async function getJSON(u,ms){const c=new AbortController(),tm=setTimeout(()=>c.abort(),ms||15000);try{const r=await fetch(u,{signal:c.signal,cache:"no-store"});if(!r.ok)throw new Error(r.status);return await r.json()}finally{clearTimeout(tm)}}
 async function carregar(){
   W.loading=true;render();
-  const metUrl=`https://api.open-meteo.com/v1/forecast?latitude=${CFG.LAT}&longitude=${CFG.LON}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_gusts_10m_max&timezone=${encodeURIComponent(TZ)}&forecast_days=3`;
-  const [a,m,v,u,bb]=await Promise.allSettled([
+  const metUrl=`https://api.open-meteo.com/v1/forecast?latitude=${CFG.LAT}&longitude=${CFG.LON}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_gusts_10m_max&timezone=${encodeURIComponent(TZ)}&forecast_days=5`;
+  const [a,m,v,u,bb,ip,r0,r1]=await Promise.allSettled([
     getJSON("https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json"),
     getJSON(metUrl),
     getJSON("avisos.json?t="+Date.now()),
     getJSON("ulpc.json?t="+Date.now()),
-    getJSON("bombeiros.json?t="+Date.now())
+    getJSON("bombeiros.json?t="+Date.now()),
+    getJSON(`https://api.ipma.pt/open-data/forecast/meteorology/cities/daily/${CFG.IPMA_LOCAL}.json`),
+    getJSON("https://api.ipma.pt/open-data/forecast/meteorology/rcm/rcm-d0.json"),
+    getJSON("https://api.ipma.pt/open-data/forecast/meteorology/rcm/rcm-d1.json")
   ]);
   let falhou=false;
   if(a.status==="fulfilled"&&Array.isArray(a.value)){W.ipma=a.value.filter(x=>x.idAreaAviso===CFG.AREA_IPMA).map(x=>({tipo:x.awarenessTypeName,nivel:x.awarenessLevelID,inicio:x.startTime,fim:x.endTime,texto:x.text||""}))}else falhou=true;
-  if(m.status==="fulfilled"&&m.value&&m.value.daily){W.meteo=m.value.daily}else falhou=true;
+  if(m.status==="fulfilled"&&m.value&&m.value.daily){W.meteo=m.value.daily}
+  const pi=ip.status==="fulfilled"?prevIpma(ip.value):null;
+  W.prev=pi&&pi.length>=3?pi:prevOM(W.meteo);if(!W.prev)falhou=true;
+  const rc=[r0,r1].map(x=>{try{const d=x.status==="fulfilled"&&x.value,n=d&&d.local&&d.local[CFG.DICO]&&d.local[CFG.DICO].data.rcm;return n>=1&&n<=5?{d:d.dataPrev,n:n}:null}catch(e){return null}});
+  if(rc[0]||rc[1])W.rcm=rc;
   if(v.status==="fulfilled"){W.mun=v.value}
   if(u.status==="fulfilled"){W.ulpc=u.value}
   if(bb.status==="fulfilled"){W.bomb=bb.value}
   W.offline=falhou;W.loading=false;
   if(!falhou)W.ts=Date.now();
-  try{localStorage.setItem("bp_cache",JSON.stringify({ipma:W.ipma,meteo:W.meteo,mun:W.mun,ulpc:W.ulpc,bomb:W.bomb,ts:W.ts}))}catch(e){}
+  try{localStorage.setItem("bp_cache",JSON.stringify({ipma:W.ipma,meteo:W.meteo,prev:W.prev,rcm:W.rcm,mun:W.mun,ulpc:W.ulpc,bomb:W.bomb,ts:W.ts}))}catch(e){}
   render();
 }
+/* ===== PREVISÃO (IPMA, 5 dias; Open-Meteo só se o IPMA falhar) ===== */
+// tipos de tempo do IPMA (idWeatherType) → ícone e texto já traduzidos (chaves dos códigos WMO)
+const IPMA_WX={1:0,2:1,3:2,4:3,5:2,6:80,7:61,8:82,9:63,10:61,11:65,12:63,13:61,14:65,15:51,16:45,17:45,18:73,19:95,20:95,21:96,22:"geada",23:95,24:3,25:3,26:45,27:3,28:85,29:71,30:71};
+const wxIcone=c=>c==="geada"?["🧊","w_frost"]:(WMO[c]||["❔",null]);
+function prevIpma(j){
+  const d=j&&Array.isArray(j.data)?j.data:null;if(!d)return null;
+  const hoje=agoraNaive().slice(0,10);
+  return d.filter(x=>x.forecastDate>=hoje).slice(0,5).map(x=>({data:x.forecastDate,wx:IPMA_WX[x.idWeatherType]??null,tmax:+x.tMax,tmin:+x.tMin,prob:x.precipitaProb!=null&&x.precipitaProb!==""?Math.round(+x.precipitaProb):null,vdir:x.predWindDir||"",vcls:+x.classWindSpeed||0,src:"ipma"}));
+}
+function prevOM(d){
+  if(!d||!d.time)return null;
+  return d.time.slice(0,5).map((dt,i)=>({data:dt,wx:d.weather_code[i],tmax:d.temperature_2m_max[i],tmin:d.temperature_2m_min[i],prob:d.precipitation_probability_max[i],mm:d.precipitation_sum[i],raj:d.wind_gusts_10m_max[i],src:"om"}));
+}
+function nomeDia(dt,i){
+  if(i===0||dt===agoraNaive().slice(0,10))return t("d0");
+  const d=new Date(dt+"T12:00:00");if(i===1)return t("d1");
+  try{const s=d.toLocaleDateString(lang==="zh"?"zh-CN":lang,{weekday:"short",day:"numeric"});return s}catch(e){return dt.slice(8,10)+"/"+dt.slice(5,7)}
+}
+const SETA={N:"↓",NE:"↙",E:"←",SE:"↖",S:"↑",SW:"↗",W:"→",NW:"↘"}; // seta para onde sopra o vento
+
+/* ===== PERIGO DE INCÊNDIO RURAL (IPMA, hoje e amanhã) ===== */
+const RCM_C=["","g","y","o","r","m"];
+function rcmDias(){return (W.rcm||[]).filter(Boolean).filter(x=>!x.d||x.d>=agoraNaive().slice(0,10))}
+function rcmConselho(n){return n>=4?t("rcm_a45"):n===3?t("rcm_a3"):t("rcm_a12")}
+function btnRcm(){
+  const R=rcmDias();
+  if(!R.length)return `<button class="avbtn i" onclick="abrirRcm()"><span>🔥 <b>${esc(t("rcm_t"))}</b><br><small>${esc(W.loading?t("meteo_load"):t("rcm_off")+" ipma.pt")}</small></span><span class="chev">›</span></button>`;
+  const mx=Math.max(...R.map(x=>x.n));
+  return `<button class="avbtn ${RCM_C[mx]}" onclick="abrirRcm()"><span>🔥 <b>${esc(t("rcm_t"))}</b><br><small>${R.map((x,i)=>esc(nomeDia(x.d||"",i)+": "+t("rcm_"+x.n))).join(" · ")}</small></span><span class="chev">›</span></button>`}
+function blocoRcm(){
+  const R=rcmDias();
+  if(!R.length)return `<div class="alert i"><b>🔥 ${esc(t("rcm_t"))}</b>${esc(t("rcm_off"))} <a href="https://www.ipma.pt/pt/riscoincendio/rcm.pt/" target="_blank" rel="noopener">ipma.pt</a></div>`;
+  const mx=Math.max(...R.map(x=>x.n));
+  return R.map((x,i)=>`<div class="alert ${RCM_C[x.n]}"><b>🔥 ${esc(nomeDia(x.d||"",i))}: ${esc(t("rcm_"+x.n))}</b></div>`).join("")+
+    `<p>${esc(rcmConselho(mx))}</p><p class="stat">${esc(t("rcm_src"))}</p>`}
+function abrirRcm(){abrirModal(`<h2>🔥 ${esc(t("rcm_t"))}</h2>${blocoRcm()}<button class="btn" onclick="fecharModal();go('queimas')">🔥 ${esc(t("qm_t"))}</button><button class="btn s" onclick="fecharModal()">${esc(t("close"))}</button>`)}
+
 function avisosIpma(){
   const ag=agoraNaive();
   return (W.ipma||[]).filter(x=>x.nivel&&x.nivel!=="green"&&NIVEL[x.nivel]&&!/agita/i.test(x.tipo||"")&&String(x.fim||"").slice(0,16)>ag).sort((p,q)=>NIVEL[q.nivel].n-NIVEL[p.nivel].n||String(p.inicio).localeCompare(String(q.inicio)));
@@ -328,12 +374,15 @@ function abrirAvisos(){
 function abrirModal(h){fecharModal();const m=document.createElement("div");m.className="modal";m.id="modal";m.onclick=e=>{if(e.target===m)fecharModal()};m.innerHTML=`<div class="sheet" role="dialog" aria-modal="true">${h}</div>`;document.body.appendChild(m)}
 function fecharModal(){const m=$("#modal");if(m)m.remove()}
 function blocoMeteo(){
-  const d=W.meteo;
-  if(!d)return `<div class="card"><h3>${esc(t("meteo_t"))}</h3><p class="mut">${esc(W.loading?t("meteo_load"):t("meteo_off"))}</p></div>`;
-  const nomes=[t("d0"),t("d1"),t("d2")];
-  const dia=i=>{const w=WMO[d.weather_code[i]]||["❔",null];const p=d.precipitation_sum[i],pp=d.precipitation_probability_max[i],r=d.wind_gusts_10m_max[i];
-    return `<div><div class="d">${esc(nomes[i])}</div><div class="e">${w[0]}</div><div class="t">${Math.round(d.temperature_2m_max[i])}° <small>${Math.round(d.temperature_2m_min[i])}°</small></div><div class="p">${esc(w[1]?t(w[1]):"—")}<br>💧 ${p!=null?Math.round(p*10)/10:"–"} mm${pp!=null?" ("+pp+"%)":""}<br>💨 ${r!=null?Math.round(r):"–"} km/h</div></div>`};
-  return `<div class="card"><h3>${esc(t("meteo_t"))}</h3><div class="wx">${[0,1,2].map(dia).join("")}</div><p class="stat">${esc(W.offline?t("meteo_cached",hm(W.ts)):t("upd",hm(W.ts)))} ${esc(t("meteo_foot"))}</p></div>`;
+  const P=W.prev;
+  if(!P||!P.length)return `<div class="card"><h3>${esc(t("meteo_t"))}</h3><p class="mut">${esc(W.loading?t("meteo_load"):t("meteo_off"))}</p></div>`;
+  const dia=(x,i)=>{const w=wxIcone(x.wx);
+    const chuva=x.prob!=null?`💧 ${x.prob}%`:"",mm=x.mm!=null?` · ${Math.round(x.mm*10)/10} mm`:"";
+    const vento=x.src==="ipma"?(x.vcls?`💨 ${SETA[x.vdir]||""} ${esc(t("wind_"+x.vcls))}`:""):(x.raj!=null?`💨 ${Math.round(x.raj)} km/h`:"");
+    return `<div><div class="d">${esc(nomeDia(x.data,i))}</div><div class="e">${w[0]}</div><div class="t">${Math.round(x.tmax)}° <small>${Math.round(x.tmin)}°</small></div><div class="p">${esc(w[1]?t(w[1]):"—")}<br>${chuva}${mm}<br>${vento}</div></div>`};
+  const fonte=P[0].src==="ipma"?t("meteo_foot_ipma"):t("meteo_foot_om");
+  return `<div class="card"><h3>${esc(t("meteo_t"))}</h3><div class="wx">${P.map(dia).join("")}</div><p class="stat">${esc(W.offline?t("meteo_cached",hm(W.ts)):t("upd",hm(W.ts)))} ${esc(fonte)}</p></div>`+
+    `<div class="card"><h3>🔥 ${esc(t("rcm_t"))}</h3>${blocoRcm()}</div>`;
 }
 
 /* ===== INSTALAÇÃO ===== */
@@ -480,17 +529,17 @@ function cardQueimas(){return `<div class="card"><h3>🔥 ${esc(t("qm_t"))}</h3>
   <a class="btn s" href="${MAIL_CB}">✉️ ${esc(t("qm_cb"))}</a></div>`}
 const sosCompacto=()=>`<div class="sosrow"><a class="s1" href="tel:112"><b>📞 112</b><span>${esc(t("sos_s"))}</span></a><a class="s2" href="${tel(CFG.TEL_MUNICIPAL)}"><b>📞 ${esc(CFG.TEL_MUNICIPAL)}</b><span>${esc(t("mun_s"))}</span></a></div>`;
 function meteoCompacto(){
-  const d=W.meteo;
-  if(!d)return `<button class="avbtn i" onclick="go('tempo')"><span>🌦️ <b>${esc(t("meteo_t"))}</b><br><small>${esc(W.loading?t("meteo_load"):t("meteo_off"))}</small></span><span class="chev">›</span></button>`;
-  const w=WMO[d.weather_code[0]]||["❔",null],p=d.precipitation_sum[0];
-  return `<button class="avbtn i" onclick="go('tempo')"><span>${w[0]} <b>${Math.round(d.temperature_2m_max[0])}° / ${Math.round(d.temperature_2m_min[0])}°</b> · ${esc(w[1]?t(w[1]):"")}<br><small>${esc(t("meteo_t"))}${p!=null?" · 💧 "+Math.round(p*10)/10+" mm":""}</small></span><span class="chev">›</span></button>`}
+  const P=W.prev;
+  if(!P||!P.length)return `<button class="avbtn i" onclick="go('tempo')"><span>🌦️ <b>${esc(t("meteo_t"))}</b><br><small>${esc(W.loading?t("meteo_load"):t("meteo_off"))}</small></span><span class="chev">›</span></button>`;
+  const x=P[0],w=wxIcone(x.wx);
+  return `<button class="avbtn i" onclick="go('tempo')"><span>${w[0]} <b>${Math.round(x.tmax)}° / ${Math.round(x.tmin)}°</b> · ${esc(w[1]?t(w[1]):"")}<br><small>${esc(t("meteo_5d"))}${x.prob!=null?" · 💧 "+x.prob+"%":""}</small></span><span class="chev">›</span></button>`}
 const voltar=()=>`<button class="back" onclick="go('home')"><span class="chev0">‹</span> ${esc(t("nav_home"))}</button>`;
-const pgQueimas=()=>voltar()+cardQueimas();
+const pgQueimas=()=>voltar()+`<div class="card"><h3>🔥 ${esc(t("rcm_t"))}</h3>${blocoRcm()}</div>`+cardQueimas();
 const pgFreg=()=>voltar()+(cardFreguesia()||`<div class="card"><p class="mut">${esc(t("meteo_load"))}</p></div>`);
 const pgTempo=()=>voltar()+blocoMeteo();
 function home(){
   const ex=expiring();
-  return sosCompacto()+avisosMun().map(cardMun).join("")+btnIpma()+meteoCompacto()+
+  return sosCompacto()+avisosMun().map(cardMun).join("")+btnIpma()+btnRcm()+meteoCompacto()+
   (ex.length?`<button class="avbtn o" onclick="go('kit')"><span>⏰ <b>${esc(t("v_alert",ex.length))}</b><br><small>${esc(ex[0].lab)} · ${esc(ex[0].n<0?t("v_expired"):t("v_soon",ex[0].n))}</small></span><span class="chev">›</span></button>`:"")+
   `<div class="grid">
    <button class="tile" onclick="go('kit')"><span class="i">🎒</span><b>${esc(t("h_kits"))}</b><small>${esc(tx("kits","mochila"))}: ${kDone("mochila")} / ${kTot("mochila")}</small><div class="bar"><i style="width:${kPct("mochila")}%"></i></div></button>
@@ -533,7 +582,7 @@ function contactos(){
   ${LINES.map(x=>{const d=tx("lines",x[0]);return linha(x[1],d.n,d.d,[[x[3]?t(x[3]):"",x[2]]])}).join("")}</div>`;
 }
 function warn(){
-  return `<div class="card"><h2>${esc(t("nav_warn"))}</h2><p class="mut">${esc(t("w_intro"))}</p></div>`+blocoAvisos()+
+  return `<div class="card"><h2>${esc(t("nav_warn"))}</h2><p class="mut">${esc(t("w_intro"))}</p></div>`+blocoAvisos()+`<div class="card"><h3>🔥 ${esc(t("rcm_t"))}</h3>${blocoRcm()}</div>`+
   `<button class="btn s" onclick="carregar()">${esc(W.loading?t("w_updating"):t("w_update"))}</button>
   <button class="btn" onclick="go('contactos')">📞 ${esc(t("h_contacts"))}</button>
   <p class="foot">${W.ts?esc(t("w_last",hm(W.ts)))+" ":""}${esc(t("w_sources"))}</p>`;

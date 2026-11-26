@@ -1,6 +1,6 @@
 # Integração: Braga Resiliente (app) e painel CCOM
 
-Este ficheiro existe, igual, nos dois repositórios. Quem alterar um lado deve ler-o primeiro e atualizar o outro se for preciso. Última atualização: 21-11-2026.
+Este ficheiro existe, igual, nos dois repositórios. Quem alterar um lado deve ler-o primeiro e atualizar o outro se for preciso. Última atualização: 26-11-2026.
 
 | | Repositório | O que é |
 |---|---|---|
@@ -57,6 +57,16 @@ Identificadores: `cheias`, `incendio`, `calor`, `vento`, `agua`, `apagao`.
 
 `pt`, `en`, `es`, `fr`, `hi` (hindi), `ne` (nepalês), `ur` (urdu, da direita para a esquerda) e `zh` (chinês simplificado) e `uk` (ucraniano). Ficheiros `lang-xx.js` com as mesmas chaves em todos. Ao acrescentar um texto, acrescentá-lo nos nove. O urdu ativa `dir="rtl"` no documento; usar propriedades CSS lógicas (`inline-start`, `inline-end`), não `left`/`right`.
 
+## Dados que a app vai buscar diretamente (não passam pelo painel)
+
+| O quê | Fonte | Notas |
+|---|---|---|
+| Avisos meteorológicos | IPMA, `warnings_www.json`, área `BRG` | Já existia |
+| Previsão para hoje e os 4 dias seguintes | IPMA, `cities/daily/1030300.json` (Braga) | Tipo de tempo, mínima e máxima, probabilidade de chuva, direção e classe do vento. Se o IPMA falhar, usa o Open-Meteo (5 dias, com chuva em mm e rajada) |
+| Perigo de incêndio rural, hoje e amanhã | IPMA, `rcm-d0.json` e `rcm-d1.json`, concelho `0303` | Níveis Reduzido a Máximo, com conselho por nível (muito elevado ou máximo: proibidas queimas de amontoados, queimadas e fogueiras em espaço rural, DL 82/2021) |
+
+A app vai buscar estes dados sempre que é aberta ou atualizada e guarda o último resultado no telemóvel para uso sem rede. Os códigos estão em `CFG` no `index.html` da app (`AREA_IPMA`, `IPMA_LOCAL`, `DICO`).
+
 ## Outros dados da app (só no repositório da app)
 
 - `bombeiros.json` e `ulpc.json`: editados à mão. O painel não lhes toca.
@@ -64,7 +74,7 @@ Identificadores: `cheias`, `incendio`, `calor`, `vento`, `agua`, `apagao`.
 
 ## Regras de manutenção
 
-- Qualquer alteração a ficheiros da app obriga a subir a versão `V` em `sw.js` (atual: `braga-v34`), senão os telemóveis ficam com a versão antiga em cache. Ficheiros novos entram na lista `CASCA`.
+- Qualquer alteração a ficheiros da app obriga a subir a versão `V` em `sw.js` (atual: `braga-v41`), senão os telemóveis ficam com a versão antiga em cache. Ficheiros novos entram na lista `CASCA`.
 - Os avisos são **públicos**. Nada de dados pessoais, nada marcado RESERVADO (o briefing CCOS Cávado nunca sai do painel).
 - A app não recolhe dados pessoais: kits e plano ficam no telemóvel.
 
