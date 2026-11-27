@@ -1,0 +1,79 @@
+{
+ "gerado": "2026-11-27T10:00",
+ "fonte": "Serviço Municipal de Proteção Civil de Braga · consenso de 6 modelos (Open-Meteo)",
+ "modelos": [
+  "ecmwf_ifs025",
+  "ecmwf_aifs025",
+  "gfs025",
+  "icon_seamless_eps",
+  "ukmo_global_ensemble_20km",
+  "gem_global"
+ ],
+ "dias": [
+  {
+   "data": "2026-11-27",
+   "n": 6,
+   "mm": 0.5,
+   "min": 0,
+   "max": 3.3,
+   "prob": 17,
+   "raj": 21,
+   "tmax": 15,
+   "tmin": 11,
+   "nuv": 96,
+   "wx": 3
+  },
+  {
+   "data": "2026-11-28",
+   "n": 6,
+   "mm": 4.6,
+   "min": 2.2,
+   "max": 26.6,
+   "prob": 100,
+   "raj": 28,
+   "tmax": 15,
+   "tmin": 12,
+   "nuv": 100,
+   "wx": 63
+  },
+  {
+   "data": "2026-11-29",
+   "n": 6,
+   "mm": 2.9,
+   "min": 1.2,
+   "max": 6.1,
+   "prob": 87,
+   "raj": 20,
+   "tmax": 15,
+   "tmin": 8,
+   "nuv": 50,
+   "wx": 63
+  },
+  {
+   "data": "2026-11-30",
+   "n": 6,
+   "mm": 0,
+   "min": 0,
+   "max": 0,
+   "prob": 0,
+   "raj": 18,
+   "tmax": 15,
+   "tmin": 7,
+   "nuv": 72,
+   "wx": 2
+  },
+  {
+   "data": "2026-12-01",
+   "n": 6,
+   "mm": 0,
+   "min": 0,
+   "max": 0,
+   "prob": 0,
+   "raj": 21,
+   "tmax": 14,
+   "tmin": 7,
+   "nuv": 76,
+   "wx": 3
+  }
+ ]
+}
