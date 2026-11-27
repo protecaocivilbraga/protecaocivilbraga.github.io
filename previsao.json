@@ -1,5 +1,5 @@
 {
- "gerado": "2026-11-27T18:00",
+ "gerado": "2026-11-27T19:00",
  "fonte": "Serviço Municipal de Proteção Civil de Braga · consenso de 6 modelos (Open-Meteo)",
  "modelos": [
   "ecmwf_ifs025",
@@ -39,10 +39,10 @@
   {
    "data": "2026-11-29",
    "n": 6,
-   "mm": 2.4,
-   "min": 1.2,
-   "max": 6.1,
-   "prob": 85,
+   "mm": 2,
+   "min": 0.9,
+   "max": 4.6,
+   "prob": 76,
    "raj": 21,
    "tmax": 15,
    "tmin": 8,
